@@ -10,7 +10,7 @@ if strcmpi(mode,'w') || strcmpi(mode,'weighted')
 end
 
 N = length(serie);
-standardDeviation = NaN(N, 1);
+standardDeviation = NaN(1, N);
 for i = samples:N
     standardDeviation(i) = std(serie(i-samples+1:i));
 end

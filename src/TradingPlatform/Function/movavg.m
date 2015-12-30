@@ -1,3 +1,4 @@
+
 function vout = movavg(vin, mode, samples)
 
 if samples > length(vin)

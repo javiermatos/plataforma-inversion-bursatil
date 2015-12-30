@@ -2,21 +2,12 @@
 function pairs = leadLagPairs(values)
 
 N = length(values);
-pairs = cell(((N-1)*N)/2,1);
 
-values = sort(values);
+leadArray = arrayfun(@(value, n) repmat(value,1,n), values(1:end-1), N-1:-1:1, 'UniformOutput', 0);
+leadArray = [leadArray{:}];
+lagArray = arrayfun(@(index) values(index:end) , 2:N, 'UniformOutput', 0);
+lagArray = [lagArray{:}];
 
-index = 1;
-for i = 1:N-1
-    
-    for j = i+1:N
-        
-        pairs{index} = [values(i), values(j)];
-        index = index + 1;
-        
-    end
-    
-end
-
+pairs = arrayfun(@(lead, lag) [lead lag], leadArray, lagArray, 'UniformOutput', 0)';
 
 end
