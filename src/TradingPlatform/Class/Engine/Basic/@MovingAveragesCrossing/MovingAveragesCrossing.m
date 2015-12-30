@@ -73,7 +73,7 @@ classdef MovingAveragesCrossing < TradingEngine
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, leadLagDomain)
+        te = initialize(fts, modeDomain, leadLagDomain)
         
     end
     

@@ -43,7 +43,7 @@ classdef BollingerBands < MovingAverage
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, samplesDomain, KDomain)
+        te = initialize(fts, modeDomain, samplesDomain, KDomain)
         
     end
     

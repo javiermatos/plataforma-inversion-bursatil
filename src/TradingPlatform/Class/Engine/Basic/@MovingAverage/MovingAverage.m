@@ -54,7 +54,7 @@ classdef MovingAverage < TradingEngine
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, samplesDomain)
+        te = initialize(fts, modeDomain, samplesDomain)
         
     end
     

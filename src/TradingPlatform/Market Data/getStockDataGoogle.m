@@ -64,7 +64,7 @@ function stockData = getStockDataGoogle(symbol, varargin)
 stockData = struct( ...             % Structure
     'symbol',       symbol, ...     % Stock symbol
     'frecuency',    frecuency, ...  % Data frecuency
-    'date',         {{}}, ...       % Date of the values
+    'date',         [], ...         % Date of the values
     'open',         [], ...         % Stock's open price
     'high',         [], ...         % Stock's highest price
     'low',          [], ...         % Stock's lowest price

@@ -74,7 +74,7 @@ classdef MovingAveragesCrossingThreshold < MovingAveragesCrossing
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, leadLagDomain, riseFallThresholdDomain)
+        te = initialize(fts, modeDomain, leadLagDomain, riseFallThresholdDomain)
         
     end
     

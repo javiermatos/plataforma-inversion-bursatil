@@ -94,7 +94,7 @@ dataDescription = ...
     ' to ', datestr(fts.Date(endIndex))];
 
 title(axesHandle, {['\bf', description], ['\bf', strrep(dataDescription, '^', '\^')]});
-legend(axesHandle, 'String', legendString);
+legend(axesHandle, 'String', legendString, 'Location', 'NorthWest');
 xlabel(axesHandle, '\bfDate');
 ylabel(axesHandle, ['\bfPrice', ' [ fun = ', func2str(fun), ' ]']);
 xlim(axesHandle, [fts.Date(startIndex) fts.Date(endIndex)]);

@@ -50,7 +50,7 @@ classdef Stochastic < TradingEngineOscillator
     
     methods (Access = public, Static)
         
-        te = optimum(fts, stochasticSamplesDomain, highThresholdDomain, lowThresholdDomain)
+        te = initialize(fts, stochasticSamplesDomain, highThresholdDomain, lowThresholdDomain)
         
     end
     

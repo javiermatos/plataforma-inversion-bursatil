@@ -49,7 +49,7 @@ classdef StochasticCrossing < Stochastic
     
     methods (Access = public, Static)
         
-        te = optimum(fts, stochasticSamplesDomain, highThresholdDomain, lowThresholdDomain, modeDomain, movingAverageSamplesDomain)
+        te = initialize(fts, stochasticSamplesDomain, highThresholdDomain, lowThresholdDomain, modeDomain, movingAverageSamplesDomain)
         
     end
     

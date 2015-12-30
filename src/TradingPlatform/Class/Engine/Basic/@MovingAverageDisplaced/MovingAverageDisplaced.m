@@ -54,7 +54,7 @@ classdef MovingAverageDisplaced < MovingAverage
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, samplesDomain, displacementDomain)
+        te = initialize(fts, modeDomain, samplesDomain, displacementDomain)
         
     end
     

@@ -13,6 +13,8 @@ classdef TradingEngine
     %% Partition, Measurement, TradeCost, ConversionRatio
     properties (GetAccess = public, SetAccess = public)
         
+%         Beginning               % Start index of fts
+        
         Partition               % Quantity of values to train the system
         
         Measurement             % Measurement
@@ -26,6 +28,14 @@ classdef TradingEngine
     end
     
     methods
+        
+%         % Beginning SET
+%         function te = set.Beginning(te, Beginning)
+%             if Beginning < 0 || Beginning > 1
+%                 error('Beginning value must be in [0 1].');
+%             end
+%             te.Beginning = Beginning;
+%         end
         
         % Partition SET
         function te = set.Partition(te, Partition)
@@ -86,6 +96,12 @@ classdef TradingEngine
     %% Dependent properties
     properties (Dependent = true)
         
+%         BeginningIndex          % First training day
+%         
+%         BeginningDate           % First training day
+        
+        PartitionIndex          % Last training day
+        
         PartitionDate           % Last training day
         
         SetItems                % FinancialTimeSerie.Length
@@ -119,9 +135,56 @@ classdef TradingEngine
     
     methods
         
+%         % BeginningIndex GET
+%         function BeginningIndex = get.BeginningIndex(te)
+%             BeginningIndex = round(te.FinancialTimeSerie.Length*te.Beginning);
+%             if BeginningIndex == 0
+%                 BeginningIndex = 1;
+%             end
+%         end
+%         
+%         % BeginningIndex SET
+%         function te = set.BeginningIndex(te, BeginningIndex)
+%             if BeginningIndex < 1 || BeginningIndex > te.FinancialTimeSerie.Length
+%                 error(['BeginningIndex value must be in [1 ', num2str(te.FinancialTimeSerie.Length),']']);
+%             end
+%             te.Beginning = BeginningIndex/te.FinancialTimeSerie.Length;
+%         end
+%         
+%         % BeginningDate GET
+%         function BeginningDate = get.BeginningDate(te)
+%             BeginningDate = datestr(te.FinancialTimeSerie.Date(te.BeginningIndex), 'yyyy-mm-dd');
+%         end
+%         
+%         % BeginningDate SET
+%         function te = set.BeginningDate(te, BeginningDate)
+%             fts = te.FinancialTimeSerie;
+%             dateNumber = datenum(BeginningDate);
+%             if dateNumber < fts.Date(1) || dateNumber > fts.Date(end)
+%                 error(['Date must be between ', datestr(fts.Date(1), 'yyyy-mm-dd'), ' and ', datestr(fts.Date(end), 'yyyy-mm-dd'), '.']);
+%             end
+%             te.Beginning = (dateNumber-fts.Date(1))/(fts.Date(end)-fts.Date(1));
+%         end
+        
+        % PartitionIndex GET
+        function PartitionIndex = get.PartitionIndex(te)
+            PartitionIndex = round(te.FinancialTimeSerie.Length*te.Partition);
+            if PartitionIndex == 0
+                PartitionIndex = 1;
+            end
+        end
+        
+        % PartitionIndex SET
+        function te = set.PartitionIndex(te, PartitionIndex)
+            if PartitionIndex < 1 || PartitionIndex > te.FinancialTimeSerie.Length
+                error(['PartitionIndex value must be in [1 ', num2str(te.FinancialTimeSerie.Length),']']);
+            end
+            te.Partition = PartitionIndex/te.FinancialTimeSerie.Length;
+        end
+        
         % PartitionDate GET
         function PartitionDate = get.PartitionDate(te)
-            PartitionDate = datestr(te.FinancialTimeSerie.Date(round(te.FinancialTimeSerie.Length*te.Partition)), 'yyyy-mm-dd');
+            PartitionDate = datestr(te.FinancialTimeSerie.Date(te.PartitionIndex), 'yyyy-mm-dd');
         end
         
         % PartitionDate SET
@@ -141,7 +204,7 @@ classdef TradingEngine
        
         % TrainingSetItems GET
         function TrainingSetItems = get.TrainingSetItems(te)
-            TrainingSetItems = round(te.FinancialTimeSerie.Length*te.Partition);
+            TrainingSetItems = te.PartitionIndex-1;
         end
         
         % TestSetItems GET
@@ -290,9 +353,9 @@ classdef TradingEngine
         % Optimization methods
         fitness = exhaustiveFitness(te, varargin)
         
-        [optimum, fitness] = exhaustiveOptimum(te, varargin)
+        [optimum, fitness] = exhaustiveProperties(te, varargin)
         
-        engine = exhaustiveEngine(te, varargin)
+        engine = exhaustiveOptimizer(te, varargin)
         
         
     end

@@ -78,7 +78,7 @@ classdef MovingAverageConvergenceDivergence < TradingEngineOscillator
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, leadLagDomain, samplesDomain)
+        te = initialize(fts, modeDomain, leadLagDomain, samplesDomain)
         
     end
     

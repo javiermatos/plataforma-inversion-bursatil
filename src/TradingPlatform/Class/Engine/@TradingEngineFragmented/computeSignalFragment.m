@@ -1,5 +1,5 @@
 
-function signalFragment = computeSignalFragment(tef, fragmentNumber, startIndex, endIndex)
+function signalFragment = computeSignalFragment(tef, startIndex, endIndex)
 
 signalFragment = zeros(1,endIndex-startIndex+1);
 

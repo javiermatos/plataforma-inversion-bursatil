@@ -2,7 +2,7 @@
 classdef TradingEngineFragmented < TradingEngine
     
     
-    %% FragmentSize, Jump, MaximumSamples, BeginningIndex, SmothnessFunction, SmoothnessSamples
+    %% FragmentSize, Jump, MaximumSamples, BeginningIndex
     properties (GetAccess = public, SetAccess = public)
         
         FragmentSize
@@ -10,10 +10,6 @@ classdef TradingEngineFragmented < TradingEngine
         Jump
         
         BeginningIndex
-        
-        SmoothnessFunction
-        
-        SmoothnessSamples
         
     end
     
@@ -32,44 +28,6 @@ classdef TradingEngineFragmented < TradingEngine
         % BeginningIndex SET
         function te = set.BeginningIndex(te, BeginningIndex)
             te.BeginningIndex = BeginningIndex;
-        end
-        
-        % SmoothnessType SET
-        function te = set.SmoothnessFunction(te, SmoothnessFunction)
-            
-            if ischar(SmoothnessFunction)
-                
-                switch lower(SmoothnessFunction)
-                    
-                    case {'e', 'exponential'}
-                        f = @(i) exp(1:i);
-                        
-                    case {'log', 'logarithmic'}
-                        f = @(i) log(2:i+1);
-                        
-                    case {'l', 'linear'}
-                        f = @(i) (1:i)/i;
-                        
-                    case {'s', 'simple'}
-                        f = @(i) ones(1,i);
-                        
-                    otherwise
-                        error('Not valid function name.');
-                end
-                
-                te.SmoothnessFunction = f;
-                
-            else
-                
-                te.SmoothnessFunction = SmoothnessFunction;
-                
-            end
-            
-        end
-        
-        % SmoothnessSamples SET
-        function te = set.SmoothnessSamples(te, SmoothnessSamples)
-            te.SmoothnessSamples = SmoothnessSamples;
         end
         
     end
@@ -97,7 +55,7 @@ classdef TradingEngineFragmented < TradingEngine
         
         
         %% Constructor
-        function te = TradingEngineFragmented(fts, fragmentSize, jump, beginningIndex, smoothnessFunction, smoothnessSamples)
+        function te = TradingEngineFragmented(fts, fragmentSize, jump, beginningIndex)
             
             te = te@TradingEngine(fts);
             
@@ -110,35 +68,23 @@ classdef TradingEngineFragmented < TradingEngine
             if ~exist('beginning','var'); beginningIndex = Default.BeginningIndex; end
             te.BeginningIndex = beginningIndex;
             
-            if ~exist('smoothnessFunction','var'); smoothnessFunction = Default.SmoothnessFunction; end
-            te.SmoothnessFunction = smoothnessFunction;
-            
-            if ~exist('smoothnessSamples','var'); smoothnessSamples = Default.SmoothnessSamples; end
-            te.SmoothnessSamples = smoothnessSamples;
-            
-            % Here training set will be input data since the first value
-            % until the last value in the first fragment.
-            [~, index] = te.fragmentRange(1);
-            te.Partition = index/te.FinancialTimeSerie.Length;
-            
         end
         
         
         %% Methods
         
-        [startIndex, endIndex] = fragmentRange(te, fragmentNumber)
+        [startIndex, endIndex] = fragmentTrainingRange(te, fragmentNumber)
+        
+        [startIndex, endIndex] = fragmentTestRange(te, fragmentNumber)
+        
+        fragmentIndex = firstTailFragment(te)
         
         
         %% Methods that must be reimplemented in subclasses
         
         signal = computeSignal(te)
         
-        signalFragment = computeSignalFragment(te, fragmentNumber, startIndex, endIndex)
-        
-        
-        %% Methods that can be reimplemented in subclasses
-        
-        fitness = computeFitness(te, set)
+        signalFragment = computeSignalFragment(te, startIndex, endIndex)
         
         
     end

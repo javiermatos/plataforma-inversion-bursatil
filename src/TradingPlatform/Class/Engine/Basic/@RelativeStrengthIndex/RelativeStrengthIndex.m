@@ -49,7 +49,7 @@ classdef RelativeStrengthIndex < TradingEngineOscillator
     
     methods (Access = public, Static)
         
-        te = optimum(fts, samplesDomain, highThresholdDomain, lowThresholdDomain)
+        te = initialize(fts, samplesDomain, highThresholdDomain, lowThresholdDomain)
         
     end
     

@@ -1,24 +1,19 @@
 
-function signal = computeSignal(tef)
+function signal = computeSignal(te)
 
 % Financial Time Serie
-fts = tef.FinancialTimeSerie;
+fts = te.FinancialTimeSerie;
 
 % First tail fragment
-firstTailFragment = ceil((fts.Length-tef.BeginningIndex-tef.FragmentSize+1)/tef.Jump)+1;
+firstTailFragmentIndex = te.firstTailFragment();
 
 signal = zeros(1, fts.Length, 'int8');
 % First fragment is for learning purspose
-for i = 2:firstTailFragment
+for i = 2:firstTailFragmentIndex
     
-    % The start index begin one position to the right of the last index of
-    % the previous fragment
-    [ ~, startIndex ] = tef.fragmentRange(i-1);
-    startIndex = startIndex + 1;
-    % The end index is the last index of the current fragment
-    [ ~, endIndex ] = tef.fragmentRange(i);
+    [startIndex, endIndex] = te.fragmentTestRange(i);
     
-    signal(startIndex:endIndex) = tef.computeSignalFragment(i,startIndex,endIndex);
+    signal(startIndex:endIndex) = te.computeSignalFragment(startIndex,endIndex);
     
 end
 

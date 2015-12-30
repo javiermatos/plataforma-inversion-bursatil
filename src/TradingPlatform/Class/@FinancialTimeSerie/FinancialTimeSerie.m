@@ -80,9 +80,13 @@ classdef FinancialTimeSerie < handle
         
         fig = plotl(fts, startRange, endRange)
         
-        output = plotSerie(te, startRange, endRange, fun, axesHandle)
+        output = plotSerie(fts, startRange, endRange, fun, axesHandle)
         
-        output = plotVolume(te, startRange, endRange, axesHandle)
+        plotSerieCustomizer(fts, startIndex, endIndex, axesHandle, fun, varargin)
+        
+        output = plotVolume(fts, startRange, endRange, axesHandle)
+        
+        plotVolumeCustomizer(fts, startIndex, endIndex, axesHandle, varargin)
         
         
     end

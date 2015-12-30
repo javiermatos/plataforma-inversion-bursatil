@@ -1,5 +1,9 @@
 function vout = movavg(vin, mode, samples)
 
+if samples > length(vin)
+    error('Samples is greater than the length of the vector.');
+end
+
 % Mov Avg modes and calculations
 switch lower(mode)
     case {'s', 'simple'} % Simple

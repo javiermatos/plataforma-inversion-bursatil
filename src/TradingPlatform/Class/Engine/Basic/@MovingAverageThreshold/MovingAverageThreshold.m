@@ -73,7 +73,7 @@ classdef MovingAverageThreshold < MovingAverage
     
     methods (Access = public, Static)
         
-        te = optimum(fts, modeDomain, samplesDomain, riseFallThresholdDomain)
+        te = initialize(fts, modeDomain, samplesDomain, riseFallThresholdDomain)
         
     end
     

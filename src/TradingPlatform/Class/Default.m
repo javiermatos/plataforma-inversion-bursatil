@@ -3,6 +3,10 @@ classdef Default < handle
     
     properties (Constant = true)
         
+        % DataSerie
+        InitDateTime            = [1985 1 1 0 0 0 0];
+        EndDateTime             = [2000 1 1 0 0 0 0]
+        
         % TradingEngine basic properties
         Partition               = 0.8           % PartitionDate has preference over Partition
         PartitionDate           = '2010-01-05'  % PartitionDate has preference over Partition
@@ -60,6 +64,10 @@ classdef Default < handle
         SamplesDomainF          = 1:50
         LeadLagDomainF          = 1:50
         RiseFallThresholdDomainF= linspace(0,0.005,5)
+        
+        
+        % Neural Network
+        InputSize               = 50
         
         
         % Plot
