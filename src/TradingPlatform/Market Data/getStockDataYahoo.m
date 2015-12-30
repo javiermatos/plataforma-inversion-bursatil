@@ -1,7 +1,7 @@
 % getStockDataYahoo - Get Stock Data from Yahoo! Finance website
 %
 % Synopsis
-%   stockData = getstockDataYahoo(symbol, varargin)
+%   stockData = getStockDataYahoo(symbol, varargin)
 %
 % Description
 %   Takes stock data from Yahoo! Finance website.
@@ -99,7 +99,13 @@ if status
     stockData.date = datenum(stockData.date);
     
     % Invert columns (older values first)
-    stockData = flipStockData(stockData);
+    stockData.date = flipud(stockData.date);
+    stockData.open = flipud(stockData.open);
+    stockData.high = flipud(stockData.high);
+    stockData.low = flipud(stockData.low);
+    stockData.close = flipud(stockData.close);
+    stockData.volume = flipud(stockData.volume);
+    stockData.rawclose = flipud(stockData.rawclose);
 
 else
     error('Data adquisition from Yahoo! Finance failed.');
