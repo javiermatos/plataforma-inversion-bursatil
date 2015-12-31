@@ -52,6 +52,7 @@ classdef DataSerie < handle
         function DiffSerie = get.DiffSerie(dataSerie)
             serie = dataSerie.Serie;
             DiffSerie = [0 diff(serie)./serie(1:end-1)];
+            %DiffSerie = [0 diff(serie)-serie(1:end-1)];
         end
         
         % InitDateTime GET
@@ -109,7 +110,7 @@ classdef DataSerie < handle
         
         %% Methods
         
-        boolean = equals(dataSerie1, dataSerie2)
+        boolean = equals(lhs, rhs)
         
         fig = plot(dataSerie, rangeInit, rangeEnd)
         

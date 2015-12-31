@@ -101,7 +101,8 @@ end
 function url = generateURL(symbolCode, compressionType, initDateTime, endDateTime)
 
 % Base address of Google Finance
-baseAddress = 'http://finance.google.com/finance/historical?';
+%baseAddress = 'http://finance.google.com/finance/historical?';
+baseAddress = 'http://google.com/finance/historical?';
 
 % Generate url
 url = strcat( ...
@@ -121,6 +122,7 @@ switch lower(compressionType)
         
     otherwise
         error('Compression type is not valid.');
+	
 end
 
 url = strcat( ...

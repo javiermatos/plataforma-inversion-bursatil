@@ -86,6 +86,7 @@ switch lower(compressionType)
         
     otherwise
         error('Compression type is not valid.');
+	
 end
 
 url = strcat( ...

@@ -1,24 +1,24 @@
 
-function boolean = equals(dataSerie1, dataSerie2)
+function boolean = equals(lhs, rhs)
 
 boolean = true;
 
 % Class
-boolean = boolean & strcmp(class(dataSerie1),class(dataSerie2));
+boolean = boolean & strcmp(class(lhs),class(rhs));
 % Compression Type
-boolean = boolean & strcmp(dataSerie1.CompressionType,dataSerie1.CompressionType);
+boolean = boolean & strcmp(lhs.CompressionType,rhs.CompressionType);
 % Compression Units
-boolean = boolean & dataSerie1.CompressionUnits == dataSerie1.CompressionUnits;
+boolean = boolean & lhs.CompressionUnits == rhs.CompressionUnits;
 
 % Length
-if length(dataSerie1.DateTime) == length(dataSerie2.DateTime)
+if length(lhs.DateTime) == length(rhs.DateTime)
     
-    boolean = boolean & all(dataSerie1.DateTime == dataSerie2.DateTime);
-    boolean = boolean & all(dataSerie1.Open == dataSerie2.Open);
-    boolean = boolean & all(dataSerie1.High == dataSerie2.High);
-    boolean = boolean & all(dataSerie1.Low == dataSerie2.Low);
-    boolean = boolean & all(dataSerie1.Close == dataSerie2.Close);
-    boolean = boolean & all(dataSerie1.Volume == dataSerie2.Volume);
+    boolean = boolean & all(lhs.DateTime == rhs.DateTime);
+    boolean = boolean & all(lhs.Open == rhs.Open);
+    boolean = boolean & all(lhs.High == rhs.High);
+    boolean = boolean & all(lhs.Low == rhs.Low);
+    boolean = boolean & all(lhs.Close == rhs.Close);
+    boolean = boolean & all(lhs.Volume == rhs.Volume);
     
 else
     boolean = false;
