@@ -1,8 +1,13 @@
 
 function performance = fitnessFunctionWrapper(algoTrader, fitnessMethodWithArguments, propertyName, propertyDomain, indexArray)
 
-% Create instance
+% Create instance (CLONE, SLOW)
+% With clone method we can use the Trading Platform with multiple
+% processors, but the computing time is slower
 algoTraderInstance = algoTrader.clone();
+
+% Create instance (DO NOT CLONE, FAST)
+% Without using the clone method the computation speed is increased
 %algoTraderInstance = algoTrader;
 
 % Set values

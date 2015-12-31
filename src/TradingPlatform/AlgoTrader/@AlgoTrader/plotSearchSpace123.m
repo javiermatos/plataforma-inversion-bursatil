@@ -64,6 +64,7 @@ if searchSpaceDimension == 1
     ymin = minFitness-(s*diffFitness);
     ymax = maxFitness+(s*diffFitness);
     
+    % Axes limit
     axis(axesHandle, [1 propertyDomainSize(1) ymin ymax]);
     
 elseif searchSpaceDimension == 2
@@ -134,57 +135,33 @@ elseif searchSpaceDimension == 3
     propertyDomain = propertyDomain(index);
     propertyDomainSize = propertyDomainSize(index);
     
+    % Search space
     searchSpace = permute(searchSpace, index);
-    %
     
+    % Min and max values
     maxFitness = max(searchSpace(:));
     minFitness = min(searchSpace(:));
     
-    n = 5;
-    v = linspace(minFitness, maxFitness, 3*n+2);
-    v = v(2:end-1);
+    % Patches
+    patches = 100;
     
-    lGroup = hggroup;
-    mGroup = hggroup;
-    hGroup = hggroup;
+    % Values and its scale
+    logvector = fliplr((1-log(linspace(1,exp(1),patches))).^1.25);
+    value = (logvector*(maxFitness-minFitness))+minFitness;
     
-    % Blue
-    for i = 1:n
-        
-        pathHandle = patch(isosurface(searchSpace,v(i)));
+    % Colormap
+    cmap = colormap('jet');
+    color = cmap(round(logvector*(length(cmap)-1)+1),:);
+    colormap(color);
+    
+    % Draw patches
+    for i = 1:patches
+        ph = patch(isosurface(searchSpace,value(i)));
+        %isosurface(searchSpace,value(i));
         
         % Set properties
-        set(pathHandle,'FaceColor','b','EdgeColor','none','FaceAlpha',0.15);
-        
-        % Add plot to group
-        set(pathHandle,'Parent',lGroup);
-        
-    end
-    
-    % Yellow
-    for i = 1:n
-        
-        pathHandle = patch(isosurface(searchSpace,v(i+n)));
-        
-        % Set properties
-        set(pathHandle,'FaceColor','y','EdgeColor','none','FaceAlpha',0.30);
-        
-        % Add plot to group
-        set(pathHandle,'Parent',mGroup);
-        
-    end
-    
-    % Red
-    for i = 1:n
-        
-        pathHandle = patch(isosurface(searchSpace,v(i+2*n)));
-        
-        % Set properties
-        set(pathHandle,'FaceColor','r','EdgeColor','none','FaceAlpha',0.5);
-        
-        % Add plot to group
-        set(pathHandle,'Parent',hGroup);
-        
+        set(ph,'FaceColor',color(i,:),'EdgeColor','none');
+        set(ph,'FaceAlpha',logvector(i)^5);
     end
     
     % Labels
@@ -202,6 +179,9 @@ elseif searchSpaceDimension == 3
     
     % Axes limit
     axis(axesHandle, [1 propertyDomainSize(2) 1 propertyDomainSize(1) 1 propertyDomainSize(3)]);
+    
+    % Colorbar limits
+    set(axesHandle, 'CLim', [minFitness maxFitness]);
 
 end
 

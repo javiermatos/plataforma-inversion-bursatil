@@ -67,16 +67,3 @@ for i = 1:N
     close(fig);
     
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
