@@ -10,6 +10,58 @@ classdef AlgoTrader < handle
     end
     
     
+    %% TrainingSet
+    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
+        
+        TrainingSet
+        
+    end
+    
+    methods
+        
+        function set.TrainingSet(algoTrader, TrainingSet)
+            
+            if length(TrainingSet) ~= 2
+                error('Error: TrainingSet must be an interval [a b]');
+            elseif (TrainingSet(1) > TrainingSet(2))
+                error('Error: TrainingSet(1) > TrainingSet(2)');
+            elseif TrainingSet(1) < 1 || TrainingSet(2) > algoTrader.DataSerie.Length
+                error(['Error: values out of range [1 ' num2str(algoTrader.DataSerie.Length) ']']);
+            else
+                algoTrader.TrainingSet = TrainingSet;
+            end
+            
+        end
+        
+    end
+    
+    
+    %% TestSet
+    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
+        
+        TestSet
+        
+    end
+    
+        methods
+        
+        function set.TestSet(algoTrader, TestSet)
+            
+            if length(TestSet) ~= 2
+                error('Error: TestSet must be an interval [a b].');
+            elseif (TestSet(1) > TestSet(2))
+                error('Error: TestSet(1) > TestSet(2).');
+            elseif TestSet(1) < 1 || TestSet(2) > algoTrader.DataSerie.Length
+                error(['Error: values out of range [1 ' num2str(algoTrader.DataSerie.Length) ']']);
+            else
+                algoTrader.TestSet = TestSet;
+            end
+            
+        end
+        
+    end
+    
+    
     %% Signal
     properties (GetAccess = public, SetAccess = protected, GetObservable)
         
@@ -20,11 +72,23 @@ classdef AlgoTrader < handle
     methods
         
         function Signal = get.Signal(algoTrader)
+            
+            % InvertSignal
             if ~algoTrader.InvertSignal
                 Signal = algoTrader.Signal;
             else
                 Signal = algoTrader.Signal*-1;
             end
+            
+            % AllowTypePositions
+            if algoTrader.AllowedPositions == 0
+                % Only long positions
+                Signal(Signal==-1) = 0;
+            elseif algoTrader.AllowedPositions == 1
+                % Only short positions
+                Signal(Signal==1) = 0;
+            end
+            
         end
         
     end
@@ -33,217 +97,74 @@ classdef AlgoTrader < handle
     %% InvertSignal
     properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
         
-        InvertSignal = false;
-        
-    end
-    
-    
-    %% InitialIndexRatio
-    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
-        
-        InitialIndexRatio
+        InvertSignal;
         
     end
     
     methods
         
-        % InitialIndexRatio SET
-        function set.InitialIndexRatio(algoTrader, initialIndexRatio)
-            if initialIndexRatio < 0 || initialIndexRatio > 1
-                error('InitialIndexRatio must be between 0 and 1.');
+        % InvertSignal SET
+        function set.InvertSignal(algoTrader, InvertSignal)
+            
+            if InvertSignal == 0 || InvertSignal == 1
+                algoTrader.InvertSignal = InvertSignal;
             else
-                algoTrader.InitialIndexRatio = initialIndexRatio;
+                error('Error: only values 0 (False) and 1 (True) are allowed.');
             end
-        end
-        
-    end
-    
-    
-    %% InitialIndex
-    properties (Dependent = true)
-        
-        InitialIndex
-        
-    end
-    
-    methods
-        
-        % InitialIndex GET
-        function initialIndex = get.InitialIndex(algoTrader)
-            initialIndex = max(1, ceil(algoTrader.InitialIndexRatio*algoTrader.DataSerie.Length));
-        end
-        
-        % InitialIndex SET
-        function set.InitialIndex(algoTrader, initialIndex)
-            if initialIndex < 1 || initialIndex > algoTrader.DataSerie.Length
-                error(['InitialIndex must be between 1 and ' num2str(algoTrader.DataSerie.Length) '.']);
-            else
-                algoTrader.InitialIndexRatio = initialIndex/algoTrader.DataSerie.Length;
-            end
-        end
-        
-    end
-    
-    
-    %% SplitIndexRatio
-    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
-        
-        SplitIndexRatio
-        
-    end
-    
-    methods
-        
-        % SplitIndexRatio SET
-        function set.SplitIndexRatio(algoTrader, splitIndexRatio)
-            if splitIndexRatio < 0 || splitIndexRatio > 1
-                error('SplitIndexRatio must be between 0 and 1.');
-            else
-                algoTrader.SplitIndexRatio = splitIndexRatio;
-            end
-        end
-        
-    end
-    
-    
-    %% SplitIndex
-    properties (Dependent = true)
-        
-        SplitIndex
-        
-    end
-    
-    methods
-        
-        % SplitIndex GET
-        function SplitIndex = get.SplitIndex(algoTrader)
-            SplitIndex = max(1, ceil(algoTrader.SplitIndexRatio*algoTrader.DataSerie.Length));
-        end
-        
-        % SplitIndex SET
-        function set.SplitIndex(algoTrader, splitIndex)
-            if splitIndex < 1 || splitIndex > algoTrader.DataSerie.Length
-                error(['SplitIndex must be between 1 and ' num2str(algoTrader.DataSerie.Length) '.']);
-            else
-                algoTrader.SplitIndexRatio = splitIndex/algoTrader.DataSerie.Length;
-            end
-        end
-        
-    end
-    
-    
-    %% InitTrainingSet, EndTrainingSet, TrainingSetSize, InitTestSet, EndTestSet, TestSetSize
-    properties (Dependent = true)
-        
-        % Padding Set
-        InitPaddingSet
-        
-        EndPaddingSet
-        
-        PaddingSetSize
-        
-        % Training Set
-        InitTrainingSet
-        
-        EndTrainingSet
-        
-        TrainingSetSize
-        
-        % Test Set
-        InitTestSet
-        
-        EndTestSet
-        
-        TestSetSize
-        
-    end
-    
-    methods
-        
-        % InitPaddingSet GET
-        function InitPaddingSet = get.InitPaddingSet(algoTrader)
-            if algoTrader.InitialIndex == 1
-                InitPaddingSet = [];
-            else
-                InitPaddingSet = datestr(algoTrader.DataSerie.DateTime(1),'yyyy-mm-dd');
-            end
-        end
-        
-        % EndPaddingSet GET
-        function EndPaddingSet = get.EndPaddingSet(algoTrader)
-            if algoTrader.InitialIndex == 1
-                EndPaddingSet = [];
-            else
-                EndPaddingSet = datestr(algoTrader.DataSerie.DateTime(algoTrader.InitialIndex-1),'yyyy-mm-dd');
-            end
-        end
-        
-        % PaddingSetSize GET
-        function PaddingSetSize = get.PaddingSetSize(algoTrader)
-            PaddingSetSize = algoTrader.InitialIndex-1;
-        end
-        
-        % InitTrainingSet GET
-        function InitTrainingSet = get.InitTrainingSet(algoTrader)
-            InitTrainingSet = datestr(algoTrader.DataSerie.DateTime(algoTrader.InitialIndex),'yyyy-mm-dd');
-        end
-        
-        % InitTrainingSet SET
-        function set.InitTrainingSet(algoTrader, initTrainingSet)
-            algoTrader.InitialIndex = find(datenum(initTrainingSet) <= algoTrader.DataSerie.DateTime, 1, 'first');
-        end
-        
-        % EndTrainingSet GET
-        function EndTrainingSet = get.EndTrainingSet(algoTrader)
-            EndTrainingSet = datestr(algoTrader.DataSerie.DateTime(algoTrader.SplitIndex),'yyyy-mm-dd');
-        end
-        
-        % EndTrainingSet SET
-        function set.EndTrainingSet(algoTrader, endTrainingSet)
-            algoTrader.SplitIndex = find(datenum(endTrainingSet) >= algoTrader.DataSerie.DateTime, 1, 'last');
-        end
-        
-        % TrainingSetSize GET
-        function TrainingSetSize = get.TrainingSetSize(algoTrader)
-            TrainingSetSize = algoTrader.SplitIndex-algoTrader.InitialIndex+1;
-        end
-        
-        % InitTestSet GET
-        function InitTestSet = get.InitTestSet(algoTrader)
-            if algoTrader.SplitIndex >= algoTrader.DataSerie.Length
-                InitTestSet = [];
-            else
-                InitTestSet = datestr(algoTrader.DataSerie.DateTime(algoTrader.SplitIndex+1),'yyyy-mm-dd');
-            end
-        end
-        
-        % EndTestSet GET
-        function EndTestSet = get.EndTestSet(algoTrader)
-            if algoTrader.SplitIndex >= algoTrader.DataSerie.Length
-                EndTestSet = [];
-            else
-                EndTestSet = datestr(algoTrader.DataSerie.DateTime(length(algoTrader.DataSerie.DateTime)),'yyyy-mm-dd');
-            end
-        end
-        
-        % TestSetSize GET
-        function TestSetSize = get.TestSetSize(algoTrader)
-            TestSetSize = algoTrader.DataSerie.Length - algoTrader.SplitIndex;
+            
         end
         
     end
     
     
     %% AllowshortPosition
-    properties (GetAccess = public, SetAccess = public)
+    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
         
-        AllowShortPosition
+        AllowedPositions
+        
+    end
+    
+    methods
+        
+        % AllowerPositions SET
+        function set.AllowedPositions(algoTrader, AllowedPositions)
+            
+            if AllowedPositions >= 0 && AllowedPositions <= 2
+                algoTrader.AllowedPositions = AllowedPositions;
+            else
+                error('Error: only values 0 (Long positions), 1 (Short positions) and 2 (Long/Short positions) are allowed.');
+            end
+            
+        end
+        
+    end
+    
+    
+    properties (Dependent = true)
+        
+        ProfitLossTrainingSet
+        
+        ProfitLossTestSet
+        
+    end
+    
+    methods
+        
+        % ProfitLossTrainingSet
+        function ProfitLossTrainingSet = get.ProfitLossTrainingSet(algoTrader)
+            ProfitLossTrainingSet = algoTrader.profitLoss(Settings.TrainingSet);
+        end
+        
+        % ProfitLossTestSet
+        function ProfitLossTestSet = get.ProfitLossTestSet(algoTrader)
+            ProfitLossTestSet = algoTrader.profitLoss(Settings.TestSet);
+        end
         
     end
     
     
     %% InitialFunds
-    properties (GetAccess = public, SetAccess = public)
+    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
         
         InitialFunds
         
@@ -261,43 +182,18 @@ classdef AlgoTrader < handle
         
         % CurrentFunds GET
         function CurrentFunds = get.CurrentFunds(algoTrader)
-            CurrentFunds = algoTrader.InitialFunds*algoTrader.profitLoss([],[],true);
+            CurrentFunds = algoTrader.InitialFunds*algoTrader.profitLoss(Settings.TestSet);
         end
         
     end
     
     
-    %% InvestmentLimit, TradingCost, Tick2Money
-    properties (GetAccess = public, SetAccess = public)
+    %% InvestmentLimit, TradingCost
+    properties (GetAccess = public, SetAccess = public, SetObservable, AbortSet)
         
         InvestmentLimit
         
         TradingCost
-        
-        Tick2Money
-        
-    end
-    
-    
-    %% Money2Tick
-    properties (Dependent = true)
-        
-        Money2Tick
-        
-    end
-    
-    methods
-        
-        % Money2Tick GET
-        function Money2Tick = get.Money2Tick(algoTrader)
-            Money2Tick = 1/algoTrader.Tick2Money;
-        end
-        
-        % Money2Tick SET
-        %function algoTrader = set.Money2Tick(algoTrader, Money2Tick)
-        function set.Money2Tick(algoTrader, Money2Tick)
-            algoTrader.Tick2Money = 1/Money2Tick;
-        end
         
     end
     
@@ -311,60 +207,67 @@ classdef AlgoTrader < handle
             
             algoTrader.DataSerie = dataSerie;
             
-            algoTrader.InitialIndexRatio = Settings.InitialIndexRatio;
-            algoTrader.SplitIndexRatio = Settings.SplitIndexRatio;
+            algoTrader.TrainingSet = Settings.TrainingSetInterval(dataSerie.Length);
+            algoTrader.TestSet = Settings.TestSetInterval(dataSerie.Length);
             
-            algoTrader.AllowShortPosition = Settings.AllowShortPosition;
+            algoTrader.InvertSignal = false;
+            algoTrader.AllowedPositions = Settings.AllowedPositions;
             
             % In the future these properties will be in a manager object
             % that will use algoTrader in order to make investments
             algoTrader.InitialFunds = Settings.InitialFunds;
             algoTrader.InvestmentLimit = Settings.InvestmentLimit;
             algoTrader.TradingCost = Settings.TradingCost;
-            algoTrader.Tick2Money = Settings.Tick2Money;
             
             % Events
-            addlistener(algoTrader, 'InvertSignal', 'PostSet', @algoTrader.resetSignal);
             addlistener(algoTrader, 'Signal', 'PreGet', @algoTrader.updateSignal);
             
         end
         
         
-        profitLoss = profitLoss(algoTrader, rangeInit, rangeEnd, applySplit)
-        
-        profitLoss = profitLossFromSet(algoTrader, set)
+        profitLoss = profitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
         
         [profitLossSerie, positionSerie, priceSerie, dateTimeSerie, longPosition, shortPosition, noPosition] ...
-            = profitLossSerie(algoTrader, rangeInit, rangeEnd, applySplit)
-        
-        profitLossSerie = profitLossSerieFromSet(algoTrader, set)
+            = profitLossSerie(algoTrader, setSelector, rangeInit, rangeEnd)
         
         [positionSerie, priceSerie, dateTimeSerie, longPosition, shortPosition, noPosition] ...
-            = positionSerie(algoTrader, rangeInit, rangeEnd, applySplit)
-        
-        positionSerie = positionSerieFromSet(algoTrader, set)
+            = positionSerie(algoTrader, setSelector, rangeInit, rangeEnd)
         
         [diffProfitLossSerie, positionSerie, priceSerie, dateTimeSerie, longPosition, shortPosition, noPosition] ...
-            = diffProfitLossSerie(algoTrader, rangeInit, rangeEnd, applySplit)
+            = diffProfitLossSerie(algoTrader, setSelector, rangeInit, rangeEnd)
         
         [longPosition, shortPosition, noPosition, initIndex, endIndex] ...
-            = signal2positions(algoTrader, rangeInit, rangeEnd, applySplit)
+            = signal2positions(algoTrader, setSelector, rangeInit, rangeEnd)
         
-        fig = plot(algoTrader, rangeInit, rangeEnd, applySplit)
+        fig = plotWrapper(algoTrader, customizer, axesHandle, setSelector, rangeInit, rangeEnd, varargin)
         
-        fig = plotSeriePosition(algoTrader, rangeInit, rangeEnd, applySplit)
+        fig = plot(algoTrader, setSelector, rangeInit, rangeEnd)
         
-        fig = plotPosition(algoTrader, rangeInit, rangeEnd, applySplit)
+        fig = plotSeriePosition(algoTrader, setSelector, rangeInit, rangeEnd)
         
-        fig = plotProfitLoss(algoTrader, rangeInit, rangeEnd, applySplit)
+        fig = plotPosition(algoTrader, setSelector, rangeInit, rangeEnd)
         
-        fig = plotDiffProfitLoss(algoTrader, rangeInit, rangeEnd, applySplit)
+        fig = plotProfitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
         
-        fitness = fitness(algoTrader, methodWithArguments)
+        fig = plotDiffProfitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
         
-        optimize(algoTrader, varargin)
+        fig = plotSignal(algoTrader, setSelector, rangeInit, rangeEnd)
+        
+        printPositionsLog(algoTrader, setSelector, rangeInit, rangeEnd)
+        
+        performance = fitness(algoTrader, fitnessMethodWithArguments)
+        
+        [minFitness, maxFitness, meanFitness, stdFitness] ...
+            = fitnessStatistics(algoTrader, varargin)
+        
+        varargout = optimize(algoTrader, varargin)
         
         fig = plotSearchSpace(algoTrader, varargin)
+        
+        fig = plotSearchSpace123(algoTrader, varargin)
+        
+        [positionType, openIndex, closeIndex, openDate, closeDate, openPrice, closePrice, profitLoss] ...
+            = positionsLog(algoTrader, setSelector, rangeInit, rangeEnd)
         
         newObj = clone(this)
         
@@ -373,28 +276,30 @@ classdef AlgoTrader < handle
     
     methods (Access = protected)
         
-        fig = plotWrapper(dataSerie, customizer, axesHandle, rangeInit, rangeEnd, varargin)
+        %fig = plotWrapper(algoTrader, customizer, axesHandle, setSelector, rangeInit, rangeEnd, varargin)
         
-        drawSeriePosition(algoTrader, axesHandle, initIndex, endIndex, applySplit)
+        drawSeriePosition(algoTrader, axesHandle, setSelector, initIndex, endIndex)
         
-        drawPosition(algoTrader, axesHandle, initIndex, endIndex, applySplit)
+        drawPosition(algoTrader, axesHandle, setSelector, initIndex, endIndex)
         
-        drawProfitLoss(algoTrader, axesHandle, initIndex, endIndex, applySplit)
+        drawProfitLoss(algoTrader, axesHandle, setSelector, initIndex, endIndex)
         
-        drawDiffProfitLoss(algoTrader, axesHandle, initIndex, endIndex, applySplit)
+        drawDiffProfitLoss(algoTrader, axesHandle, setSelector, initIndex, endIndex)
+        
+        drawSignal(algoTrader, axesHandle, setSelector, initIndex, endIndex)
         
         resetSignal(algoTrader, src, event)
         
         updateSignal(algoTrader, src, event)
         
-        fitnessValue = fitnessFunctionWrapper(algoTrader, fitnessMethodWithArguments, propertyName, propertyDomain, indexArray)
+        performance = fitnessFunctionWrapper(algoTrader, fitnessMethodWithArguments, propertyName, propertyDomain, indexArray)
         
     end
     
     
     methods (Access = public, Abstract)
         
-        simulate(algoTrader)
+        computeSignal(algoTrader)
         
         %step(algoTrader)
         

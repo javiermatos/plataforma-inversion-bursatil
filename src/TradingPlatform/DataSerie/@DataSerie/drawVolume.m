@@ -28,8 +28,10 @@ hold off;
 
 % Itemize
 % Information and fixes
-legend(axesHandle, 'Volume','Location','NorthWest');
-xlabel(axesHandle, '\bfDateTime');
+if Settings.ShowLegend
+    legend(axesHandle, 'Volume','Location','NorthWest');
+end
+xlabel(axesHandle, '\bfDate');
 ylabel(axesHandle, '\bfQuantity');
 xlim(axesHandle, [dateTime(1) dateTime(end)]);
 

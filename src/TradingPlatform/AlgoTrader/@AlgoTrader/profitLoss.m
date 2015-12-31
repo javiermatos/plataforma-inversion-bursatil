@@ -1,66 +1,57 @@
 
-function profitLoss = profitLoss(algoTrader, rangeInit, rangeEnd, applySplit)
+function profitLoss = profitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
 
 % rangeInit
 if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
-% applySplit
-if ~exist('applySplit','var'); applySplit = true; end
+% setSelector
+if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
 
 % Compute positions from signal and correct the result to get the absolute
 % position (and not the relative to rangeInit)
-[longPosition, shortPosition, ~, initIndex, endIndex] = algoTrader.signal2positions(rangeInit, rangeEnd, applySplit);
+[longPosition, shortPosition, ~, initIndex, endIndex] = algoTrader.signal2positions(setSelector, rangeInit, rangeEnd);
 priceSerie = algoTrader.DataSerie.Serie(initIndex:endIndex);
 
-% Initialize values
-profitLoss = 1;
+% Positions table
+positions = sortrows([[ones(size(longPosition, 1),1) longPosition]; [-ones(size(shortPosition, 1),1) shortPosition]], 2);
+positionType = positions(:,1);
+openPrice = priceSerie(positions(:,2))';
+closePrice = priceSerie(positions(:,3))';
 
-if ~isempty(longPosition) || ~isempty(shortPosition)
+% Available funds to invest
+currentFunds = algoTrader.InitialFunds;
+
+diff = positionType.*(closePrice-openPrice);
+
+for i = 1:length(diff)
     
-    position = sortrows([[longPosition ones(size(longPosition, 1),1)]; [shortPosition -ones(size(shortPosition, 1),1)]], 1);
+    % Number of stocks that we can buy/sell
+    investment = min(currentFunds,algoTrader.InvestmentLimit);
+    n = max(0,floor(investment/openPrice(i)));
     
-    % Available funds to invest
-    currentFunds = algoTrader.InitialFunds;
+    investmentCapital0 = n*openPrice(i);
+    index0 = find(investmentCapital0<=algoTrader.TradingCost(:,1), 1, 'first');
+    fixedCost0 = algoTrader.TradingCost(index0,2);
+    variableCost0 = algoTrader.TradingCost(index0,3)*investmentCapital0/100;
     
+    investmentCapitalN = n*closePrice(i);
+    indexN = find(investmentCapitalN<=algoTrader.TradingCost(:,1), 1, 'first');
+    fixedCostN = algoTrader.TradingCost(indexN,2);
+    variableCostN = algoTrader.TradingCost(indexN,3)*investmentCapitalN/100;
     
-    for i = 1:size(position,1)
+    if n > 0
         
-        % Open position price
-        openPrice = priceSerie(position(i,1));
-        
-        % Close position price
-        closePrice = priceSerie(position(i,2));
-
-        % Number of stocks that we can buy/sell
-        n = max(0,floor((min(currentFunds,algoTrader.InvestmentLimit)-2*algoTrader.TradingCost)*algoTrader.Money2Tick/openPrice));
-
-        % Proceed only if we buy/sell
-        if n > 0
-            
-            positionType = position(i,3);
-            
-            if positionType == 1
-                % Long position
-                currentFunds = ...
-                    + currentFunds ...
-                    + n*(closePrice-openPrice)*algoTrader.Tick2Money ...
-                    - 2*algoTrader.TradingCost;
-                
-            elseif positionType == -1
-                % Short position
-                currentFunds = ...
-                    + currentFunds ...
-                    + n*(openPrice-closePrice)*algoTrader.Tick2Money ...
-                    - 2*algoTrader.TradingCost;
-            end
-            
-        end
+        currentFunds = ...
+            + currentFunds ...
+            + n*(diff(i)) ...
+            - (fixedCost0 + variableCost0) ...
+            - (fixedCostN + variableCostN);
         
     end
     
-    profitLoss = (currentFunds/algoTrader.InitialFunds);
-    
 end
+
+profitLoss = (currentFunds/algoTrader.InitialFunds);
 
 end

@@ -38,7 +38,7 @@ figureHandle = figure('Name',description);
 
 % Serie
 serie = subplot(2,1,1);
-dataSerie.plotWrapper(@drawSerie, serie, rangeInit, rangeEnd);
+dataSerie.plotWrapper(@drawSeries, serie, rangeInit, rangeEnd);
 
 % Volume
 volume = subplot(2,1,2);

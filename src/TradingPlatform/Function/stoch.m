@@ -1,18 +1,18 @@
 
-function stochastic = stoch(highSerie, lowSerie, closeSerie, stochasticSamples)
+function stochastic = stoch(highSerie, lowSerie, closeSerie, samples)
 
 N = length(closeSerie);
 
 % Highest high
 hhigh = NaN(1,N);
-for i = stochasticSamples:N
-    hhigh(i) = max(highSerie(i-stochasticSamples+1:i));
+for i = samples:N
+    hhigh(i) = max(highSerie(i-samples+1:i));
 end
 
 % Lowest low
 llow = NaN(1,N);
-for i = stochasticSamples:N
-    llow(i) = min(lowSerie(i-stochasticSamples+1:i));
+for i = samples:N
+    llow(i) = min(lowSerie(i-samples+1:i));
 end
 
 nonZeros = hhigh-llow ~= 0;

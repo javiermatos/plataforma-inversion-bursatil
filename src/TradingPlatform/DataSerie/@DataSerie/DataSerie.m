@@ -52,7 +52,7 @@ classdef DataSerie < handle
         function DiffSerie = get.DiffSerie(dataSerie)
             serie = dataSerie.Serie;
             DiffSerie = [0 diff(serie)./serie(1:end-1)];
-            %DiffSerie = [0 diff(serie)-serie(1:end-1)];
+			%DiffSerie = [0 diff(serie)-serie(1:end-1)];
         end
         
         % InitDateTime GET
@@ -112,6 +112,8 @@ classdef DataSerie < handle
         
         boolean = equals(lhs, rhs)
         
+        fig = plotWrapper(dataSerie, customizer, axesHandle, rangeInit, rangeEnd, varargin)
+        
         fig = plot(dataSerie, rangeInit, rangeEnd)
         
         fig = plotOpen(dataSerie, rangeInit, rangeEnd)
@@ -126,6 +128,8 @@ classdef DataSerie < handle
         
         fig = plotSerie(dataSerie, rangeInit, rangeEnd)
         
+        fig = plotSeries(dataSerie, rangeInit, rangeEnd)
+        
         fig = plotDiffSerie(dataSerie, rangeInit, rangeEnd)
         
         index = firstFrom(dataSerie, dateTime)
@@ -137,7 +141,7 @@ classdef DataSerie < handle
     
     methods (Access = protected)
         
-        fig = plotWrapper(dataSerie, customizer, axesHandle, rangeInit, rangeEnd, varargin)
+        %fig = plotWrapper(dataSerie, customizer, axesHandle, rangeInit, rangeEnd, varargin)
         
         drawOpen(dataSerie, axesHandle, initIndex, endIndex)
         
@@ -150,6 +154,8 @@ classdef DataSerie < handle
         drawVolume(dataSerie, axesHandle, initIndex, endIndex)
         
         drawSerie(dataSerie, axesHandle, initIndex, endIndex)
+        
+        drawSeries(dataSerie, axesHandle, initIndex, endIndex)
         
         drawDiffSerie(dataSerie, axesHandle, initIndex, endIndex)
         

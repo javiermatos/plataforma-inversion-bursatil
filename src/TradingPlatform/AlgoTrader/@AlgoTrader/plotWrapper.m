@@ -1,5 +1,5 @@
 
-function fig = plotWrapper(algoTrader, customizer, axesHandle, rangeInit, rangeEnd, varargin)
+function fig = plotWrapper(algoTrader, customizer, axesHandle, setSelector, rangeInit, rangeEnd, varargin)
 
 dataSerie = algoTrader.DataSerie;
 
@@ -41,7 +41,7 @@ end
 % plotWrapper
 
 % customizer function
-customizer(algoTrader, axesHandle, initIndex, endIndex, varargin{:});
+customizer(algoTrader, axesHandle, setSelector, initIndex, endIndex, varargin{:});
 
 % Corrections
 % Basic
@@ -52,7 +52,7 @@ set(figureHandle,'Color',Settings.BackgroundColor);
 set(axesHandle, 'Box', Settings.Box);
 
 % Automatic y limit
-set(axesHandle, 'YLimMode', 'auto');
+%set(axesHandle, 'YLimMode', 'auto');
 
 % Grid
 set(axesHandle, ...

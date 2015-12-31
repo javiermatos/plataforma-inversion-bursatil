@@ -19,8 +19,10 @@ hold off;
 
 % Itemize
 % Information and fixes
-legend(axesHandle, 'DiffSerie','Location','NorthWest');
-xlabel(axesHandle, '\bfDateTime');
+if Settings.ShowLegend
+    legend(axesHandle, 'DiffSerie','Location','NorthWest');
+end
+xlabel(axesHandle, '\bfDate');
 ylabel(axesHandle, '\bfDiffSerie');
 xlim(axesHandle, [dateTime(1) dateTime(end)]);
 

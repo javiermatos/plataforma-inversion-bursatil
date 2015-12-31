@@ -1,43 +1,46 @@
 
-function [bestIndexArray, fitnessMatrix] = exhaustive(fitnessFunction, domainSize)
+function [bestIndexArray, searchSpace] = exhaustive(selectionFunction, fitnessFunction, searchSpaceSize)
 
-if length(domainSize) == 1
-    fitnessMatrix = zeros(domainSize,1);
+if length(searchSpaceSize) == 1
+    searchSpace = zeros(searchSpaceSize,1);
 else
-    fitnessMatrix = zeros(domainSize);
+    searchSpace = zeros(searchSpaceSize);
 end
 
-parfor i = 1:prod(domainSize)
+parfor i = 1:prod(searchSpaceSize)
     
-    indexArray = ind2array(domainSize,i);
+    indexArray = index2indexArray(searchSpaceSize,i);
     
-    fitnessMatrix(i) = feval(fitnessFunction,indexArray);
+    searchSpace(i) = feval(fitnessFunction,indexArray);
     
 end
 
-% Get first max value
-[~, index] = max(fitnessMatrix(:));
-bestIndexArray = index2indexArray(domainSize,index);
+% Get first best value
+[~, index] = selectionFunction(searchSpace(:));
+bestIndexArray = index2indexArray(searchSpaceSize,index);
 
-% % Get all max values
-% index = find(fitnessMatrix(:) == max(fitnessMatrix(:))); 
-% bestIndexArray = index2indexArray(domainSize,index(1));
+% % Get all best values
+% index = find(searchSpace(:) == selectionFunction(searchSpace(:))); 
+% bestIndexArray = index2indexArray(searchSpaceSize,index(1));
 
 end
 
-function indexArray = index2indexArray(domainSize, n)
+
+function indexArray = index2indexArray(searchSpaceSize, n)
 
 % Initial correction
 n = n-1;
 
-N = length(domainSize);
+base = cumprod([1 searchSpaceSize(1:end-1)]);
+
+N = length(searchSpaceSize);
+
 indexArray = zeros(1, N);
+
 for i = N:-1:1
     
-    baseValue = prod(domainSize(1:i-1));
-    
-    idiv = floor(n/baseValue);
-    n = n - idiv*baseValue;
+    idiv = floor(n/base(i));
+    n = n - idiv*base(i);
     
     indexArray(i) = idiv;
     

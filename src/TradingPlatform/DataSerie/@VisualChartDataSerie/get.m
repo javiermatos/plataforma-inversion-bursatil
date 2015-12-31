@@ -91,7 +91,7 @@ switch lower(compressionTypeString)
         
     otherwise
         error('Not valid argument.')
-	
+		
 end
 
 end

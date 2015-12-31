@@ -1,63 +1,103 @@
 
-function optimize(algoTrader, varargin)
+function varargout = optimize(algoTrader, varargin)
 
-if isa(varargin{1},'function_handle') ||  iscell(varargin{1})
+% Default fitness function is built-in fitness which calls profitLoss
+fitnessMethodWithArguments = {};
+
+% Default selection function is max
+selectionFunction = @max;
+
+% Default optimization method is exhaustive
+optimizationMethod = @exhaustive;
+optimizationMethodArguments = {};
+
+% Change default if requested in the call
+if isa(varargin{1},'function_handle') || iscell(varargin{1})
     
     % First optional parameter is optimization method
     if isa(varargin{1},'function_handle')
-        method = varargin{1};
-        methodArguments = {};
+        fitnessMethodWithArguments = varargin(1);
     elseif iscell(varargin{1})
-        method = varargin{1};
-        methodArguments = varargin{1}(2:end);
+        fitnessMethodWithArguments = varargin{1};
     end
     
-    % Second optional parameter is fitness method
+    % Second optional parameter is selection function
     if isa(varargin{2},'function_handle')
-        fitnessMethodWithArguments = varargin(2);
-        pairs = varargin(3:end);
-    elseif iscell(varargin{2})
-        fitnessMethodWithArguments = varargin{2};
-        pairs = varargin(3:end);
+        
+        % Objetive is min or max
+        selectionFunction = varargin{2};
+        
+        % Third optional parameter is optimization method
+        if isa(varargin{3},'function_handle') || iscell(varargin{3})
+            
+            if isa(varargin{3},'function_handle')
+                optimizationMethod = varargin{3};
+                optimizationMethodArguments = {};
+            elseif iscell(varargin{3})
+                optimizationMethod = varargin{3}{1};
+                optimizationMethodArguments = varargin{3}(2:end);
+            end
+            
+            pairs = varargin(4:end);
+            
+        else
+            
+            pairs = varargin(3:end);
+            
+        end
+        
     else
-        fitnessMethodWithArguments = {};
+        
         pairs = varargin(2:end);
+        
     end
     
 else
     
-    % Default optimization method is exhaustive
-    method = @exhaustive;
-    methodArguments = {};
-    
-    % Default fitness method is built-in fitness
-    fitnessMethodWithArguments = {};
-    
-    pairs = varargin;    
+    pairs = varargin;
     
 end
+
+%optimizationMethod
+%optimizationMethodArguments
 
 % Organize input
 propertyName = pairs(1:2:end);
 propertyDomain = pairs(2:2:end);
 propertyDomainSize = cellfun(@length, propertyDomain);
 
-% Call optimization method
-bestIndexArray = method ...
+% Call optimization optimizationMethod
+bestIndexArray = optimizationMethod ...
         ( ...
+            selectionFunction, ...
             @(indexArray) fitnessFunctionWrapper(algoTrader, fitnessMethodWithArguments, propertyName, propertyDomain, indexArray), ...
             propertyDomainSize, ...
-            methodArguments{:} ...
+            optimizationMethodArguments{:} ...
         );
 
 % Set values
-for i = 1:length(propertyDomain)
+for i = 1:length(propertyName)
     
-    subsasgn(algoTrader, struct('type','.','subs',propertyName{i}), innerValue(propertyDomain{i}(bestIndexArray(i))));
+    subsasgn( ...
+        algoTrader, ...
+        struct( ...
+            'type','.', ...
+            'subs',propertyName{i} ...
+            ),...
+        innerValue(propertyDomain{i}(bestIndexArray(i))) ...
+        );
     
 end
 
+% Return results if requested
+if nargout == 2
+    varargout{1} = propertyName;
+    varargout{2} = cellfun(@(cell, index) innerValue(cell(index)), ...
+        propertyDomain, num2cell(bestIndexArray),'UniformOutput',false);
 end
+
+end
+
 
 function value = innerValue(valueOrCellValue)
 

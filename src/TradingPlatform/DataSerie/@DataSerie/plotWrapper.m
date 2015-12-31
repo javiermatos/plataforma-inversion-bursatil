@@ -50,7 +50,7 @@ set(figureHandle,'Color',Settings.BackgroundColor);
 set(axesHandle, 'Box', Settings.Box);
 
 % Automatic y limit
-set(axesHandle, 'YLimMode', 'auto');
+%set(axesHandle, 'YLimMode', 'auto');
 
 % Fixex x limit
 set(axesHandle, 'XLim', [dataSerie.DateTime(initIndex) dataSerie.DateTime(endIndex)]);

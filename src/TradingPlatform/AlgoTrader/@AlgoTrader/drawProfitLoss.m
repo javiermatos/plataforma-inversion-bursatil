@@ -1,6 +1,5 @@
 
-function drawProfitLoss(algoTrader, axesHandle, initIndex, endIndex, applySplit)
-
+function drawProfitLoss(algoTrader, axesHandle, setSelector, initIndex, endIndex)
 [ ...
     profitLoss, ...
     ~, ...      % Position serie
@@ -8,9 +7,9 @@ function drawProfitLoss(algoTrader, axesHandle, initIndex, endIndex, applySplit)
     dateTime, ...
     longPosition, ...
     shortPosition, ...
-    noPosition, ...
+    noPosition ...
 ] ...
-= algoTrader.profitLossSerie(initIndex, endIndex, applySplit);
+= algoTrader.profitLossSerie(setSelector, initIndex, endIndex);
 
 symbolCode = algoTrader.DataSerie.SymbolCode;
 compressionType = algoTrader.DataSerie.CompressionType;
@@ -70,6 +69,7 @@ end
 hold off;
 
 % Strings holder
+if Settings.ShowLegend
 legendString = {};
 if ~isempty(get(lpGroup,'Children'))
     legendString = [ legendString {'Profit/Loss in long position'} ];
@@ -92,10 +92,13 @@ if ~isempty(get(npGroup,'Children'))
     set(get(get(npGroup,'Annotation'),'LegendInformation'),...
         'IconDisplayStyle','on');
 end
+end
 
 % Itemize
 % Information and fixes
-legend(axesHandle, 'String', legendString, 'Location', 'NorthWest');
+if Settings.ShowLegend
+    legend(axesHandle, 'String', legendString, 'Location', 'NorthWest');
+end
 xlabel(axesHandle, '\bfDate');
 ylabel(axesHandle, '\bfQuantity');
 xlim(axesHandle, [dateTime(1) dateTime(end)]);

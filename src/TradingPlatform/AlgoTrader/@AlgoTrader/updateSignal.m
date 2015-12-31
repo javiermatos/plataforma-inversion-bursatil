@@ -2,7 +2,7 @@
 function updateSignal(algoTrader, src, event)
 
 if isempty(algoTrader.Signal);
-    algoTrader.simulate();
+    algoTrader.computeSignal();
 end
 
 end

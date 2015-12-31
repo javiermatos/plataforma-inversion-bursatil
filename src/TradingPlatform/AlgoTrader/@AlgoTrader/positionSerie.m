@@ -1,68 +1,63 @@
 
 function [positionSerie, priceSerie, dateTimeSerie, longPosition, shortPosition, noPosition] ...
-    = positionSerie(algoTrader, rangeInit, rangeEnd, applySplit)
+    = positionSerie(algoTrader, setSelector, rangeInit, rangeEnd)
 
 % rangeInit
 if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
-% applySplit
-if ~exist('applySplit','var'); applySplit = true; end
+% setSelector
+if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
 
 % Compute positions from signal and correct the result to get the absolute
 % position (and not the relative to rangeInit)
-[longPosition, shortPosition, noPosition, initIndex, endIndex] = algoTrader.signal2positions(rangeInit, rangeEnd, applySplit);
+[longPosition, shortPosition, noPosition, initIndex, endIndex] = algoTrader.signal2positions(setSelector, rangeInit, rangeEnd);
 priceSerie = algoTrader.DataSerie.Serie(initIndex:endIndex);
 dateTimeSerie = algoTrader.DataSerie.DateTime(initIndex:endIndex);
 
 % Initialize values
 positionSerie = zeros(1, length(priceSerie));
 
-if ~isempty(longPosition) || ~isempty(shortPosition)
-    
-    position = sortrows([[longPosition ones(size(longPosition, 1),1)]; [shortPosition -ones(size(shortPosition, 1),1)]], 1);
-    
-    % Available funds to invest
-    currentFunds = algoTrader.InitialFunds;
-    
-    
-    for i = 1:size(position,1)
-        
-        % Open position price
-        openPosition = position(i,1);
-        openPrice = priceSerie(openPosition);
-        
-        % Close position price
-        closePosition = position(i,2);
-        closePrice = priceSerie(closePosition);
-        
-        % Number of stocks that we can buy/sell
-        n = max(0,floor((min(currentFunds,algoTrader.InvestmentLimit)-2*algoTrader.TradingCost)*algoTrader.Money2Tick/openPrice));
+% Positions table
+positions = sortrows([[ones(size(longPosition, 1),1) longPosition]; [-ones(size(shortPosition, 1),1) shortPosition]], 2);
+positionType = positions(:,1);
+openPosition = positions(:,2);
+openPrice = priceSerie(openPosition)';
+closePosition = positions(:,3);
+closePrice = priceSerie(closePosition)';
 
-        % Proceed only if we buy/sell
-        if n > 0
+% Available funds to invest
+currentFunds = algoTrader.InitialFunds;
 
-            positionType = position(i,3);
+diff = positionType.*(closePrice-openPrice);
 
-            if positionType == 1
-                % Long position
-                currentFunds = ...
-                    + currentFunds ...
-                    + n*(closePrice-openPrice)*algoTrader.Tick2Money ...
-                    - 2*algoTrader.TradingCost;
-                positionSerie(openPosition:closePosition) = n*openPrice;
-                
-            elseif positionType == -1
-                % Short position
-                currentFunds = ...
-                    + currentFunds ...
-                    + n*(openPrice-closePrice)*algoTrader.Tick2Money ...
-                    - 2*algoTrader.TradingCost;
-                positionSerie(openPosition:closePosition) = -n*openPrice;
-                
-            end
-            
-        end
+for i = 1:length(diff)
+    
+    % Number of stocks that we can buy/sell
+    investment = min(currentFunds,algoTrader.InvestmentLimit);
+    n = max(0,floor(investment/openPrice(i)));
+    
+    investmentCapital0 = n*openPrice(i);
+    index0 = find(investmentCapital0<=algoTrader.TradingCost(:,1), 1, 'first');
+    fixedCost0 = algoTrader.TradingCost(index0,2);
+    variableCost0 = algoTrader.TradingCost(index0,3)*investmentCapital0/100;
+    
+    investmentCapitalN = n*closePrice(i);
+    indexN = find(investmentCapitalN<=algoTrader.TradingCost(:,1), 1, 'first');
+    fixedCostN = algoTrader.TradingCost(indexN,2);
+    variableCostN = algoTrader.TradingCost(indexN,3)*investmentCapitalN/100;
+    
+    if n > 0
+        
+        newFunds = ...
+            + currentFunds ...
+            + n*(diff(i)) ...
+            - (fixedCost0 + variableCost0) ...
+            - (fixedCostN + variableCostN);
+        
+        positionSerie(openPosition(i):closePosition(i)) = positionType(i)*n*openPrice(i);
+        
+        currentFunds = newFunds;
         
     end
     

@@ -1,6 +1,9 @@
 
 function vout = movavg(vin, mode, samples)
 
+% Correction over vin
+vin(isnan(vin)) = 0;
+
 if samples > length(vin)
     error('Samples is greater than the length of the vector.');
 end
@@ -59,8 +62,8 @@ switch lower(mode)
 
     case {'w', 'heighted'} % Weighted
         
-        % Samples must be a column vector
-        samples = samples(:);
+        % Samples must be a column or row vector (the same as the vin)
+        % samples = samples(:);
         
         % Length weights
         lenWghts = length(samples);

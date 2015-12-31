@@ -1,14 +1,14 @@
 
-function fig = plotPosition(algoTrader, rangeInit, rangeEnd, applySplit)
+function fig = plotPosition(algoTrader, setSelector, rangeInit, rangeEnd)
 
 % rangeInit
 if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
-% applySplit
-if ~exist('applySplit','var'); applySplit = true; end
+% setSelector
+if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
 
-figureHandle = algoTrader.plotWrapper(@drawPosition, [], rangeInit, rangeEnd, applySplit);
+figureHandle = algoTrader.plotWrapper(@drawPosition, [], setSelector, rangeInit, rangeEnd);
 
 % Protects against edition if needed
 set(figureHandle,'HandleVisibility','callback');

@@ -19,8 +19,10 @@ hold off;
 
 % Itemize
 % Information and fixes
-legend(axesHandle, 'Close','Location','NorthWest');
-xlabel(axesHandle, '\bfDateTime');
+if Settings.ShowLegend
+    legend(axesHandle, 'Close','Location','NorthWest');
+end
+xlabel(axesHandle, '\bfDate');
 ylabel(axesHandle, '\bfPrice');
 xlim(axesHandle, [dateTime(1) dateTime(end)]);
 

@@ -1,12 +1,12 @@
 
-function fig = plot(algoTrader, rangeInit, rangeEnd, applySplit)
+function fig = plot(algoTrader, setSelector, rangeInit, rangeEnd)
 
 % rangeInit
 if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
-% applySplit
-if ~exist('applySplit','var'); applySplit = true; end
+% setSelector
+if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
 
 dataSerie = algoTrader.DataSerie;
 
@@ -42,15 +42,15 @@ figureHandle = figure('Name',description);
 
 % SeriePosition
 seriePosition = subplot(2,1,1);
-algoTrader.plotWrapper(@drawSeriePosition, seriePosition, rangeInit, rangeEnd, applySplit);
+algoTrader.plotWrapper(@drawSeriePosition, seriePosition, setSelector, rangeInit, rangeEnd);
 
 % Position
 position = subplot(4,1,3);
-algoTrader.plotWrapper(@drawPosition, position, rangeInit, rangeEnd, applySplit);
+algoTrader.plotWrapper(@drawPosition, position, setSelector, rangeInit, rangeEnd);
 
 % ProfitLoss
 profitLoss = subplot(4,1,4);
-algoTrader.plotWrapper(@drawProfitLoss, profitLoss, rangeInit, rangeEnd, applySplit);
+algoTrader.plotWrapper(@drawProfitLoss, profitLoss, setSelector, rangeInit, rangeEnd);
 
 % Link axes views over x
 linkaxes([seriePosition, position, profitLoss],'x');
