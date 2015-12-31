@@ -3,7 +3,7 @@ function performance = fitness(algoTrader, fitnessMethodWithArguments)
 
 if ~exist('fitnessMethodWithArguments','var')
     
-    performance = algoTrader.profitLoss(Settings.TrainingSet);
+    performance = algoTrader.profitLoss(Default.TrainingSet);
     
 else 
     
@@ -25,7 +25,7 @@ else
         closePrice, ...
         profitLoss ...
     ] ...
-    = algoTrader.positionsLog(Settings.TrainingSet);
+    = algoTrader.positionsLog(Default.TrainingSet);
     
     performance = method( ...
         [ ...

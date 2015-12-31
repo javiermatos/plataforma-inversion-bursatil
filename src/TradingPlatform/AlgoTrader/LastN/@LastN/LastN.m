@@ -15,7 +15,7 @@ classdef LastN < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('samples','var'); samples = Settings.LastN.Samples; end
+            if ~exist('samples','var'); samples = Default.LastN.Samples; end
             
             algoTrader.Samples = samples;
             

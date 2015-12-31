@@ -15,7 +15,7 @@ classdef GARCH < NonLinear
             
             algoTrader = algoTrader@NonLinear(dataSerie);
             
-            if ~exist('k','var'); k = Settings.AR.K; end
+            if ~exist('k','var'); k = Default.AR.K; end
             
             algoTrader.K = k;
             

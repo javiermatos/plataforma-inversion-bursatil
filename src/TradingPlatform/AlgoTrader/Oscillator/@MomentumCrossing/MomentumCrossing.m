@@ -15,12 +15,12 @@ classdef MomentumCrossing < Momentum
         
         function algoTrader = MomentumCrossing(dataSerie, delay, mode, samples)
             
-            if ~exist('delay','var'); delay = Settings.MomentumCrossing.Delay; end
+            if ~exist('delay','var'); delay = Default.MomentumCrossing.Delay; end
             
             algoTrader = algoTrader@Momentum(dataSerie, delay);
             
-            if ~exist('mode','var'); mode = Settings.MomentumCrossing.Mode; end
-            if ~exist('samples','var'); samples = Settings.MomentumCrossing.Samples; end
+            if ~exist('mode','var'); mode = Default.MomentumCrossing.Mode; end
+            if ~exist('samples','var'); samples = Default.MomentumCrossing.Samples; end
             
             algoTrader.Mode = mode;
             algoTrader.Samples = samples;

@@ -33,14 +33,14 @@ classdef MovingAveragesCrossingThreshold < MovingAveragesCrossing
         
         function algoTrader = MovingAveragesCrossingThreshold(dataSerie, mode, lead, lag, riseThreshold, fallThreshold)
             
-            if ~exist('mode','var'); mode = Settings.MovingAveragesCrossingThreshold.Mode; end
-            if ~exist('lead','var'); lead = Settings.MovingAveragesCrossingThreshold.Lead; end
-            if ~exist('lag','var'); lag = Settings.MovingAveragesCrossingThreshold.Lag; end
+            if ~exist('mode','var'); mode = Default.MovingAveragesCrossingThreshold.Mode; end
+            if ~exist('lead','var'); lead = Default.MovingAveragesCrossingThreshold.Lead; end
+            if ~exist('lag','var'); lag = Default.MovingAveragesCrossingThreshold.Lag; end
             
             algoTrader = algoTrader@MovingAveragesCrossing(dataSerie, mode, lead, lag);
             
-            if ~exist('riseThreshold','var'); riseThreshold = Settings.MovingAveragesCrossingThreshold.RiseThreshold; end
-            if ~exist('fallThreshold','var'); fallThreshold = Settings.MovingAveragesCrossingThreshold.FallThreshold; end
+            if ~exist('riseThreshold','var'); riseThreshold = Default.MovingAveragesCrossingThreshold.RiseThreshold; end
+            if ~exist('fallThreshold','var'); fallThreshold = Default.MovingAveragesCrossingThreshold.FallThreshold; end
             
             algoTrader.RiseThreshold = riseThreshold;
             algoTrader.FallThreshold = fallThreshold;

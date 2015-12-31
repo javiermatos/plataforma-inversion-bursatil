@@ -42,9 +42,9 @@ classdef LastNRatio < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('samples','var'); samples = Settings.LastNRatio.Samples; end
-            if ~exist('riseFallRatio','var'); riseFallRatio = Settings.LastNRatio.RiseFallRatio; end
-            if ~exist('fallRiseRatio','var'); fallRiseRatio = Settings.LastNRatio.FallRiseRatio; end
+            if ~exist('samples','var'); samples = Default.LastNRatio.Samples; end
+            if ~exist('riseFallRatio','var'); riseFallRatio = Default.LastNRatio.RiseFallRatio; end
+            if ~exist('fallRiseRatio','var'); fallRiseRatio = Default.LastNRatio.FallRiseRatio; end
             
             algoTrader.Samples = samples;
             algoTrader.RiseFallRatio = riseFallRatio;

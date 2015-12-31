@@ -29,7 +29,7 @@ hold off;
 
 % Itemize
 % Information and fixes
-if Settings.ShowLegend
+if Default.ShowLegend
     legend(axesHandle, 'String', { 'Momentum' 'Zero line' } , 'Location', 'NorthWest');
 end
 xlabel(axesHandle, '\bfDate');

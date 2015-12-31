@@ -25,7 +25,7 @@ ds.plot();
 % No es necesario pasar más parámetros a la máquina que el objeto del tipo
 % DataSerie. La clase MovingAverage utiliza los parámetros 'Mode' y
 % 'Samples' para el cálculo de la señal de posición. En caso de omisión
-% estos valores toman aquellos definidos en el archivo Settings.m.
+% estos valores toman aquellos definidos en el archivo Default.m.
 %
 ma = MovingAverage(ds);
 
@@ -38,9 +38,9 @@ ma.Mode
 ma.Samples
 
 % Muestra los valores predefinidos de las propiedades 'Mode' y 'Samples'
-Settings.MovingAverage.Mode
+Default.MovingAverage.Mode
 
-Settings.MovingAverage.Samples
+Default.MovingAverage.Samples
 
 % Muestra la evolución del precio de la acción, las posiciones que adopta
 % la máquina y la curva de beneficio/pérdida asociada en el intervalo de

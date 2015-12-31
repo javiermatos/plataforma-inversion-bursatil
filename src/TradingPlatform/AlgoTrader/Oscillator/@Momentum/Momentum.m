@@ -15,7 +15,7 @@ classdef Momentum < Oscillator
             
             algoTrader = algoTrader@Oscillator(dataSerie);
             
-            if ~exist('delay','var'); delay = Settings.Momentum.Delay; end
+            if ~exist('delay','var'); delay = Default.Momentum.Delay; end
             
             algoTrader.Delay = delay;
             

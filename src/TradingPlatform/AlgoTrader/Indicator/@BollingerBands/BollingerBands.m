@@ -17,8 +17,8 @@ classdef BollingerBands < Indicator
             
             algoTrader = algoTrader@Indicator(dataSerie);
             
-            if ~exist('samples','var'); samples = Settings.BollingerBands.Samples; end
-            if ~exist('k','var'); k = Settings.BollingerBands.K; end
+            if ~exist('samples','var'); samples = Default.BollingerBands.Samples; end
+            if ~exist('k','var'); k = Default.BollingerBands.K; end
             
             algoTrader.Samples = samples;
             algoTrader.K = k;

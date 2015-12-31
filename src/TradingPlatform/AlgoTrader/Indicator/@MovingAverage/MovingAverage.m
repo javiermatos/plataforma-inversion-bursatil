@@ -17,8 +17,8 @@ classdef MovingAverage < Indicator
             
             algoTrader = algoTrader@Indicator(dataSerie);
             
-            if ~exist('mode','var'); mode = Settings.MovingAverage.Mode; end
-            if ~exist('samples','var'); samples = Settings.MovingAverage.Samples; end
+            if ~exist('mode','var'); mode = Default.MovingAverage.Mode; end
+            if ~exist('samples','var'); samples = Default.MovingAverage.Samples; end
             
             algoTrader.Mode = mode;
             algoTrader.Samples = samples;

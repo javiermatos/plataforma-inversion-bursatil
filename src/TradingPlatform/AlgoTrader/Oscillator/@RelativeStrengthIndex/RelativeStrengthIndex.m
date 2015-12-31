@@ -19,9 +19,9 @@ classdef RelativeStrengthIndex < Oscillator
             
             algoTrader = algoTrader@Oscillator(dataSerie);
             
-            if ~exist('samples','var'); samples = Settings.RelativeStrengthIndex.Samples; end
-            if ~exist('highThresold','var'); riseThreshold = Settings.RelativeStrengthIndex.RiseThreshold; end
-            if ~exist('fallThreshold','var'); fallThreshold = Settings.RelativeStrengthIndex.FallThreshold; end
+            if ~exist('samples','var'); samples = Default.RelativeStrengthIndex.Samples; end
+            if ~exist('highThresold','var'); riseThreshold = Default.RelativeStrengthIndex.RiseThreshold; end
+            if ~exist('fallThreshold','var'); fallThreshold = Default.RelativeStrengthIndex.FallThreshold; end
             
             algoTrader.Samples = samples;
             algoTrader.RiseThreshold = riseThreshold;

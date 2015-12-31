@@ -6,13 +6,13 @@ if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
 % setSelector
-if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
+if ~exist('setSelector','var'); setSelector = Default.TargetSet; end
 
 [positionType, openIndex, closeIndex, openDate, closeDate, openPrice, closePrice, profitLoss] ...
     = positionsLog(algoTrader, setSelector, rangeInit, rangeEnd);
 
-openDate = datestr(openDate, Settings.DateFormat);
-closeDate = datestr(closeDate, Settings.DateFormat);
+openDate = datestr(openDate, Default.DateFormat);
+closeDate = datestr(closeDate, Default.DateFormat);
 table = [];
 for i = 1:size(positionType,1)
     

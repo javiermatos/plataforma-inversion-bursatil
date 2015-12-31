@@ -15,7 +15,7 @@ classdef LastNWeighted < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('weight','var'); weight = Settings.LastNWeighted.Weight; end
+            if ~exist('weight','var'); weight = Default.LastNWeighted.Weight; end
             
             algoTrader.Weight = weight;
             

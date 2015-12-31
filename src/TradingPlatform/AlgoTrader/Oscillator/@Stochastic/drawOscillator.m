@@ -49,7 +49,7 @@ hold off;
 
 % Itemize
 % Information and fixes
-if Settings.ShowLegend
+if Default.ShowLegend
     legend(axesHandle, 'String', { '%K' '%D' 'High Threshold' 'Low Threshold' }, 'Location', 'NorthWest');
 end
 xlabel(axesHandle, '\bfDate');

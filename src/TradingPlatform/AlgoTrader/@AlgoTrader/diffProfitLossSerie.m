@@ -7,7 +7,7 @@ if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
 % setSelector
-if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
+if ~exist('setSelector','var'); setSelector = Default.TargetSet; end
 
 [profitLossSerie, positionSerie, priceSerie, dateTimeSerie, longPosition, shortPosition, noPosition] ...
     = algoTrader.profitLossSerie(setSelector, rangeInit, rangeEnd);

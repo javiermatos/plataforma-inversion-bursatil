@@ -22,10 +22,10 @@ classdef ARMA < Linear
             
             algoTrader = algoTrader@Linear(dataSerie);
             
-            if ~exist('na','var'); na = Settings.ARMA.Na; end
-            if ~exist('nc','var'); nc = Settings.ARMA.Nc; end
-            if ~exist('method','var'); method = Settings.ARMA.Method; end
-            if ~exist('k','var'); k = Settings.ARMA.K; end
+            if ~exist('na','var'); na = Default.ARMA.Na; end
+            if ~exist('nc','var'); nc = Default.ARMA.Nc; end
+            if ~exist('method','var'); method = Default.ARMA.Method; end
+            if ~exist('k','var'); k = Default.ARMA.K; end
             
             algoTrader.Na = na;
             algoTrader.Nc = nc;

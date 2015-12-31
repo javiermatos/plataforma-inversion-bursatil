@@ -19,9 +19,9 @@ classdef AR < Linear
             
             algoTrader = algoTrader@Linear(dataSerie);
             
-            if ~exist('order','var'); order = Settings.AR.Order; end
-            if ~exist('method','var'); method = Settings.AR.Method; end
-            if ~exist('k','var'); k = Settings.AR.K; end
+            if ~exist('order','var'); order = Default.AR.Order; end
+            if ~exist('method','var'); method = Default.AR.Method; end
+            if ~exist('k','var'); k = Default.AR.K; end
             
             algoTrader.Order = order;
             algoTrader.Method = method;

@@ -27,12 +27,12 @@ classdef MovingAverageDisplaced < MovingAverage
         
         function algoTrader = MovingAverageDisplaced(dataSerie, mode, samples, displacement)
             
-            if ~exist('mode','var'); mode = Settings.MovingAverageDisplaced.Mode; end
-            if ~exist('samples','var'); samples = Settings.MovingAverageDisplaced.Samples; end
+            if ~exist('mode','var'); mode = Default.MovingAverageDisplaced.Mode; end
+            if ~exist('samples','var'); samples = Default.MovingAverageDisplaced.Samples; end
             
             algoTrader = algoTrader@MovingAverage(dataSerie, mode, samples);
             
-            if ~exist('displacement','var'); displacement = Settings.MovingAverageDisplaced.Displacement; end
+            if ~exist('displacement','var'); displacement = Default.MovingAverageDisplaced.Displacement; end
             
             algoTrader.Displacement = displacement;
             

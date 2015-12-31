@@ -29,7 +29,7 @@ end
 
 % setSelector
 if ~exist('setSelector','var') || isempty(setSelector)
-    setSelector = Settings.TargetSet;
+    setSelector = Default.TargetSet;
 end
 
 % setSelector

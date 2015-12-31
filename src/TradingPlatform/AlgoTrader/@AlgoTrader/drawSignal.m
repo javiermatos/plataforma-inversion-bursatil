@@ -41,7 +41,7 @@ plot(axesHandle, dateTime, signal);
 
 % Itemize
 % Information and fixes
-if Settings.ShowLegend
+if Default.ShowLegend
     legend(axesHandle, 'Signal', 'Location', 'NorthWest');
 end
 xlabel(axesHandle, '\bfDate');

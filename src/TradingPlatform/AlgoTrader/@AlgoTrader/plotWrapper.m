@@ -46,24 +46,24 @@ customizer(algoTrader, axesHandle, setSelector, initIndex, endIndex, varargin{:}
 % Corrections
 % Basic
 set(figureHandle,'NumberTitle','off');
-set(figureHandle,'Color',Settings.BackgroundColor);
+set(figureHandle,'Color',Default.BackgroundColor);
 
 % Axes boxes
-set(axesHandle, 'Box', Settings.Box);
+set(axesHandle, 'Box', Default.Box);
 
 % Automatic y limit
 %set(axesHandle, 'YLimMode', 'auto');
 
 % Grid
 set(axesHandle, ...
-    'XGrid', Settings.XGrid, ...
-    'XColor', Settings.GridColor, ...
-    'YGrid', Settings.YGrid, ...
-    'YColor', Settings.GridColor ...
+    'XGrid', Default.XGrid, ...
+    'XColor', Default.GridColor, ...
+    'YGrid', Default.YGrid, ...
+    'YColor', Default.GridColor ...
     );
 
 % Set date in x
-datetick(axesHandle, 'x', Settings.DateFormat, 'keepticks', 'keeplimits');
+datetick(axesHandle, 'x', Default.DateFormat, 'keepticks', 'keeplimits');
 
 % Corrections if we generate an independent figure
 if ~exist('figureHandle','var')

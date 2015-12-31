@@ -37,9 +37,9 @@ classdef MovingAveragesCrossing < Indicator
             
             algoTrader = algoTrader@Indicator(dataSerie);
             
-            if ~exist('mode','var'); mode = Settings.MovingAveragesCrossing.Mode; end
-            if ~exist('lead','var'); lead = Settings.MovingAveragesCrossing.Lead; end
-            if ~exist('lag','var'); lag = Settings.MovingAveragesCrossing.Lag; end
+            if ~exist('mode','var'); mode = Default.MovingAveragesCrossing.Mode; end
+            if ~exist('lead','var'); lead = Default.MovingAveragesCrossing.Lead; end
+            if ~exist('lag','var'); lag = Default.MovingAveragesCrossing.Lag; end
             
             algoTrader.Mode = mode;
             algoTrader.Lead = lead;

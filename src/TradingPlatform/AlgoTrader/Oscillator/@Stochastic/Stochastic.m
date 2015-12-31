@@ -25,12 +25,12 @@ classdef Stochastic < Oscillator
             
             algoTrader = algoTrader@Oscillator(dataSerie);
             
-            if ~exist('samples','var'); samples = Settings.Stochastic.Samples; end
-            if ~exist('highThresold','var'); riseThreshold = Settings.Stochastic.RiseThreshold; end
-            if ~exist('fallThreshold','var'); fallThreshold = Settings.Stochastic.FallThreshold; end
-            if ~exist('mode','var'); mode = Settings.Stochastic.Mode; end
-            if ~exist('kSamples','var'); kSamples = Settings.Stochastic.KSamples; end
-            if ~exist('dSamples','var'); dSamples = Settings.Stochastic.DSamples; end
+            if ~exist('samples','var'); samples = Default.Stochastic.Samples; end
+            if ~exist('highThresold','var'); riseThreshold = Default.Stochastic.RiseThreshold; end
+            if ~exist('fallThreshold','var'); fallThreshold = Default.Stochastic.FallThreshold; end
+            if ~exist('mode','var'); mode = Default.Stochastic.Mode; end
+            if ~exist('kSamples','var'); kSamples = Default.Stochastic.KSamples; end
+            if ~exist('dSamples','var'); dSamples = Default.Stochastic.DSamples; end
             
             algoTrader.Samples = samples;
             algoTrader.RiseThreshold = riseThreshold;

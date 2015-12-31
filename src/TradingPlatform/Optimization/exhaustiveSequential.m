@@ -1,5 +1,5 @@
 
-function [bestIndexArray, searchSpace] = exhaustiveSecuential(selectionFunction, fitnessFunction, searchSpaceSize)
+function [bestIndexArray, searchSpace] = exhaustiveSequential(selectionFunction, fitnessFunction, searchSpaceSize)
 
 if length(searchSpaceSize) == 1
     searchSpace = zeros(searchSpaceSize,1);

@@ -114,10 +114,10 @@ description = [descriptionItems{:}];
 
 set(figureHandle,'Name',['Fitness function: ' description]);
 set(figureHandle,'NumberTitle','off');
-set(figureHandle,'Color',Settings.BackgroundColor);
+set(figureHandle,'Color',Default.BackgroundColor);
 
 % Axes boxes
-set(axesHandle, 'Box', Settings.Box);
+set(axesHandle, 'Box', Default.Box);
 
 % Histogram
 [n,xout] = hist(fitness, 100);

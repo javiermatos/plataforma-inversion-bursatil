@@ -36,8 +36,8 @@ classdef Random < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('minimumPeriodLength','var'); minimumPeriodLength = Settings.Random.MinimumPeriodLength; end
-            if ~exist('maximumPeriodLength','var'); maximumPeriodLength = Settings.Random.MaximumPeriodLength; end
+            if ~exist('minimumPeriodLength','var'); minimumPeriodLength = Default.Random.MinimumPeriodLength; end
+            if ~exist('maximumPeriodLength','var'); maximumPeriodLength = Default.Random.MaximumPeriodLength; end
             
             algoTrader.MinimumPeriodLength = minimumPeriodLength;
             algoTrader.MaximumPeriodLength = maximumPeriodLength;

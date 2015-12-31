@@ -6,7 +6,7 @@ if ~exist('rangeInit','var'); rangeInit = []; end
 % rangeEnd
 if ~exist('rangeEnd','var'); rangeEnd = []; end
 % setSelector
-if ~exist('setSelector','var'); setSelector = Settings.TargetSet; end
+if ~exist('setSelector','var'); setSelector = Default.TargetSet; end
 
 % Compute positions from signal and correct the result to get the absolute
 % position (and not the relative to rangeInit)

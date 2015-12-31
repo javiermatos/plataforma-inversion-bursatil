@@ -16,8 +16,8 @@ classdef Voting < Joint
             % All algoTraders share the same dataSerie
             algoTrader = algoTrader@Joint(dataSerie, varargin{:});
             
-            %algoTrader.Votes = round(length(algoTrader.InnerAlgoTrader)*Settings.Majority.Ratio);
-            algoTrader.Ratio = Settings.Voting.Ratio;
+            %algoTrader.Votes = round(length(algoTrader.InnerAlgoTrader)*Default.Majority.Ratio);
+            algoTrader.Ratio = Default.Voting.Ratio;
             
         end
         

@@ -15,7 +15,7 @@ classdef LastNTrends < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('samples','var'); samples = Settings.LastNTrends.Samples; end
+            if ~exist('samples','var'); samples = Default.LastNTrends.Samples; end
             
             algoTrader.Samples = samples;
             

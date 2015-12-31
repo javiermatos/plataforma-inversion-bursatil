@@ -32,8 +32,8 @@ classdef Fragmented < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('trainingSetSize','var'); trainingSetSize = Settings.Fragmented.TrainingSetSize; end
-            if ~exist('testSetSize','var'); testSetSize = Settings.Fragmented.TestSetSize; end
+            if ~exist('trainingSetSize','var'); trainingSetSize = Default.Fragmented.TrainingSetSize; end
+            if ~exist('testSetSize','var'); testSetSize = Default.Fragmented.TestSetSize; end
             
             algoTrader.InnerAlgoTrader = innerAlgoTrader.clone();
             algoTrader.Fragment = [];

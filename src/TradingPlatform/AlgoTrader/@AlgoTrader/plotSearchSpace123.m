@@ -78,18 +78,18 @@ elseif searchSpaceDimension == 2
     searchSpace = permute(searchSpace, index);
     %
     
-    % Image
-    imagesc(searchSpace);
-    colorbar;
-    
-    % Labels
-    set(axesHandle,'XTick',1:propertyDomainSize(2));
-    set(axesHandle,'XTickLabel',propertyDomain{2});
-    xlabel(axesHandle, ['\bf' propertyName{2}]);
-    
-    set(axesHandle,'YTick',1:propertyDomainSize(1));
-    set(axesHandle,'YTickLabel',propertyDomain{1});
-    ylabel(axesHandle, ['\bf' propertyName{1}]);
+%     % Image
+%     imagesc(searchSpace);
+%     colorbar;
+%     
+%     % Labels
+%     set(axesHandle,'XTick',1:propertyDomainSize(2));
+%     set(axesHandle,'XTickLabel',propertyDomain{2});
+%     xlabel(axesHandle, ['\bf' propertyName{2}]);
+%     
+%     set(axesHandle,'YTick',1:propertyDomainSize(1));
+%     set(axesHandle,'YTickLabel',propertyDomain{1});
+%     ylabel(axesHandle, ['\bf' propertyName{1}]);
     
 %     % Contour
 %     [cMatrix, cHandle] = contourf(axesHandle,searchSpace,'LineStyle','none');
@@ -105,22 +105,22 @@ elseif searchSpaceDimension == 2
 %     set(axesHandle,'YTickLabel',propertyDomain{1});
 %     ylabel(axesHandle, ['\bf' propertyName{1}]);
     
-%     % Surface
-%     surf(axesHandle, searchSpace);
-%     shading(axesHandle,'flat'); % 'flat', 'faceted', 'interp'
-%     
-%     %colorbar;
-%     
-%     % Labels
-%     set(axesHandle,'XTick',1:propertyDomainSize(2));
-%     set(axesHandle,'XTickLabel',propertyDomain{2});
-%     xlabel(axesHandle, ['\bf' propertyName{2}]);
-%     
-%     set(axesHandle,'YTick',1:propertyDomainSize(1));
-%     set(axesHandle,'YTickLabel',propertyDomain{1});
-%     ylabel(axesHandle, ['\bf' propertyName{1}]);
-%     
-%     zlabel(axesHandle, '\bfFitness');
+    % Surface
+    surf(axesHandle, searchSpace);
+    shading(axesHandle,'flat'); % 'flat', 'faceted', 'interp'
+    
+    %colorbar;
+    
+    % Labels
+    set(axesHandle,'XTick',1:propertyDomainSize(2));
+    set(axesHandle,'XTickLabel',propertyDomain{2});
+    xlabel(axesHandle, ['\bf' propertyName{2}]);
+    
+    set(axesHandle,'YTick',1:propertyDomainSize(1));
+    set(axesHandle,'YTickLabel',propertyDomain{1});
+    ylabel(axesHandle, ['\bf' propertyName{1}]);
+    
+    zlabel(axesHandle, '\bfFitness');
     
     % Axes limit
     axis(axesHandle, [1 propertyDomainSize(2) 1 propertyDomainSize(1)]);
@@ -208,13 +208,13 @@ end
 
 % Axes
 set(axesHandle, ...
-    'XColor', Settings.GridColor, ...
-    'YColor', Settings.GridColor, ...
-    'ZColor', Settings.GridColor ...
+    'XColor', Default.GridColor, ...
+    'YColor', Default.GridColor, ...
+    'ZColor', Default.GridColor ...
     );
 
 % set(axesHandle,'GridLineStyle', 'none');
-% set(axesHandle,'Box', Settings.Box);
+% set(axesHandle,'Box', Default.Box);
 
 % Figure
 descriptionItems = cellfun ...
@@ -228,7 +228,7 @@ description = [descriptionItems{:}];
 
 set(figureHandle,'Name',['Search Space: ' description]);
 set(figureHandle,'NumberTitle','off');
-set(figureHandle,'Color',Settings.BackgroundColor);
+set(figureHandle,'Color',Default.BackgroundColor);
 
 % Protects against edition if needed
 set(figureHandle,'HandleVisibility','callback');

@@ -17,8 +17,8 @@ classdef AverageDirectionalIndex < Oscillator
             
             algoTrader = algoTrader@Oscillator(dataSerie);
             
-            if ~exist('mode','var'); mode = Settings.AverageDirectionalIndex.Mode; end
-            if ~exist('samples','var'); samples = Settings.AverageDirectionalIndex.Samples; end
+            if ~exist('mode','var'); mode = Default.AverageDirectionalIndex.Mode; end
+            if ~exist('samples','var'); samples = Default.AverageDirectionalIndex.Samples; end
             
             algoTrader.Mode = mode;
             algoTrader.Samples = samples;

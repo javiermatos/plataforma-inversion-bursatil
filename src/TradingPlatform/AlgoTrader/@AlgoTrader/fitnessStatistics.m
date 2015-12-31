@@ -55,7 +55,7 @@ description = [descriptionItems{:}];
 
 set(figureHandle,'Name',['Fitness function: ' description]);
 set(figureHandle,'NumberTitle','off');
-set(figureHandle,'Color',Settings.BackgroundColor);
+set(figureHandle,'Color',Default.BackgroundColor);
 
 % Histogram
 [n,xout] = hist(fitness, 100);
@@ -66,14 +66,16 @@ xlabel(axesHandle, '\bfNumber of instances');
 ylabel(axesHandle, '\bfFitness');
 
 % Axes boxes
-set(axesHandle, 'Box', Settings.Box);
+set(axesHandle, 'Box', Default.Box);
 
 % Axes color
 set(axesHandle, ...
-    'XColor', Settings.GridColor, ...
-    'YColor', Settings.GridColor, ...
-    'ZColor', Settings.GridColor ...
+    'XColor', Default.GridColor, ...
+    'YColor', Default.GridColor, ...
+    'ZColor', Default.GridColor ...
     );
+
+prettySize(figureHandle);
 
 % Protects against edition if needed
 set(figureHandle,'HandleVisibility','callback');

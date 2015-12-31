@@ -35,7 +35,7 @@ hold off;
 
 % Itemize
 % Information and fixes
-if Settings.ShowLegend
+if Default.ShowLegend
     legend(axesHandle, 'String', { 'Histogram' 'MACD' 'Signal' }, 'Location', 'NorthWest');
 end
 xlabel(axesHandle, '\bfDate');

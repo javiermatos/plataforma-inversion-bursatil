@@ -28,7 +28,7 @@ classdef FakeOptimum < AlgoTrader
             
             algoTrader = algoTrader@AlgoTrader(dataSerie);
             
-            if ~exist('foresee','var'); foresee = Settings.FakeOptimum.Foresee; end
+            if ~exist('foresee','var'); foresee = Default.FakeOptimum.Foresee; end
             
             algoTrader.Foresee = foresee;
             

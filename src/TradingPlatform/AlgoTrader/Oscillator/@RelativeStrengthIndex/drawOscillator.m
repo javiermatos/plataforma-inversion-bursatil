@@ -37,7 +37,7 @@ hold off;
 
 % Itemize
 % Information and fixes
-if Settings.ShowLegend
+if Default.ShowLegend
     legend(axesHandle, 'String', { 'Relative Strength Index' 'Rise Threshold' 'Fall Threshold' }, 'Location', 'NorthWest');
 end
 xlabel(axesHandle, '\bfDate');

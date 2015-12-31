@@ -40,10 +40,10 @@ classdef ThreeMovingAverages < Indicator
             
             algoTrader = algoTrader@Indicator(dataSerie);
             
-            if ~exist('mode','var'); mode = 'e'; end %Settings.MovingAveragesCrossing.Mode; end
-            if ~exist('fast','var'); fast = 5; end %Settings.MovingAveragesCrossing.Lead; end
-            if ~exist('middle','var'); middle = 21; end %Settings.MovingAveragesCrossing.Lag; end
-            if ~exist('slow','var'); slow = 63; end %Settings.MovingAveragesCrossing.Lag; end
+            if ~exist('mode','var'); mode = 'e'; end %Default.MovingAveragesCrossing.Mode; end
+            if ~exist('fast','var'); fast = 5; end %Default.MovingAveragesCrossing.Lead; end
+            if ~exist('middle','var'); middle = 21; end %Default.MovingAveragesCrossing.Lag; end
+            if ~exist('slow','var'); slow = 63; end %Default.MovingAveragesCrossing.Lag; end
             
             algoTrader.Mode = mode;
             algoTrader.Fast = fast;

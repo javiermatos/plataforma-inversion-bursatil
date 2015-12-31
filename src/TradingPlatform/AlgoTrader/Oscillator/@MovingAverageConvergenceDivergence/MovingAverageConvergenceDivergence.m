@@ -39,10 +39,10 @@ classdef MovingAverageConvergenceDivergence < Oscillator
             
             algoTrader = algoTrader@Oscillator(dataSerie);
             
-            if ~exist('mode','var'); mode = Settings.MovingAverageConvergenceDivergence.Mode; end
-            if ~exist('lead','var'); lead = Settings.MovingAverageConvergenceDivergence.Lead; end
-            if ~exist('lag','var'); lag = Settings.MovingAverageConvergenceDivergence.Lag; end
-            if ~exist('samples','var'); samples = Settings.MovingAverageConvergenceDivergence.Samples; end
+            if ~exist('mode','var'); mode = Default.MovingAverageConvergenceDivergence.Mode; end
+            if ~exist('lead','var'); lead = Default.MovingAverageConvergenceDivergence.Lead; end
+            if ~exist('lag','var'); lag = Default.MovingAverageConvergenceDivergence.Lag; end
+            if ~exist('samples','var'); samples = Default.MovingAverageConvergenceDivergence.Samples; end
             
             algoTrader.Mode = mode;
             algoTrader.Lead = lead;

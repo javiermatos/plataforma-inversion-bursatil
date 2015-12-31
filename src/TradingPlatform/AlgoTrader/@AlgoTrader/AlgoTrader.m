@@ -152,12 +152,12 @@ classdef AlgoTrader < handle
         
         % ProfitLossTrainingSet
         function ProfitLossTrainingSet = get.ProfitLossTrainingSet(algoTrader)
-            ProfitLossTrainingSet = algoTrader.profitLoss(Settings.TrainingSet);
+            ProfitLossTrainingSet = algoTrader.profitLoss(Default.TrainingSet);
         end
         
         % ProfitLossTestSet
         function ProfitLossTestSet = get.ProfitLossTestSet(algoTrader)
-            ProfitLossTestSet = algoTrader.profitLoss(Settings.TestSet);
+            ProfitLossTestSet = algoTrader.profitLoss(Default.TestSet);
         end
         
     end
@@ -182,7 +182,7 @@ classdef AlgoTrader < handle
         
         % CurrentFunds GET
         function CurrentFunds = get.CurrentFunds(algoTrader)
-            CurrentFunds = algoTrader.InitialFunds*algoTrader.profitLoss(Settings.TestSet);
+            CurrentFunds = algoTrader.InitialFunds*algoTrader.profitLoss(Default.TestSet);
         end
         
     end
@@ -207,17 +207,17 @@ classdef AlgoTrader < handle
             
             algoTrader.DataSerie = dataSerie;
             
-            algoTrader.TrainingSet = Settings.TrainingSetInterval(dataSerie.Length);
-            algoTrader.TestSet = Settings.TestSetInterval(dataSerie.Length);
+            algoTrader.TrainingSet = Default.TrainingSetInterval(dataSerie.Length);
+            algoTrader.TestSet = Default.TestSetInterval(dataSerie.Length);
             
             algoTrader.InvertSignal = false;
-            algoTrader.AllowedPositions = Settings.AllowedPositions;
+            algoTrader.AllowedPositions = Default.AllowedPositions;
             
             % In the future these properties will be in a manager object
             % that will use algoTrader in order to make investments
-            algoTrader.InitialFunds = Settings.InitialFunds;
-            algoTrader.InvestmentLimit = Settings.InvestmentLimit;
-            algoTrader.TradingCost = Settings.TradingCost;
+            algoTrader.InitialFunds = Default.InitialFunds;
+            algoTrader.InvestmentLimit = Default.InvestmentLimit;
+            algoTrader.TradingCost = Default.TradingCost;
             
             % Events
             addlistener(algoTrader, 'Signal', 'PreGet', @algoTrader.updateSignal);

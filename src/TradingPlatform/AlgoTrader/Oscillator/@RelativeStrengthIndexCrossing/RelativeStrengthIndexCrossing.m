@@ -15,12 +15,12 @@ classdef RelativeStrengthIndexCrossing < RelativeStrengthIndex
         
         function algoTrader = RelativeStrengthIndexCrossing(dataSerie, samples, cMode, cSamples)
             
-            if ~exist('samples','var'); samples = Settings.RelativeStrengthIndexCrossing.Samples; end
+            if ~exist('samples','var'); samples = Default.RelativeStrengthIndexCrossing.Samples; end
             
             algoTrader = algoTrader@RelativeStrengthIndex(dataSerie, samples);
             
-            if ~exist('cMode','var'); cMode = Settings.RelativeStrengthIndexCrossing.CMode; end
-            if ~exist('cSamples','var'); cSamples = Settings.RelativeStrengthIndexCrossing.CSamples; end
+            if ~exist('cMode','var'); cMode = Default.RelativeStrengthIndexCrossing.CMode; end
+            if ~exist('cSamples','var'); cSamples = Default.RelativeStrengthIndexCrossing.CSamples; end
             
             algoTrader.CMode = cMode;
             algoTrader.CSamples = cSamples;

@@ -33,13 +33,13 @@ classdef MovingAverageThreshold < MovingAverage
         
         function algoTrader = MovingAverageThreshold(dataSerie, mode, samples, riseThreshold, fallThreshold)
             
-            if ~exist('mode','var'); mode = Settings.MovingAverageThreshold.Mode; end
-            if ~exist('samples','var'); samples = Settings.MovingAverageThreshold.Samples; end
+            if ~exist('mode','var'); mode = Default.MovingAverageThreshold.Mode; end
+            if ~exist('samples','var'); samples = Default.MovingAverageThreshold.Samples; end
             
             algoTrader = algoTrader@MovingAverage(dataSerie, mode, samples);
             
-            if ~exist('riseThreshold','var'); riseThreshold = Settings.MovingAverageThreshold.RiseThreshold; end
-            if ~exist('fallThreshold','var'); fallThreshold = Settings.MovingAverageThreshold.FallThreshold; end
+            if ~exist('riseThreshold','var'); riseThreshold = Default.MovingAverageThreshold.RiseThreshold; end
+            if ~exist('fallThreshold','var'); fallThreshold = Default.MovingAverageThreshold.FallThreshold; end
             
             algoTrader.RiseThreshold = riseThreshold;
             algoTrader.FallThreshold = fallThreshold;
