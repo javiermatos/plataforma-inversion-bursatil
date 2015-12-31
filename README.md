@@ -1,0 +1,9 @@
+# Plataforma de inversión bursátil con fines de investigación
+
+Este proyecto consiste en el desarrollo de una plataforma de inversión bursátil con fines de investigación. El objetivo de la plataforma es el de automatizar aquellos procesos que intervienen en el estudio de las estrategias de negociación de acciones o estrategias de trading: la adquisición de datos desde los proveedores de información bursátil, la creación y simulación de estrategias basadas en diferentes modelos matemáticos, la optimización de los parámetros de las estrategias y la generación de resultados descriptivos.
+
+La plataforma de inversión bursátil es una herramienta de gran valor para la investigación. Permite medir, analizar y manipular cualquier aspecto relacionado con las estrategias de trading. Más allá de proporcionar una base, esta plataforma presenta una arquitectura pensada para ser extendida de acuerdo a las necesidades.
+La plataforma también es una herramienta útil para el inversor. Gracias al simulador que implementa se puede estudiar el comportamiento de las estrategias sin la necesidad de operar en bolsa. De esta manera, el inversor puede comprobar con anticipo las consecuencias de sus decisiones para evitar aquellas inversiones más arriesgadas y propensas a incurrir en pérdidas.
+
+Las aportaciones más notables e innovadoras en el desarrollo de la plataforma han sido las estrategias de trading compuestas, con las que se pueden combinar otras estrategias para conseguir mejores resultados; el mecanismo de optimización de parámetros, que emplea, entre otros, un algoritmo genético distribuido para el proceso de optimización; y el sistema de generación de resultados, capaz de representar el espacio de búsqueda para estudiar las relaciones entre los valores óptimos de las estrategias de trading.
+

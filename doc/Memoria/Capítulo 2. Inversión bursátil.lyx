@@ -1,0 +1,1112 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Inversión bursátil
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Inversión bursátil"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En finanzas, la inversión consiste en destinar una cantidad de capital a
+ la adquisición de bienes con la intención de obtener unos ingresos o rentas
+ a lo largo del tiempo.
+ De esta manera, se renuncia a un consumo actual y cierto a cambio de conseguir
+ unos beneficios futuros y distribuidos en el tiempo.
+\end_layout
+
+\begin_layout Standard
+Los factores más relevantes que condicionan las decisiones de inversión
+ son los siguientes:
+\end_layout
+
+\begin_layout Description
+Rendimiento
+\begin_inset space ~
+\end_inset
+
+esperado Es la compensación que se espera obtener por la inversión, su rentabili
+dad.
+\end_layout
+
+\begin_layout Description
+Riesgo
+\begin_inset space ~
+\end_inset
+
+aceptado Incertidumbre sobre cuál será el rendimiento real que se obtendrá
+ al final de la inversión, que incluye además la estimación de la capacidad
+ de pago (si la inversión podrá pagar los resultados al inversor).
+\end_layout
+
+\begin_layout Description
+Horizonte
+\begin_inset space ~
+\end_inset
+
+temporal Periodo durante el cual se mantiene la inversión.
+\end_layout
+
+\begin_layout Standard
+El término bursátil se refiere a la Bolsa de valores, que es una organización
+ privada que brinda las facilidades necesarias para que sus miembros, atendiendo
+ al mandato de sus clientes, introduzcan las órdenes y realicen negociaciones
+ de compra y venta de valores.
+ Los tipos de valores que se comercian son acciones de sociedades o compañías
+ anónimas, bonos públicos y privados, certificados, títulos de participación
+ y una amplia variedad de instrumentos de inversión.
+\end_layout
+
+\begin_layout Standard
+En consecuencia, la inversión bursátil consiste en el empleo de un capital
+ para la compra de títulos (principalmente acciones) que se negocian en
+ el mercado bursátil con la intención de generar beneficios a partir de
+ las variaciones en el precio y el cobro de dividendos.
+\end_layout
+
+\begin_layout Section
+¿Qué es una acción?
+\end_layout
+
+\begin_layout Standard
+Una acción es una parte del capital social de una sociedad anónima.
+ Representa la propiedad que una persona tiene de una parte de esa sociedad.
+ Normalmente, las acciones son transmisibles de forma libre y otorgan derechos
+ económicos y políticos a su titular.
+ La emisión de acciones es el principal medio utilizado por las empresas
+ para captar el capital requerido para el desarrollo de sus actividades.
+\end_layout
+
+\begin_layout Standard
+Como inversión, una acción es un instrumento de renta variable, dado que
+ no tiene un retorno fijo establecido por contrato, sino que depende de
+ la buena marcha de dicha empresa.
+\end_layout
+
+\begin_layout Standard
+Hay dos maneras de hacer dinero con las acciones: una es a través del pago
+ de dividendos que el propietario de la acción recibe (en efectivo o en
+ títulos cuando se reparten las utilidades de la compañía), la otra es mediante
+ la diferencia entre el precio al que compra una acción y al que la vende
+ más tarde.
+\end_layout
+
+\begin_layout Section
+La negociación de acciones
+\end_layout
+
+\begin_layout Standard
+Salvo prohibición, las acciones de una empresa pueden ser transferidas desde
+ el accionista (el titular en posesión de las acciones) hacia terceros,
+ mediante su venta u otros mecanismos.
+ Existen rigurosas leyes y reglamentos que rigen las transferencias, sobre
+ todo si el emisor es una entidad que cotiza en bolsa.
+\end_layout
+
+\begin_layout Standard
+El deseo de los accionistas de comerciar con sus acciones ha llevado a la
+ creación de bolsas de valores.
+ La Bolsa de valores es una organización que ofrece un mercado para la negociaci
+ón de acciones, derivados y otros productos financieros.
+ En la actualidad, los inversionistas suelen estar representados por un
+ agente de bolsa que compra y vende acciones de una amplia gama de empresas
+ en las bolsas.
+ Una empresa puede cotizar sus acciones en el mercado bursátil si cumple
+ los requisitos impuestos por la Bolsa de valores.
+\end_layout
+
+\begin_layout Subsection
+Compra
+\end_layout
+
+\begin_layout Standard
+Son varias las maneras de comprar acciones.
+ La forma mas común es a través de un corredor de bolsa que organiza la
+ transferencia de acciones desde un vendedor hasta un comprador.
+ La mayoría de transferencias se hacen por mediación de los corredores de
+ bolsa que operan en la Bolsa de valores.
+\end_layout
+
+\begin_layout Standard
+Existen muchos corredores de bolsa entre los que se puede elegir, los cuales
+ se clasifican en dos grupos: los corredores de servicio completo, que cobran
+ más por ofrecer consejos de inversión y un servicio más personalizado;
+ y los corredores de descuento, que cobran menos a expensas de obviar los
+ consejos de inversión.
+ Otro tipo de corredor podría ser un banco o una cooperativa de crédito,
+ que disponen de un acuerdo sea con un corredor de servicio completo o uno
+ de descuento.
+\end_layout
+
+\begin_layout Standard
+Hay dos maneras de financiar la compra de acciones: pagándolas con dinero
+ en posesión del comprador o con la compra a crédito.
+ Comprar acciones a crédito significa adquirirlas con dinero prestado por
+ el corredor de bolsa, utilizando otras acciones que se tienen en la cuenta
+ como aval.
+ Estas acciones movilizadas en la cuenta son la garantía de que el comprador
+ puede pagar el préstamo; de lo contrario, el corredor de bolsa tiene el
+ derecho de vender las acciones de garantía para recuperar el dinero prestado.
+ Este servicio no es gratis, sino que el corredor de bolsa cobra intereses
+ por el préstamo.
+ La compra de acciones a crédito está relacionada con apalancamiento.
+\end_layout
+
+\begin_layout Subsection
+Venta
+\end_layout
+
+\begin_layout Standard
+La venta de acciones es un procedimiento similar al de la compra.
+ La intención del inversor es la de comprar barato y vender caro, aunque
+ una serie de razones pueden inducir a vender en pérdidas, como por ejemplo
+ el evitar incurrir en pérdidas mayores.
+\end_layout
+
+\begin_layout Standard
+Al igual que con la compra de acciones, hay una tarifa que cobra el corredor
+ de bolsa por transferir las acciones del vendedor al comprador.
+ Esta tarifa puede ser más alta o más baja, dependiendo del tipo de corredor
+ que se encargue de la transferencia.
+\end_layout
+
+\begin_layout Standard
+Una vez realizada la venta, el vendedor tiene plenos derechos sobre el dinero
+ conseguido.
+ Una parte importante en la venta de acciones es el seguimiento de los ingresos.
+ Las ganancias así conseguidas, de producirse, están sometidas al pago de
+ impuestos según esté establecido.
+\end_layout
+
+\begin_layout Subsection
+Posición larga
+\end_layout
+
+\begin_layout Standard
+Una posición larga consiste en comprar acciones, esperar a que se produzca
+ una apreciación en el valor de estas y venderlas.
+ Para el caso, la operación produce beneficios si el precio de la acción
+ sube y pérdidas si baja.
+\end_layout
+
+\begin_layout Standard
+En una posición larga la secuencia de pasos que se toman es la siguiente:
+\end_layout
+
+\begin_layout Enumerate
+Comprar las acciones en el mercado (se abre la posición larga).
+\end_layout
+
+\begin_layout Enumerate
+Seguir la evolución del precio con el propósito de maximizar los beneficios
+ y minimizar las pérdidas.
+\end_layout
+
+\begin_layout Enumerate
+Vender las acciones en el mercado (se cierra la posición larga).
+\end_layout
+
+\begin_layout Subsection
+Posición corta
+\end_layout
+
+\begin_layout Standard
+La manera en que se opera en la bolsa no tiene por qué ser primero comprando
+ acciones y luego vendiéndolas.
+ En este sentido, una posición corta se refiere a la venta de acciones que
+ no se poseen, con la esperanza de que su precio se vea devaluado, para
+ luego comprarlas y devolverlas al prestamista.
+ De esta manera, la operación acarrea beneficios si el precio de la acción
+ baja y pérdidas si sube.
+\end_layout
+
+\begin_layout Standard
+La secuencia de pasos que se suceden en una posición corta es la siguiente:
+\end_layout
+
+\begin_layout Enumerate
+Pedir prestadas las acciones a un prestamista, generalmente un corredor
+ de bolsa.
+\end_layout
+
+\begin_layout Enumerate
+Vender las acciones en el mercado (se abre la posición corta).
+\end_layout
+
+\begin_layout Enumerate
+Seguir la evolución del precio con el propósito de maximizar los beneficios
+ y minimizar las pérdidas.
+\end_layout
+
+\begin_layout Enumerate
+Comprar las acciones en el mercado (se cierra la posición corta).
+\end_layout
+
+\begin_layout Enumerate
+Devolver las acciones tomadas del prestamista con las compradas.
+\end_layout
+
+\begin_layout Enumerate
+Pagar intereses por el préstamo concedido.
+\end_layout
+
+\begin_layout Standard
+Las posiciones cortas son más arriesgadas que las largas: en el caso de
+ las posiciones largas, el peor escenario consiste en la pérdida de todo
+ el capital invertido, que es una cantidad acotada; sin embargo, en las
+ posiciones cortas no hay cota máxima de la pérdida que se puede sufrir.
+\end_layout
+
+\begin_layout Subsection
+Fluctuaciones del precio
+\end_layout
+
+\begin_layout Standard
+El precio de una acción fluctúa debido fundamentalmente a la teoría de la
+ oferta y la demanda.
+ Al igual que todos los productos en el mercado, el precio de una acción
+ es sensible a la demanda.
+ Por su parte, hay muchos factores que influyen en la demanda de una acción
+ en particular.
+\end_layout
+
+\begin_layout Standard
+El precio de las acciones puede verse influido por las previsiones de los
+ analistas de la empresa, los competidores de la empresa, las perspectivas
+ para el segmento del mercado, las agencias de calificación, los factores
+ macroeconómicos...
+\end_layout
+
+\begin_layout Standard
+Con el análisis fundamental y el análisis técnico se intentan entender las
+ condiciones del mercado que dan lugar a cambios en los precios, o incluso
+ predecir los precios en el futuro.
+\end_layout
+
+\begin_layout Section
+La Bolsa de valores
+\end_layout
+
+\begin_layout Standard
+La Bolsa de valores es una organización privada que brinda las facilidades
+ necesarias para que sus miembros, atendiendo al mandato de sus clientes,
+ introduzcan órdenes y realicen negociaciones de compra y venta de valores.
+ Los tipos de valores que se comercian son acciones de sociedades o compañías
+ anónimas, bonos públicos y privados, certificados, títulos de participación
+ y una amplia variedad de instrumentos de inversión.
+\end_layout
+
+\begin_layout Standard
+La negociación de los valores en los mercados bursátiles se hace tomando
+ como base unos precios conocidos y fijados en tiempo real, en un entorno
+ seguro para la actividad de los inversionistas, donde el mecanismo de las
+ transacciones está totalmente regulado, lo que garantiza la legalidad,
+ la seguridad y la transparencia.
+\end_layout
+
+\begin_layout Standard
+Las bolsas fortalecen al mercado de capitales e impulsan el desarrollo económico
+ y financiero en la mayoría de los países del mundo, donde existen en algunos
+ casos desde hace siglos, a partir de la creación de las primeras entidades
+ de este tipo aparecidas en los primeros años del siglo XVII.
+\end_layout
+
+\begin_layout Standard
+La institución Bolsa de valores intenta satisfacer tres grandes intereses:
+\end_layout
+
+\begin_layout Itemize
+El de la empresa, porque al colocar sus acciones en el mercado y ser adquiridas
+ por el público, obtiene de este el financiamiento necesario para cumplir
+ sus fines y generar riqueza.
+\end_layout
+
+\begin_layout Itemize
+El de los ahorradores, porque se convierten en inversionistas y en la medida
+ de su participación obtienen beneficios por la vía de los dividendos que
+ le reportan sus acciones.
+\end_layout
+
+\begin_layout Itemize
+El del Estado, porque con la bolsa dispone de un medio para financiarse
+ y hacer frente al gasto público, así como adelantar nuevas obras y programas
+ de alcance social.
+\end_layout
+
+\begin_layout Standard
+Los participantes que interactúan en la bolsa son los demandantes de capital
+ (empresas, organismos públicos o privados y otras entidades), los oferentes
+ de capital (ahorradores, inversionistas) y los intermediarios.
+\end_layout
+
+\begin_layout Standard
+La negociación de valores en las bolsas se efectúa a través de los miembros
+ de la bolsa, conocidos habitualmente con el nombre de brokers (terminología
+ anglosajona), corredores, sociedades de corretaje de valores, casas de
+ bolsa, agentes o comisionistas, de acuerdo a la denominación que reciben
+ en las leyes de cada país, quienes hacen su labor a cambio de una comisión.
+\end_layout
+
+\begin_layout Subsection
+Características
+\end_layout
+
+\begin_layout Standard
+Las características de la bolsa son las siguientes:
+\end_layout
+
+\begin_layout Description
+Rentabilidad Siempre que se invierte en bolsa se pretende obtener un rendimiento
+, y este se puede lograr de dos maneras: la primera es con el cobro de dividendo
+s y la segunda con la diferencia entre el precio de venta y el de compra
+ de los títulos.
+\end_layout
+
+\begin_layout Description
+Seguridad La bolsa es un mercado de renta variable, es decir, la cotización
+ de los valores cambia a lo largo del tiempo, lo cual implica un riesgo.
+ Para minimizar el riesgo es conveniente diversificar y no concentrar toda
+ la inversión en un mismo valor de la bolsa.
+\end_layout
+
+\begin_layout Description
+Liquidez Facilidad de este tipo de inversiones de comprar y vender rápidamente.
+\end_layout
+
+\begin_layout Subsection
+Participantes
+\end_layout
+
+\begin_layout Standard
+Los participantes que toman parte en las bolsas de valores son de tres clases:
+\end_layout
+
+\begin_layout Description
+Intermediarios Casas de bolsa, sociedades de corretaje, agencias de valores...
+\end_layout
+
+\begin_layout Description
+Inversionistas Arriesgan mucho buscando altas rentabilidades (inversionistas
+ a corto plazo); buscan rentabilidad a través de dividendos y ampliaciones
+ de capital (inversionistas a largo plazo); o invierten preferiblemente
+ en valores de renta fija (inversionistas adversos al riesgo).
+\end_layout
+
+\begin_layout Description
+Empresas
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+estados Empresas, organismos públicos o privados y otros entes.
+\end_layout
+
+\begin_layout Subsection
+Función económica
+\end_layout
+
+\begin_layout Standard
+Las bolsas de valores cumplen las siguientes funciones:
+\end_layout
+
+\begin_layout Itemize
+Canalizan el ahorro hacia la inversión, favoreciendo el desarrollo económico.
+\end_layout
+
+\begin_layout Itemize
+Ponen en contacto a las empresas y entidades del Estado necesitadas de recursos
+ de inversión con los ahorradores.
+\end_layout
+
+\begin_layout Itemize
+Confieren liquidez a la inversión, de manera que los poseedores de títulos
+ pueden convertir en dinero sus acciones u otros valores con facilidad.
+\end_layout
+
+\begin_layout Itemize
+Certifican precios de mercado.
+\end_layout
+
+\begin_layout Itemize
+Favorecen una asignación eficiente de los recursos.
+\end_layout
+
+\begin_layout Itemize
+Contribuyen a la valoración de activos financieros.
+\end_layout
+
+\begin_layout Standard
+Por otra parte, las bolsas están sujetas a los riesgos de los ciclos económicos
+ y sufren los efectos de los fenómenos psicológicos que pueden elevar o
+ reducir los precios de los títulos y acciones.
+\end_layout
+
+\begin_layout Section
+El problema de la negociación de acciones
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:El problema de la negociación de acciones"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El problema de la negociación de acciones se define como sigue: elegidas
+ las acciones de una empresa o entidad, maximizar la ganancia que se obtiene
+ como consecuencia de las operaciones de compra y venta de estas acciones
+ a lo largo del tiempo.
+\end_layout
+
+\begin_layout Standard
+Maximizar la ganancia significa maximizar los beneficios de las posiciones
+ largas y cortas que se toman en el mercado bursátil.
+ Para calcular el beneficio potencial por cada acción negociada en una posición
+ larga se procede como aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Beneficio potencial por acción en posición larga"
+
+\end_inset
+
+, siendo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$precio_{t_0}$
+\end_layout
+
+\end_inset
+
+ el precio al que la acción fue adquirida en el instante de tiempo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t_0$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$precio_{t_n}$
+\end_layout
+
+\end_inset
+
+ el precio al que fue vendida en el instante 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t_n$
+\end_layout
+
+\end_inset
+
+.
+ Por su parte, para calcular el beneficio potencial por cada acción negociada
+ en una posición corta se hace como indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Beneficio potencial por acción en posición corta"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+beneficio\; potencial\; por\; acción\; en\; posición\; larga=precio_{t_{n}}-precio_{t_{0}}\label{eq:Beneficio potencial por acción en posición larga}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+beneficio\; potencial\; por\; acción\; en\; posición\; corta=precio_{t_{0}}-precio_{t_{n}}\label{eq:Beneficio potencial por acción en posición corta}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La dificultad del problema estriba en que para cada instante de tiempo sólo
+ se conocen los precios pasados de la acción.
+ En consecuencia, cada posición que se toma en el mercado refleja la esperanza
+ del inversor porque las variaciones en el precio se produzcan en sentido
+ favorable: esto es, suban al tomar una posición larga y bajen en posición
+ corta.
+\end_layout
+
+\begin_layout Standard
+Las ecuaciones anteriores son una simplificación para ilustrar la manera
+ en que se calcula el beneficio (o pérdida) potencial por acción adquirida.
+ Una fórmula más fiel a la realidad debe tener en cuenta el número de acciones
+ que se negocian, los costes de operación impuestos por el intermediario
+ y los intereses asociados al préstamo de acciones en el caso de una posición
+ corta.
+ Las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Beneficio posición larga"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Beneficio posición corta"
+
+\end_inset
+
+ estiman estos resultados de forma más rigurosa para una negociación con
+ un volumen de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$N$
+\end_layout
+
+\end_inset
+
+ acciones.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{rl}
+beneficio\; posición\; larga= & N\cdot(precio_{t_{n}}-precio_{t_{0}})\\
+ & -2\cdot coste\; de\; operación
+\end{array}\label{eq:Beneficio posición larga}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{rl}
+beneficio\; posición\; corta= & N\cdot(precio_{t_{0}}-precio_{t_{n}})\\
+ & -2\cdot coste\; de\; operación\\
+ & -intereses\; del\; préstamo
+\end{array}\label{eq:Beneficio posición corta}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los datos primordiales en este problema son los precios de la acción en
+ los instantes pasados.
+ No obstante, los inversores emplean cualquier tipo de información relacionada
+ (y no tan relacionada) con la que cuentan: indicadores macroeconómicos,
+ sensaciones de los inversores en el mercado (miedo, incertidumbre, pesimismo,
+ confianza, seguridad, optimismo), perspectivas futuras...
+ Parte de la dificultad de este problema radica en seleccionar aquellos
+ indicadores más representativos e importantes que intervienen en la estimación
+ del precio futuro de la acción.
+\end_layout
+
+\begin_layout Section
+Maneras de enfrentar el problema
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Maneras de enfrentar el problema"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La obtención de un modelo preciso para resolver el problema de la negociación
+ de acciones supondría unas compensaciones económicas muy elevadas.
+ Dada la cuantiosa retribución, se han creado y estudiado una gran cantidad
+ de modelos desde perspectivas muy variadas.
+ Estos modelos no resuelven de forma explícita el problema de la negociación
+ de acciones, sino que buscan solución a problemas equivalentes cuyos resultados
+ se pueden aplicar de forma directa en la resolución del problema de partida.
+ Uno de estos problemas equivalentes es el de la predicción de series temporales.
+\end_layout
+
+\begin_layout Standard
+En esta sección se recogen algunos de los modelos surgidos en relación con
+ el problema a resolver.
+ El contenido se divide en dos bloques: el primero se centra en los modelos
+ de predicción de series temporales y el segundo en las herramientas propias
+ del campo de las finanzas.
+\end_layout
+
+\begin_layout Subsection
+Predicción de series temporales
+\end_layout
+
+\begin_layout Standard
+Una serie temporal es una secuencia de datos, medidos normalmente en instantes
+ de tiempo sucesivos espaciados entre sí de manera uniforme.
+ Ejemplos de series temporales son el precio diario de cierre del índice
+ de Dow Jones o el caudal anual del río Nilo en Aswan.
+ El análisis de series temporales comprende métodos para analizar los datos
+ de las series temporales con el fin de extraer estadísticas significativas
+ y otras características de los valores.
+ La predicción de series temporales consiste en el uso de un modelo para
+ predecir los hechos futuros basándose en eventos conocidos del pasado:
+ trata de predecir el valor futuro de la serie antes de la medición.
+\end_layout
+
+\begin_layout Subsubsection
+Análisis
+\end_layout
+
+\begin_layout Standard
+Hay varios tipos de análisis de datos disponibles para las series temporales,
+ cada uno de los cuales es apropiado para un propósito concreto:
+\end_layout
+
+\begin_layout Description
+Exploración
+\begin_inset space ~
+\end_inset
+
+general La exploración general comprende el examen gráfico de las series
+ de datos, el análisis de la autocorrelación para estimar la dependencia
+ de la serie y el análisis espectral para detectar el comportamiento cíclico
+ relacionado con la estacionalidad.
+\end_layout
+
+\begin_layout Description
+Descripción Con la descripción se descompone la serie en sus partes constituyent
+es: la tendencia, el ciclo, la estacionalidad y la aleatoriedad.
+\end_layout
+
+\begin_layout Description
+Predicción
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+pronóstico Consiste en la utilización de los modelos estadísticos para la
+ simulación estocástica, a fin de generar versiones alternativas de la serie
+ de datos que representen los valores que esta puede tomar en el futuro.
+ Esto es, emplear modelos estadísticos para describir el resultado probable
+ de la serie de datos en el futuro inmediato, dados los resultados más recientes
+ y pasados.
+\end_layout
+
+\begin_layout Subsubsection
+Modelos
+\end_layout
+
+\begin_layout Standard
+Los modelos de series temporales de datos pueden tener muchas formas con
+ las que representar a los procesos estocásticos.
+ Las tres clases de modelos según importancia práctica son el modelo autorregres
+ivo (AR), el modelo integrado (I) y el modelo de la media móvil (MA).
+ Estas tres clases modelan la serie temporal con una función lineal aplicada
+ a los datos previos.
+ Con la combinación de estos modelos se producen el modelo autorregresivo
+ de media móvil (ARMA) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Box_et_al._1994"
+
+\end_inset
+
+ y el modelo autorregresivo integrado de media móvil (ARIMA) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Box_et_al._1994"
+
+\end_inset
+
+.
+ El modelo autorregresivo fraccional integrado de media móvil (ARFIMA) es
+ una generalización de todos los anteriores 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Granger_and_Joyeux_1980,Hosking_1981,Robinson_2003"
+
+\end_inset
+
+.
+ Así mismo, hay extensiones de estos modelos que manipulan series de vectores,
+ que se conocen como series temporales multivariable.
+ Otro tipo de extensiones se basan en considerar una serie temporal externa
+ que condiciona el resultado de la serie temporal modelada.
+\end_layout
+
+\begin_layout Standard
+Además de los modelos lineales están aquellos que contemplan relaciones
+ no lineales en los valores de la serie respecto a sus anteriores.
+ Con estos modelos se pueden generar series temporales caóticas.
+ Más importante aún, los estudios sugieren que las predicciones de los modelos
+ no lineales son superiores a la de los lineales.
+\end_layout
+
+\begin_layout Standard
+Algunos de estos modelos no lineales se basan en representar el cambio de
+ la varianza a lo largo del tiempo (heterocedasticidad).
+ Estos son los modelos de heterocedasticidad condicional autorregresivos
+ (ARCH), que cuentan con una amplia variedad de representaciones (GARCH,
+ TARCH, EGARCH, FIGARCH, CGARCH...) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Engle_1995"
+
+\end_inset
+
+.
+ Aquí, los cambios en las varianza se relacionan o predicen a partir de
+ los valores pasados observados en la serie.
+\end_layout
+
+\begin_layout Standard
+Otras herramientas que se han mostrado especialmente útiles en el modelado
+ y predicción de series temporales son las redes neuronales 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lawrence_1997,Zekic_1998,Egeli_et_al._2003"
+
+\end_inset
+
+, las redes Bayesianas 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "O_et_al._2004"
+
+\end_inset
+
+ y el modelo oculto de Márkov 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang_2004"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Herramientas del campo de las finanzas
+\end_layout
+
+\begin_layout Standard
+En el pasado, las decisiones de inversión se tomaban sin mucho fundamento,
+ sólo justificadas por las intuiciones y sensaciones del inversor.
+ Las transacciones eran cada vez de mayor cuantía y el riesgo asumido más
+ alto.
+ Se urgía la creación de herramientas que impusieran rigor en la toma de
+ decisiones.
+ Las aportaciones realizadas en este sentido sobre el campo de las finanzas
+ han sido múltiples.
+ Estos esfuerzos se ven justificados por las promesas de suculentas ganancias.
+\end_layout
+
+\begin_layout Standard
+Se parte del análisis bursátil, que tiene como objetivo el estudio del comportam
+iento de los mercados financieros y de los valores que lo constituyen.
+ Con este análisis se pretende conseguir información relevante que ayude
+ en las decisiones de inversión en situaciones de incertidumbre.
+ Se divide en una doble categoría de análisis, cada una de las cuales parte
+ de suposiciones diferentes a la hora de interpretar el comportamiento de
+ los mercados financieros.
+ Estas dos categorías son:
+\end_layout
+
+\begin_layout Subsubsection
+Análisis fundamental
+\end_layout
+
+\begin_layout Standard
+En el análisis fundamental se analizan aspectos clave de una empresa para
+ evaluar su situación: estado y salud financiera, forma de gestión, funcionamien
+to, ventajas competitivas, competidores y mercado en que opera.
+ El objetivo de este tipo de análisis es conocer el auténtico valor del
+ título o acción, llamado valor fundamental.
+ Un aspecto negativo de este tipo de análisis es que los resultados que
+ arroja están condicionados por la apreciación del analista y por tanto
+ son subjetivos.
+\end_layout
+
+\begin_layout Standard
+Este tipo de análisis fue introducido por Benjamin Graham y David Dodd 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Graham_and_Dodd_2002"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Análisis técnico
+\end_layout
+
+\begin_layout Standard
+El análisis técnico consiste en el estudio de la acción del mercado, principalme
+nte a través del uso de gráficas, con el propósito de predecir las tendencias
+ en el precio.
+\end_layout
+
+\begin_layout Standard
+La acción del mercado queda reflejada por las tres fuentes principales de
+ información disponibles para el analista técnico: el precio o cotización,
+ el volumen de transacciones y el interés abierto (representa el número
+ de contratos que permanecen abiertos al cierre del periodo).
+\end_layout
+
+\begin_layout Standard
+El análisis técnico tuvo sus orígenes en la teoría de Dow, creada por Charles
+ H.
+ Dow a finales del siglo XIX.
+ Adquirió gran impulso con la teoría de las ondas de Elliot propuesta por
+ Ralph N.
+ Elliott 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Elliott_2004"
+
+\end_inset
+
+.
+ Los principios y herramientas que proporciona este tipo de análisis son
+ aplicables al estudio de cualquier instrumento financiero.
+\end_layout
+
+\begin_layout Standard
+Entre las fortalezas del análisis técnico está el hecho de que se puede
+ adaptar a cualquier instrumento financiero y dimensión de tiempo.
+ No hay ninguna área dentro de los mercados financieros en la que los principios
+ del análisis técnico no sean aplicables.
+ Se pueden seguir simultáneamente tantos mercados como se desee, aplicando
+ los mismos principios con adaptaciones menores de acuerdo al comportamiento
+ de cada uno.
+\end_layout
+
+\begin_layout Standard
+La principal virtud del análisis técnico reside en la utilización de fórmulas
+ bien definidas que excluyen la subjetividad en los estudios.
+ Gracias a esta característica se puede ejecutar este tipo de análisis sobre
+ máquinas.
+\end_layout
+
+\begin_layout Subsubsection
+Predictibilidad
+\end_layout
+
+\begin_layout Standard
+Existe recelo en la comunidad académica respecto a las capacidades de predicción
+ del análisis funcional y el análisis técnico.
+\end_layout
+
+\begin_layout Standard
+El análisis fundamental parece bien sostenido en la teoría, y muchos analistas
+ lo usan en la actualidad.
+ Sin embargo, los resultados arrojados por la comunidad académica concluyen
+ que el análisis fundamental no es mejor que el análisis técnico a la hora
+ de predecir el futuro de las acciones 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kida_2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En lo que al análisis técnico se refiere, los estudios académicos sugieren
+ que el poder de predicción que tiene es limitado 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kida_2006"
+
+\end_inset
+
+.
+ Los economistas Arnold Moore y Eugene F.
+ Fama lograron determinar que sólo alrededor del 3% de la variación diaria
+ en el precio puede ser explicada a partir de los precios pasados de la
+ acción.
+ Es por eso que la información contenida en el histórico del precio pasado
+ de un determinado título es insuficiente para predecir el precio futuro
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cootner_1964,Fama_1965,Sherden_1998"
+
+\end_inset
+
+.
+ Burton G.
+ Malkiel, inspirador de la teoría del paseo aleatorio, es otro especialista
+ que examinó el éxito predictivo del análisis técnico 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Malkiel_2003"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Otros estudios sugieren que hay posibilidades de obtener beneficios por
+ encima del promedio.
+ Por ejemplo, la predicción no lineal usando redes neuronales ha demostrado
+ obtener resultados estadisticamente significativos 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Skabar_and_Cloete_2002"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Existen varias hipótesis que explicarían las dificultades del análisis técnico
+ y otro tipo de análisis bursátiles para predecir las cotizaciones futuras:
+\end_layout
+
+\begin_layout Itemize
+Una de ellas tiene que ver con la hipótesis de los mercados eficientes,
+ según la cual toda la información disponible influye rápidamente en la
+ cotización de un determinado título.
+ Esto haría que fuera imposible aprovechar las subvaloraciones o sobrevaloracion
+es del precio.
+\end_layout
+
+\begin_layout Itemize
+Otro tipo de evidencia fue encontrada por Gary Belsky y Thomas Gilovich.
+ Estos señalan que los mercados tienen periodos de paseo aleatorio en que
+ básicamente no pasa nada determinate, interrumpidos por euforias y pánicos
+ abruptos.
+ En sus estudios consideraron cotizaciones desde 1963 a 1993, lo que incluía
+ 7802 días de negocio, en los que la rentabilidad media anual fue algo inferior
+ al 12%.
+ Si se descontaban los 40 mejores días, entonces la rentabilidad media anual
+ sólo era ligeramente superior al 7%.
+ Esto significa que el 0,5% de las sesiones son responsables de casi el
+ 5% de la rentabilidad, siendo el 99,5% restante responsable de sólo el
+ 7%.
+ Dado el caracter extremadamente abrupto de las euforias y los pánicos,
+ estos autores sugieren que difícilmente las técnicas de pronóstico actuales
+ puedan ser demasiado útiles 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Belsky_and_Gilovich_2000"
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

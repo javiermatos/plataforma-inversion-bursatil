@@ -1,0 +1,6212 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:La clase DataSerie"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ es la encargada de almacenar y representar la información relativa a una
+ acción del mercado bursátil.
+ Ofrece una interfaz común para todas aquellas clases que se encargan de
+ conectar con los diferentes proveedores de información bursátil.
+ Está implementada en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie.m}
+\end_layout
+
+\end_inset
+
+ como una clase MATLAB de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{handle}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Una clase de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{handle}
+\end_layout
+
+\end_inset
+
+ se define en MATLAB como aquella que se manipula a través de un puntero
+ y no de forma directa.
+ Las diferencias entre una clase normal y una clase de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{handle}
+\end_layout
+
+\end_inset
+
+ son sutiles y afectan al comportamiento de los objetos de la clase.
+\end_layout
+
+\end_inset
+
+.
+ A partir del mecanismo de herencia es como se extiende a esta clase abstracta.
+ Es necesario que la clase heredera implemente el método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+, que es el encargado de comunicar con el proveedor de información bursátil
+ concreto.
+ La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ fue introducida en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Adquisición de datos"
+
+\end_inset
+
+ y utilizada en el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Conexión con los proveedores de datos"
+
+\end_inset
+
+ para implementar la comunicación con los diferentes proveedores disponibles
+ en la plataforma.
+\end_layout
+
+\begin_layout Standard
+Esta parte del documento contiene la información técnica relativa a la clase
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:DataSerie - Propiedades"
+
+\end_inset
+
+ quedan recogidas las propiedades
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Hay que aclarar que el uso que MATLAB hace del término propiedad se corresponde
+ con el concepto de atributo según se define en los lenguajes de programación
+ orientada a objetos.
+\end_layout
+
+\end_inset
+
+ o atributos.
+ Los métodos son documentados en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:DataSerie - Métodos"
+
+\end_inset
+
+.
+ Finalmente, la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:DataSerie - El sistema de dibujado"
+
+\end_inset
+
+ comenta el sistema de dibujado de gráficos.
+\end_layout
+
+\begin_layout Section
+Propiedades
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:DataSerie - Propiedades"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las propiedades de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ se pueden separar según su naturaleza en no dependientes y dependientes.
+ Las propiedades no dependientes son aquellas que reservan memoria donde
+ almacenar el valor.
+ Las propiedades dependientes, según se definen en MATLAB, no reservan memoria:
+ en caso de lectura, la propiedad dependiente calcula el valor a devolver
+ a partir de una función asociada (es similar a un método sin argumentos
+ que devuelve un valor); para operaciones de escritura, la propiedad dependiente
+ invoca a una segunda función asociada que altera alguna de las propiedades
+ no dependientes del objeto (se asemeja a un método con el nuevo valor de
+ la propiedad como argumento de entrada que modifica el estado interno del
+ objeto).
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+ se corresponde con un vector columna de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{double}
+\end_layout
+
+\end_inset
+
+ que contiene los precios de cierre de la acción.
+ El instante de tiempo correspondiente al elemento 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+ se encuentra en la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ De esta manera, se almacena tanto el precio de cierre como el instante
+ de tiempo de la serie temporal.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CompressionType}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CompressionType}
+\end_layout
+
+\end_inset
+
+ almacena en forma de cadena de caracteres el tipo de resolución con que
+ están almacenados los datos en el objeto: puede ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ticks}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{minutes}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{days}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{weeks}
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{months}
+\end_layout
+
+\end_inset
+
+.
+ Sirve, junto a la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CompressionUnits}
+\end_layout
+
+\end_inset
+
+, para entender la magnitud y frecuencia de los datos almacenados en el
+ objeto.
+ Esta propiedad toma el valor que se pasa al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ como argumento.
+ De esta manera, las peticiones realizadas a los proveedores pueden proporcionar
+ información con diferente grado de resolución.
+ Por ejemplo, si la compresión temporal es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{months}
+\end_layout
+
+\end_inset
+
+ y las unidades de compresión 3, entonces los datos tomados del proveedor
+ son empaquetados en intervalos de tres meses.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CompressionUnits}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CompressionUnits}
+\end_layout
+
+\end_inset
+
+ guarda un número de tipo entero que cuantifica la frecuencia con que se
+ encuentran almacenados los datos de la serie.
+ Sirve, junto a la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CompressionType}
+\end_layout
+
+\end_inset
+
+, para entender la magnitud y frecuencia de los datos almacenados en el
+ objeto.
+ Esta propiedad toma el valor que se pasa como argumento al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+ se corresponde con un vector columna de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{double}
+\end_layout
+
+\end_inset
+
+ que contiene los instantes de tiempo donde se realizaron las mediciones
+ de los precios de la acción.
+ Se utiliza junto a otros vectores para definir las series temporales relacionad
+as con las cotizaciones de una acción.
+ Las fechas se codifican en diferentes formatos dentro de MATLAB: como cadena
+ de caracteres con la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{datestr}
+\end_layout
+
+\end_inset
+
+, como vector con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{datevec}
+\end_layout
+
+\end_inset
+
+ o como número con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{datenum}
+\end_layout
+
+\end_inset
+
+.
+ Este vector codifica las fechas como números, donde el valor 1 se corresponde
+ con la fecha 1 de enero del año 0 a las 00:00:00.
+ El incremento de días supone un aumento del valor numérico en una unidad.
+ Por su parte, también se consideran incrementos menores a un dia (horas,
+ minutos y segundos), en cuyo caso se utilizan números fraccionarios.
+ Por ejemplo, el dia 3 de enero del año 0 a las 06:00:00 se codifica como
+ 3.25.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DiffSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad dependiente de sólo lectura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DiffSerie}
+\end_layout
+
+\end_inset
+
+ devuelve un vector columna con las variaciones relativas en tanto por uno
+ que sufren los valores del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+.
+ En concreto, el primer elemento toma el valor 0 y el resto se calcula a
+ partir de la división entre dos valores consecutivos del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{EndDateTime}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta propiedad dependiente de sólo lectura devuelve la última fecha del
+ vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+, que marca el último instante para el que se tiene información sobre los
+ precios de la acción.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{High}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{High}
+\end_layout
+
+\end_inset
+
+ se corresponde con un vector columna de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{double}
+\end_layout
+
+\end_inset
+
+ que contiene los precios más altos de la acción.
+ El instante de tiempo correspondiente al elemento 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{High}
+\end_layout
+
+\end_inset
+
+ se encuentra en la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ De esta manera, se almacena tanto el precio más alto como el instante de
+ tiempo de la serie temporal.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InitDateTime}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Propiedad dependiente de sólo lectura que devuelve la primera fecha en el
+ vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Se refiere al inicio del intervalo para el cual se tiene información de
+ los precios de la acción.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Length}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta propiedad dependiente de sólo lectura devuelve la longitud de los vectores
+ que representan series temporales almacenadas en el objeto.
+ Las longitudes de todos estos vectores son las mismas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Low}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Low}
+\end_layout
+
+\end_inset
+
+ se corresponde con un vector columna de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{double}
+\end_layout
+
+\end_inset
+
+ que contiene los precios mas bajos de la acción.
+ El instante de tiempo correspondiente al elemento 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Low}
+\end_layout
+
+\end_inset
+
+ se encuentra en la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ De esta manera, se almacena tanto el precio más bajo como el instante de
+ tiempo de la serie temporal.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Open}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Open}
+\end_layout
+
+\end_inset
+
+ se corresponde con un vector columna de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{double}
+\end_layout
+
+\end_inset
+
+ que contiene los precios de apertura de la acción.
+ El instante de tiempo correspondiente al elemento 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Open}
+\end_layout
+
+\end_inset
+
+ se encuentra en la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ De esta manera, se almacena tanto el precio de apertura como el instante
+ de tiempo de la serie temporal.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad dependiente de sólo lectura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+ devuelve la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+.
+ Se utiliza como apuntador para desacoplar a la plataforma de inversión
+ de una serie temporal concreta.
+ Las máquinas de inversión suelen realizar los cálculos a partir de la informaci
+ón contenida en la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+.
+ Se puede hacer que la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+ apunte hacia cualquiera de los vectores: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Open}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{High}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Low}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{SymbolCode}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{SymbolCode}
+\end_layout
+
+\end_inset
+
+ guarda el identificador de la acción bursátil en forma de cadena de texto.
+ Almacena la misma cadena que utiliza el proveedor de datos para identificar
+ a la acción.
+ Para una misma acción de la bolsa este identificador puede cambiar según
+ el proveedor.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Volume}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Volume}
+\end_layout
+
+\end_inset
+
+ se corresponde con un vector columna de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{double}
+\end_layout
+
+\end_inset
+
+ que contiene los volúmenes de transacción de la acción.
+ El instante de tiempo correspondiente al elemento 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Volume}
+\end_layout
+
+\end_inset
+
+ se encuentra en la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{i}
+\end_layout
+
+\end_inset
+
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ De esta manera, se almacena tanto el volumen de transacción como el instante
+ de tiempo de la serie temporal.
+\end_layout
+
+\begin_layout Section
+Métodos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:DataSerie - Métodos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es necesario comentar la manera en que MATLAB permite organizar el código
+ para implementar una clase: una forma consiste en crear un único archivo
+ monolítico que contenga toda la definición e implementación de la clase;
+ otra posibilidad es crear un archivo con el nombre de la clase y almacenarlo
+ en un directorio con el mismo nombre que este archivo, aunque sin la extensión
+ y precedido del carácter @.
+ La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ se organiza de acuerdo a la segunda opción.
+ Utilizando tal posibilidad, se crean los métodos de la clase como archivos
+ independientes contenidos en el directorio 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{@DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ En este caso, hay que especificar en el archivo de la clase los atributos
+ del método: estos son las restricciones de acceso (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{public}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{private}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{protected}
+\end_layout
+
+\end_inset
+
+) y sus características (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{static}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{abstract}
+\end_layout
+
+\end_inset
+
+).
+ Los métodos de las clases en MATLAB, a excepción del constructor, tienen
+ como primer argumento la instancia de la clase.
+ Esto es así porque MATLAB permite utilizar los métodos de dos formas diferentes
+: la primera consiste en emplear el separador '.', colocando delante la instancia
+ de la clase y detrás el método; la segunda posibilidad es usar el método
+ como si fuera una función, donde el primer argumento es la instancia de
+ la clase.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Constructor de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+dataSerie = DataSerie(
+\backslash
+=symbolCode, compressionType, compressionUnits, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> initDateTime, endDateTime)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{symbolCode}
+\end_layout
+
+\end_inset
+
+ Cadena de caracteres que identifica a la acción bursátil según la reconoce
+ el proveedor de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{compressionType}
+\end_layout
+
+\end_inset
+
+ Cadena de caracteres que indica la magnitud de tiempo considerada en las
+ series temporales.
+ Puede tomar los valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'ticks'}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'minutes'}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'days'}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'weeks'}
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'months'}
+\end_layout
+
+\end_inset
+
+ según estén o no implementados en el proveedor.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initDateTime}
+\end_layout
+
+\end_inset
+
+ Fecha comienzo del intervalo a partir de la cual se quiere obtener la informaci
+ón sobre las series temporales de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endDateTime}
+\end_layout
+
+\end_inset
+
+ Fecha final del intervalo hasta la cual se quiere obtener la información
+ sobre las series temporales de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawClose}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del precio de cierre de la acción.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawClose(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawDiffSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del diferencial en tanto por uno de alguno de los precios
+ de la acción (apertura, más alto, más bajo o cierre) según apunte la propiedad
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+.
+ Los datos que visualiza por defecto son los del diferencial de la propiedad
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawDiffSerie(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawHigh}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del precio más alto de la acción.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{High}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawHigh(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawLow}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del precio más bajo de la acción.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Low}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawLow(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOpen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del precio de apertura de la acción.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Open}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawOpen(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica de alguno de los precios de la acción (apertura, más alto,
+ más bajo o cierre) según apunte la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+.
+ Los datos que visualiza por defecto son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawSerie(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeries}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica con todos los precios de la acción (apertura, más alto,
+ más bajo y cierre).
+ Los datos que visualiza son los de las propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Open}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{High}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Low}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Close}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawSeries(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawVolume}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del volumen de transacciones de la acción.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Volume}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawVolume(dataSerie, axesHandle, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice del primer valor de las series temporales a partir del cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice del último valor de las series temporales hasta el cual dibujar
+ las gráficas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{equals}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compara dos objetos de clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ e indica si son o no iguales.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+boolean = equals(lhs, rhs)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{lhs}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rhs}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{boolean}
+\end_layout
+
+\end_inset
+
+ Resultado de la comparación de igualdad.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{firstFrom}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula el índice del primer elemento del vector de instantes temporales
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+ que cumpla ser menor o igual que la fecha indicada.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+index = firstFrom(dataSerie, dateTime)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dateTime}
+\end_layout
+
+\end_inset
+
+ Fecha para realizar la búsqueda del índice sobre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{index}
+\end_layout
+
+\end_inset
+
+ Índice del vector de instantes temporales 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:DataSerie.get"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Obtiene los precios de cotización de la acción desde un proveedor de datos.
+ Es un método abstracto que ha de ser implementado desde la clase que hereda
+ de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ Este método no se utiliza directamente, sino que es invocado por el constructor
+ para obtener los datos del proveedor en el momento de la creación del objeto.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[dateTime, open, high, low, close, volume]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+= get(symbolCode,compressionType,compressionUnits,initDateTime,endDateTime)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{symbolCode}
+\end_layout
+
+\end_inset
+
+ Cadena de caracteres que identifica a la acción bursátil según el proveedor
+ de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{compressionType}
+\end_layout
+
+\end_inset
+
+ Cadena de caracteres que indica la magnitud de tiempo considerada en las
+ series temporales.
+ Puede tomar los valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ticks}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{minutes}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{days}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{weeks}
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{months}
+\end_layout
+
+\end_inset
+
+ según estén o no implementados en el proveedor.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initDateTime}
+\end_layout
+
+\end_inset
+
+ Fecha comienzo del intervalo a partir de la cual se quiere obtener la informaci
+ón sobre las series temporales de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endDateTime}
+\end_layout
+
+\end_inset
+
+ Fecha final del intervalo hasta la cual se quiere obtener la información
+ sobre las series temporales de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dateTime}
+\end_layout
+
+\end_inset
+
+ Vector columna con los instantes de tiempo en que se han obtenido los valores
+ de las series temporales.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{open}
+\end_layout
+
+\end_inset
+
+ Vector columna con los precios de apertura de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{high}
+\end_layout
+
+\end_inset
+
+ Vector columna con los precios más altos de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{low}
+\end_layout
+
+\end_inset
+
+ Vector columna con los precios más bajos de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{close}
+\end_layout
+
+\end_inset
+
+ Vector columna con los precios de cierre de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{volume}
+\end_layout
+
+\end_inset
+
+ Vector columna con los volúmenes de transacción de la acción bursátil.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{lastUntil}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula el índice del último elemento del vector de instantes temporales
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+ que cumpla ser mayor o igual que la fecha indicada.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+index = lastUntil(dataSerie, dateTime)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dateTime}
+\end_layout
+
+\end_inset
+
+ Fecha para realizar la búsqueda del índice sobre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{index}
+\end_layout
+
+\end_inset
+
+ Índice del vector de instantes temporales 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa a la acción bursátil.
+ Crea y configura la ventana, y mediante llamadas sucesivas al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ produce los gráficos deseados.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plot(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotClose}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al precio de cierre de la acción
+ bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawClose}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotClose(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotDiffSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al diferencial de la serie predeterminad
+a de la acción bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawDiffSerie}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotDiffSerie(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotHigh}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al precio más alto de la acción
+ bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawHigh}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotHigh(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotLow}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al precio más bajo de la acción
+ bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawLow}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotLow(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOpen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al precio de apertura de la acción
+ bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOpen}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotOpen(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa la serie predeterminada de la acción
+ bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSerie}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSerie(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeries}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa a todos los precios de la acción
+ (apertura, más alto, más bajo y cierre).
+ Realiza llamadas sucesivas al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando como argumento los métodos de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOpen}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawHigh}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawLow}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawClose}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSeries(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotVolume}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa el volumen de transacciones de la
+ acción bursátil.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawVolume}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotVolume(dataSerie, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inicializa y configura la ventana donde se muestran los gráficos.
+ Se encarga de establecer la manera en que se interactúa con los gráficos
+ a partir de la función de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{panning}
+\end_layout
+
+\end_inset
+
+, que cambia la sección del gráfico mostrado en pantalla ante eventos del
+ ratón, y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{zooming}
+\end_layout
+
+\end_inset
+
+, que aumenta o disminuye la escala en que se visualiza el gráfico.
+ A partir de la llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+, utilizando como argumento alguno de los métodos de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+, se consigue la representación de la información de la acción bursátil.
+ Este método es utilizado por los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot*}
+\end_layout
+
+\end_inset
+
+ para generar los gráficos.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotWrapper(
+\backslash
+= dataSerie, customizer, axesHandle,
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> rangeInit, rangeEnd, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{customizer}
+\end_layout
+
+\end_inset
+
+ Método de dibujado para representar la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{varargin}
+\end_layout
+
+\end_inset
+
+ Resto de argumentos que se pasan sin modificar hacia el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+.
+ Permite extender el comportamiento del método que dibuja la información.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Section
+El sistema de dibujado
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:DataSerie - El sistema de dibujado"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El sistema de dibujado está dividido en partes que colaboran en la construcción
+ de los gráficos: de esta manera se consigue un código fácil de mantener,
+ alterar y extender.
+ Este proceso está dividido en dos etapas: primero se crea y configura la
+ ventana contenedor y después se dibujan los gráficos que representan la
+ información.
+ La manera de acometer esta separación es utilizando el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+, que se encarga de la inicialización y toma como argumento un método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+, cuyo objetivo es dibujar el gráfico.
+ Para ocultar esta complejidad de cara al usuario se utilizan los métodos
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot*}
+\end_layout
+
+\end_inset
+
+, que generan el gráfico a través de una llamada a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ en combinación con un método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+.
+ Por ejemplo, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ implementa el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotClose}
+\end_layout
+
+\end_inset
+
+, que crea la ventana con la curva de cotizaciones de cierre de la acción
+ combinando los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawClose}
+\end_layout
+
+\end_inset
+
+.
+ La ventaja de esta separación de roles en los métodos es que la implementación
+ del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ es la más compleja (al lidiar con los aspectos específicos del entorno
+ MATLAB para configurar la ventana), mientras que la implementación de los
+ métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot*}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+ es trivial.
+\end_layout
+
+\end_body
+\end_document

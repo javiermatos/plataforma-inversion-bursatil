@@ -1,0 +1,416 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 3cm
+\rightmargin 2.5cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle empty
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+Huge
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textsc{
+\end_layout
+
+\end_inset
+
+Plataforma de inversión bursátil con fines de investigación
+\begin_inset VSpace 0.5em
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+{
+\backslash
+Large
+\end_layout
+
+\end_inset
+
+ adquisición de datos, creación y simulación de estrategias,
+\begin_inset Newline newline
+\end_inset
+
+optimización de parámetros y generación de resultados
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 2em
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+LARGE{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textsc{
+\end_layout
+
+\end_inset
+
+Javier Matos Odut
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 4em
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Contenido del disco de código fuente
+\end_layout
+
+\begin_layout Standard
+A continuación la descripción del contenido de los directorios más relevantes
+ donde se encuentran implementadas las partes de la plataforma de inversión
+ bursátil:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/}
+\end_layout
+
+\end_inset
+
+ Contiene todo el código de la plataforma desarrollado con MATLAB.
+ Es el directorio que hay que añadir al 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{path}
+\end_layout
+
+\end_inset
+
+ de MATLAB para poder utilizarla.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/AlgoTrader/}
+\end_layout
+
+\end_inset
+
+ Guarda las máquinas de trading implementadas dentro de la plataforma.
+ La estructura se organiza en subdirectorios para agrupar familias de estrategia
+s con características en común.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/DataSerie/}
+\end_layout
+
+\end_inset
+
+ Almacena los conectores hacia los diferentes proveedores de información
+ bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/Ejemplos/}
+\end_layout
+
+\end_inset
+
+ Reúne los ejemplos de uso de la plataforma.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/Evaluation/}
+\end_layout
+
+\end_inset
+
+ Guarda las funciones de evaluación con las que se miden las características
+ de las máquinas de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/Function/}
+\end_layout
+
+\end_inset
+
+ Agrupa las funciones auxiliares que se usan en la plataforma para implementar
+ algunas de las máquinas de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/TradingPlatform 2.2/Optimization/}
+\end_layout
+
+\end_inset
+
+ Guarda los algoritmos de optimización implementados.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{/VisualChart Connector/}
+\end_layout
+
+\end_inset
+
+ Almacena el proyecto hecho en Visual Studio 2010 con que se implementa
+ la biblioteca de enlace dinámico que conecta a MATLAB con VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+\end_layout
+
+\end_body
+\end_document

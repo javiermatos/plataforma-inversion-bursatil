@@ -1,0 +1,4634 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Conexión con los proveedores de datos
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Conexión con los proveedores de datos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La lectura de datos reales es imprescindible; en este sentido, se han tenido
+ en cuenta los diferentes proveedores del mercado, centrándose en aquellos
+ más económicos y de fácil acceso.
+ En concreto, se ha optado por la inclusión de dos proveedores gratuitos
+ como son Yahoo! Finance y Google Finance.
+ El tercer proveedor es VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V, que requiere del registro de una cuenta de usuario gratuita.
+ Este último proveedor es capaz de adquirir datos con mayor resolución que
+ los dos anteriores, aunque como contrapartida, es necesario esperar hasta
+ el cierre de los mercados para tener acceso a los datos del día.
+ Esta es la limitación de uso que impone la cuenta de usuario gratuita.
+\end_layout
+
+\begin_layout Standard
+Aunque diferentes, los proveedores de datos son utilizados de forma homogénea
+ gracias a la interfaz propuesta por la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ Esta pieza fundamental de la plataforma permite extender el desarrollo
+ más allá de los proveedores aquí implementados.
+ Contar con un tratamiento homogéneo de la información hace posible que
+ el código escrito para la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ sea más elegante y esté desacoplado de los detalles propios de cada proveedor.
+ Detalles como este hacen manifiestas las buenas prácticas de programación
+ seguidas durante el desarrollo de la plataforma.
+ Para una descripción técnica de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ se puede consultar el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El resto del capítulo trata sobre la implementación concreta de los proveedores
+ de datos seleccionados.
+ Se puede observar que el proceso seguido es el mismo para cada uno de ellos,
+ si bien difieren en la metodología, a consecuencia de las particularidades
+ de cada uno.
+ Las fases del proceso son las siguientes: analizar cómo se interactúa con
+ el proveedor, estudiar cómo es la estructura de datos a la que da acceso,
+ implementar un sistema de transferencia de datos y por último almacenar
+ la información de forma local.
+ Todas las fases del proceso, a excepción del almacenamiento local que es
+ automático, se implementan en el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+ Los pasos seguidos son los mismos para todos los proveedores implementados
+ en el capítulo.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Google Finance"
+
+\end_inset
+
+ se implementa el proveedor de datos bursátiles de Google.
+ Luego, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Yahoo! Finance"
+
+\end_inset
+
+ se implementa el proveedor de Yahoo!, que es muy parecido al anterior.
+ Por último, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:VisualChart V"
+
+\end_inset
+
+ se trata sobre la implementación del proveedor de VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V, que es el más versátil y complejo.
+ La implementación de este último requiere de un pequeño desarrollo sobre
+ la plataforma .NET para conectar VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V con MATLAB.
+\end_layout
+
+\begin_layout Section
+Google Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Google Finance"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Google Finance es un sitio web producto de la empresa Google.
+ El servicio ofrece noticias sobre las decisiones financieras de empresas
+ y estados, así como otros grandes eventos recogidos por la prensa.
+ El sitio web está integrado con los servicios Google News y Google Blog
+ Search para incorporar información adicional sobre las corporaciones.
+ Este sitio web dispone de información sobre las cotizaciones bursátiles,
+ los precios del cambio de divisas, el rendimiento del mercado de Estados
+ Unidos agrupado por sectores...
+ Respecto a las cotizaciones bursátiles, almacena datos históricos de empresas
+ de los Estados Unidos para los últimos 40 años.
+\end_layout
+
+\begin_layout Subsection
+Interacción con el proveedor
+\end_layout
+
+\begin_layout Standard
+La interacción con Google Finance se hace a través de su sitio web
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://google.com/finance
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Utilizando el buscador de acciones bursátiles que incorpora, se accede
+ a la información sobre las cotizaciones.
+ Así por ejemplo, la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Google Finance - Información de la acción"
+
+\end_inset
+
+ muestra la cotización de las acciones de la empresa Ford, según fue buscada
+ en este sitio web.
+ En la figura se aprecia un enlace hacia los datos históricos, que ha sido
+ señalado con una flecha.
+ Al acceder hacia la página de los datos históricos, se encuentra una tabla
+ ordenada de forma cronológica con la información de las cotizaciones.
+ Lo interesante de esta página está en el enlace para descargar la información,
+ que se obtiene como una hoja de cálculos con los datos históricos solicitados.
+ La figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Google Finance - Precios históricos"
+
+\end_inset
+
+ muestra la captura descrita, indicando con una flecha el enlace que contiene
+ la información en un archivo de hoja de cálculos.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Conexión con los proveedores de datos/Google Finance - Información de la acción (1).png
+	width 65page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Información sobre una acción bursátil en Google Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Google Finance - Información de la acción"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Conexión con los proveedores de datos/Google Finance - Precios históricos.png
+	width 65page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cotización de una acción bursátil en Google Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Google Finance - Precios históricos"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para automatizar este proceso, se analiza la URL (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Uniform Resource Locator}
+\end_layout
+
+\end_inset
+
+)
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "URL"
+description "Uniform Resource Locator"
+
+\end_inset
+
+ que apunta hacia el archivo con los datos históricos.
+ Tras una serie de pruebas, se concluyó cuáles eran las cadenas a utilizar
+ para formar la URL que apunta hacia la información de interés.
+ Tal dirección consiste en realidad en una consula que se pasa al proveedor
+ para que genere el archivo de datos oportuno.
+ Esta consulta está compuesta por partes individuales que, combinadas a
+ través de un caracter de separación, especifican todos los criterios de
+ búsqueda deseados.
+ Las componentes que se combinan para formar la dirección para la petición
+ del archivo se describen a continuación:
+\end_layout
+
+\begin_layout Description
+http://google.com/finance/historical? Prefijo de la cadena que compone la
+ dirección que apunta hacia la hoja de cálculos.
+\end_layout
+
+\begin_layout Description
+& Símbolo separador.
+ Es necesario utilizarlo para combinar los patrones y componer la dirección.
+\end_layout
+
+\begin_layout Description
+q=VALOR Patrón con el que se especifica la acción concreta de la que se
+ quiere obtener los datos históricos.
+ La subcadena 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{VALOR}
+\end_layout
+
+\end_inset
+
+ se refiere a la cadena de texto utilizada por Google Finance para identificar
+ a la acción.
+\end_layout
+
+\begin_layout Description
+output=csv Formato en que se desean obtener los datos históricos.
+ El formato csv (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Comma-separated values}
+\end_layout
+
+\end_inset
+
+)
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "CSV"
+description "Comma-separated values"
+
+\end_inset
+
+ consiste en un archivo de texto que con saltos de líneas y comas distingue
+ las filas y las columnas de una tabla de valores.
+ Es el único formato de salida que admite Google Finance.
+\end_layout
+
+\begin_layout Description
+histperiod=(daily|weekly) Patrón para indicar el tipo de compresión con
+ que se piden los datos históricos: puede ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{daily}
+\end_layout
+
+\end_inset
+
+ para datos diarios o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{weekly}
+\end_layout
+
+\end_inset
+
+ para semanales.
+ Agrupando los datos es posible conseguir datos mensuales, anuales o de
+ cualquier otro tipo con resolución menor a la diaria.
+ En caso de omisión, los datos devueltos son diarios.
+\end_layout
+
+\begin_layout Description
+startdate=YYYY-MM-DD Patrón para especificar la fecha de comienzo del intervalo
+ de los datos históricos.
+ En caso de omisión, se toma la fecha más antigua a partir de la cual se
+ disponga de datos históricos.
+\end_layout
+
+\begin_layout Description
+enddate=YYYY-MM-DD Patrón para especificar la fecha de final del intervalo
+ de los datos históricos.
+ En caso de omisión, se toma la fecha más reciente hasta la que se disponga
+ de datos históricos.
+\end_layout
+
+\begin_layout Standard
+La cadena 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://google.com/finance/historical?q=NYSE:F&output=csv
+\end_layout
+
+\end_inset
+
+ es un ejemplo de cadena bien formada que contiene la dirección de un archivo
+ de datos históricos.
+ Esta cadena es la correspondiente al enlace señalado la flecha de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Google Finance - Precios históricos"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Estructura de datos remota
+\end_layout
+
+\begin_layout Standard
+La estructura de datos remota consiste en un archivo con valores separados
+ por saltos de linea y comas que se interpreta como una hoja de cálculo.
+ Los saltos de línea sirven para discriminar entre filas y las comas, entre
+ columnas.
+ En la tabla
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Google Finance - Archivo"
+
+\end_inset
+
+ aparece el contenido de uno de estos archivo.
+ La primera linea consiste en la descripción de los datos contenidos en
+ cada columna: fecha, precio de apertura, precio más alto, precio más bajo,
+ precio de cierre y volumen de transacciones.
+ Las siguientes líneas contienen los datos ordenados de forma cronológica,
+ comenzando por los más recientes.
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Date,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Open,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Close,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Volume
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.38,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+57768853
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.64,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.69,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.26,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.32,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+61376128
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.86,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.90,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.61,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.88,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+68554677
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.22,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.90,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+66182741
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.89,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.96,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46235125
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.07,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.18,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.91,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.10,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+47019360
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1-Jul-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.02,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.02,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.02,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.02,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30-Jun-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.46,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.97,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.36,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.79,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+74123979
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29-Jun-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.41,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.51,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.32,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.42,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54119696
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Contenido del archivo de datos descargado desde Google Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Google Finance - Archivo"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Transferencia de datos
+\end_layout
+
+\begin_layout Standard
+Para conseguir los datos hay que generar la URL con las opciones adecuadas
+ y descargar el archivo al que apunta.
+ Esta operación se realiza utilizando la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{urlread}
+\end_layout
+
+\end_inset
+
+ de MATLAB, que lee el contenido apuntado por una dirección URL y devuelve
+ como resultado una cadena de texto.
+ Hay un problema con el proveedor Google Finance y es que sólo permite descargar
+ archivos con un contenido limitado a 4000 líneas.
+ Ante peticiones de mayor tamaño, no se recibirán todos los datos solicitados.
+ Una manera de arreglar esta limitación consiste en hacer descargas secuenciales
+ hasta satisfacer el proceso de recolección de datos.
+ También es importante ignorar la primera linea de los archivos descargados,
+ pues sólo contendrá la descripción de cada una de las columnas.
+\end_layout
+
+\begin_layout Subsection
+Extracción de la información
+\end_layout
+
+\begin_layout Standard
+El formato del archivo de datos es regular y la extracción de la información
+ es inmediata.
+ En particular, se utilizan las expresiones regulares de MATLAB para leer
+ y extraer la información del archivo de datos.
+ Como resultado de la extracción, se obtienen vectores de valores.
+\end_layout
+
+\begin_layout Standard
+Además de extraer la información, en esta fase también se produce la normalizaci
+ón de los valores.
+ De manera nativa, Google Finance ofrece datos agrupados en forma de días
+ o semanas, ¿cómo es posible conseguir otro tipo de agrupación? La manera
+ en que se hace es procesando los datos extraídos y agrupándolos según sea
+ necesario.
+ Si por ejemplo se piden con una resolución de tres días, entonces se descargan
+ con una frecuencia diaria y se agrupan de tres en tres.
+\end_layout
+
+\begin_layout Subsection
+Almacenamiento local
+\end_layout
+
+\begin_layout Standard
+El método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ realiza los pasos anteriores hasta la extracción de datos.
+ El resultado que este método devuelve consiste en los vectores de información
+ de las cotizaciones.
+ En el proceso de almacenamiento local se toman los vectores de información
+ devueltos por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ y se almacenan en las propiedades del objeto que hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ La llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ sólo la realiza el constructor de la clase durante la creación de una nueva
+ instancia.
+ Llegados a este punto el objeto contiene la información solicitada, que
+ se determina a partir de los argumentos en la llamada al constructor de
+ la clase.
+\end_layout
+
+\begin_layout Subsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{GoogleDataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Siguiendo las indicaciones anteriores, se implementa en la plataforma la
+ conexión hacia el proveedor de datos Google Finance.
+ El desarrollo se encuentra en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{GoogleDataSerie}
+\end_layout
+
+\end_inset
+
+, que hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ e implementa el método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+ Gracias a la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+, la cantidad de código escrita para implementar la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{GoogleDataSerie}
+\end_layout
+
+\end_inset
+
+ ha sido mínima.
+ Una descripción detallada de las posibilidades que ofrece la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{GoogleDataSerie}
+\end_layout
+
+\end_inset
+
+ a partir de sus propiedades y métodos aparece en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Yahoo! Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Yahoo! Finance"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Yahoo! Finance es un servicio web propiedad de Yahoo! que proporciona informació
+n financiera.
+ Es el sitio web con noticias y estudios financieros más utilizado en los
+ Estados Unidos.
+ Ofrece información sobre cotizaciones bursátiles, bolsas de valores, comunicado
+s de prensa e informes financieros.
+ Incluye algunas herramientas para gestionar las finanzas personales.
+ Este portal opera en muchos países con la información de las bolsas nacionales.
+\end_layout
+
+\begin_layout Subsection
+Interacción con el proveedor
+\end_layout
+
+\begin_layout Standard
+Al igual que en el caso anterior, también se interactúa con Yahoo! Finance
+ por medio de su sitio web
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://finance.yahoo.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Un buscador conduce hacia la información sobre las acciones bursátiles,
+ incluyendo sus cotizaciones.
+ Si se efectúa una búsqueda, se llega hasta una página que aglutina en forma
+ de resumen la información más relevante respecto a una acción.
+ La figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Yahoo! Finance - Información de la acción"
+
+\end_inset
+
+ muestra la página en cuestión, donde se ha incluído una flecha para señalar
+ el enlace hacia la información histórica de la acción mostrada.
+ Este enlace conduce a otra página donde aparecen las cotizaciones de la
+ acción en forma de tabla de datos.
+ Hacia el final de esta página, se encuentra un enlace para descargar archivo
+ con la información de las cotizaciones.
+ La figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Yahoo! Finance - Precios históricos"
+
+\end_inset
+
+ muestra el sitio web con una flecha apuntando al enlace donde se encuentra
+ el archivo.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Conexión con los proveedores de datos/Yahoo! Finance - Información de la acción.png
+	width 65page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Información sobre una acción bursátil en Yahoo! Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Yahoo! Finance - Información de la acción"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Conexión con los proveedores de datos/Yahoo! Finance - Precios históricos (1).png
+	width 65page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cotización de una acción bursátil en Yahoo! Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Yahoo! Finance - Precios históricos"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La dirección del enlace es en realidad un conjunto de instrucciones que
+ se le pasan al servidor web del proveedor para que genere el archivo con
+ los datos solicitados.
+ Es necesario comprender la manera en que se confecciona la dirección URL
+ para generar las consultas de forma automatizada.
+ La estructura de la cadena consiste en la combinación de varios elementos
+ por medio de un carácter separador: primero está la dirección del servidor
+ remoto, luego aparecen las instrucciones para efectuar la consulta.
+ Las partes de la dirección se describen a continuación:
+\end_layout
+
+\begin_layout Description
+http://ichart.finance.yahoo.com/table.csv? Prefijo de la cadena de dirección
+ que apunta hacia el servidor web donde se realizan las peticiones de datos.
+\end_layout
+
+\begin_layout Description
+& Carácter separador.
+ Se utiliza para combinar las diferentes partes de la cadena.
+\end_layout
+
+\begin_layout Description
+s=VALOR Patrón para indicar la acción de la que se solicita la información
+ del proveedor.
+ La subcadena 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{VALOR}
+\end_layout
+
+\end_inset
+
+ se refiere a la cadena de texto utilizada por Yahoo! Finance para identificar
+ a la acción.
+\end_layout
+
+\begin_layout Description
+ignore=.csv Formato de salida de los datos históricos.
+ El formato csv consiste en un archivo de texto que almacena información
+ dispuesta en forma de tabla.
+ Utiliza saltos de linea y comas para identificar las diferentes filas y
+ columnas de la tabla.
+ Es el único formato de salida que admite Yahoo! Finance.
+\end_layout
+
+\begin_layout Description
+g=(d|w|m) Cadena con la que se indica el tipo de compresión con que se solicitan
+ los datos históricos.
+ Los valores permitidos son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{d}
+\end_layout
+
+\end_inset
+
+ para valores diarios, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{w}
+\end_layout
+
+\end_inset
+
+ para semanales y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{m}
+\end_layout
+
+\end_inset
+
+ para mensuales.
+ A partir de la agrupación es posible conseguir otros tipos de compresión.
+ Los datos generados son diarios en caso de omisión.
+\end_layout
+
+\begin_layout Description
+b=DD&a=MM&c=YYYY Patrón para especificar la fecha de comienzo del intervalo
+ de los datos históricos.
+ La subcadena 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{DD}
+\end_layout
+
+\end_inset
+
+ se sustituye por el día, la subcadena 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{MM}
+\end_layout
+
+\end_inset
+
+ se sustituye por los meses, teniendo en cuenta que el primer mes se representa
+ con el valor 0, y la subcadena 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{YYYY}
+\end_layout
+
+\end_inset
+
+ se sustituye por el año.
+ En caso de omisión, se toma la fecha más antigua a partir de la cual se
+ disponga de datos históricos.
+\end_layout
+
+\begin_layout Description
+e=DD&d=MM&f=YYYY Patrón para especificar la fecha final del intervalo de
+ los datos históricos.
+ La sustitución de las subcadenas se hace siguiendo el mismo procedimiento
+ que en el caso anterior.
+ En caso de omisión, se toma la fecha más reciente hasta la que se disponga
+ de datos históricos.
+\end_layout
+
+\begin_layout Standard
+La cadena 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://ichart.finance.yahoo.com/table.csv?s=F&g=d&ignore=.csv
+\end_layout
+
+\end_inset
+
+ es un ejemplo de cadena bien formada, con la dirección y las instrucciones
+ necesarias para producir un archivo con datos históricos.
+ Esta cadena es similar a la del enlace que aparece señalado en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Yahoo! Finance - Precios históricos"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Estructura de datos remota
+\end_layout
+
+\begin_layout Standard
+Ante la petición enviada al servidor, se obtiene como resultado un archivo
+ de texto con los valores.
+ El contenido del archivo se asemeja a la tabla de valores mostrada en la
+ figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Yahoo! Finance - Precios históricos"
+
+\end_inset
+
+.
+ Utilizando saltos de línea y comas se organizan los valores en filas y
+ columnas.
+ El contenido de uno de estos archivos de texto aparece en la tabla
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Yahoo! Finance - Archivo"
+
+\end_inset
+
+.
+ En la primera linea, se incluye una descripción de los datos que contiene
+ cada columna: fecha, precio de apertura, precio más alto, precio más bajo,
+ precio de cierre, volumen de transacciones y precio de cierre ajustado.
+ La columna de precio de cierre ajustado tiene en cuenta todos los fraccionamien
+tos
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+El fraccionamiento o escisión de una acción (en inglés un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{split}
+\end_layout
+
+\end_inset
+
+) ocurre cuando la compañía emite un número de acciones en una determinada
+ proporción a partir de las ya existentes.
+ Así por ejemplo si el fraccionamiento es 2-1 entoces cada accionista duplica
+ su número de acciones aunque el capital total se conserva por lo que el
+ precio de una acción es recortado hasta la mitad.
+ También son posibles los fraccionamientos a la inversa en cuyo caso el
+ número de acciones se reduce a la par que se incrementa el valor por unidad
+ para mantener el capital total.
+\end_layout
+
+\end_inset
+
+ y dividendos de la acción, aplicando las modificaciones pertimentes de
+ manera retroactiva.
+ Las líneas siguientes contienen los datos ordenados de forma cronológica,
+ con los más recientes ocupando las posiciones superiores.
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="15" columns="7">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Date,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Open,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Close,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Volume,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Adj Close
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.30,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.43,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.23,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.27,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44280700,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.27
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.38,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+57704900,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.12
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-11,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.64,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.69,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.26,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.32,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+61316000,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-08,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.86,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.90,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.61,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.88,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+68539000,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.88
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-07,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.22,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.90,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+66168700,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.12
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-06,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.89,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.96,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46218000,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.96
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-05,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.07,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.18,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.91,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.10,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+47003800,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-07-01,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.92,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.13,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.73,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.02,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+66304800,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.02
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-06-30,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.46,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.97,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.36,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.79,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+74076900,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.79
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-06-29,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.41,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.51,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.32,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.42,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54105500,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.42
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-06-28,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.55,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.55,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.25,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.33,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54013200,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.33
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-06-27,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.35,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.55,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.09,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.46,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+49987600,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.46
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-06-24,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.52,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.60,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.14,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.24,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+82707400,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.24
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011-06-23,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.12,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.50,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.06,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.47,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59323000,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.47 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Contenido del archivo de datos descargado desde Yahoo! Finance
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Yahoo! Finance - Archivo"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Transferencia de datos
+\end_layout
+
+\begin_layout Standard
+Los datos se solicitan al proveedor por medio de la dirección URL.
+ Esta dirección es una consulta con las indicaciones sobre los datos requeridos.
+ El resultado de la consulta da lugar a un archivo de texto con la estructura
+ antes descrita.
+ El contenido del archivo se lee con la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{urlread}
+\end_layout
+
+\end_inset
+
+ de MATLAB.
+\end_layout
+
+\begin_layout Subsection
+Extracción de la información
+\end_layout
+
+\begin_layout Standard
+Para extraer la información a partir del archivo con la cadena de texto,
+ se lee el contenido utilizando una expresión regular.
+ No hay complicación alguna en esta fase, pues las líneas que componen el
+ texto siguen todas el mismo patrón.
+ Tras procesar el archivo de datos se obtienen vectores de datos en el formato
+ de MATLAB.
+\end_layout
+
+\begin_layout Standard
+Luego, se realiza la normalización y adecuación de los valores.
+ A través de Yahoo! Finance los datos pueden ser solicitados con un tipo
+ de compresión diaria, semanal o mensual.
+ Si se requiere una agrupación diferente de los valores, entonces se modifican
+ de la forma pertinente.
+ Por ejemplo, si se piden valores con una frecuencia trimestral, entonces
+ estos se solicitan con una frecuencia mensual y se agrupan de tres en tres.
+\end_layout
+
+\begin_layout Subsection
+Almacenamiento local
+\end_layout
+
+\begin_layout Standard
+El método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ realiza los pasos anteriores hasta la extracción de datos.
+ El resultado que este método devuelve consiste en los vectores de información
+ de las cotizaciones.
+ En el proceso de almacenamiento local se toman los vectores de información
+ devueltos por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ y se almacenan en las propiedades del objeto que hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ La llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ sólo la realiza el constructor de la clase durante la creación de una nueva
+ instancia.
+ Llegados a este punto el objeto contiene la información solicitada, que
+ se determina a partir de los argumentos en la llamada al constructor de
+ la clase.
+\end_layout
+
+\begin_layout Subsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{YahooDataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{YahooDataSerie}
+\end_layout
+
+\end_inset
+
+ es la realización del proceso explicado en los apartados anteriores.
+ Con ella se obtienen datos provinientes de la plataforma Yahoo! Finance.
+ La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{YahooDataSerie}
+\end_layout
+
+\end_inset
+
+ hereda de la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ e implementa el método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+ Al heredar de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+, se reduce el esfuerzo de implementación y se tiene acceso a todas las
+ funcionalidades provistas por la clase.
+ Las posibilidades que ofrece la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+, y por ende la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{YahooDataSerie}
+\end_layout
+
+\end_inset
+
+, se recogen en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:VisualChart V"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V es un software de uso profesional propiedad de Visual
+\begin_inset space ~
+\end_inset
+
+Chart
+\begin_inset space ~
+\end_inset
+
+Group.
+ Este programa obtiene información bursátil desde los mercados y permite
+ emitir operaciones de compra y venta en la bolsa.
+ Se necesita conexión a un broker para poder operar en la bolsa.
+ La aplicación ofrece un entorno integral orientado al análisis técnico
+ y al análisis chartista.
+ Como cuestión avanzada, este software aporta herramientas para implementar
+ estrategias de trading personalizadas utilizando el lenguaje de programación
+ Visual
+\begin_inset space ~
+\end_inset
+
+Basic.
+\end_layout
+
+\begin_layout Standard
+La aplicación VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V sólo funciona bajo el sistema operativo Windows.
+ Esta restricción ha condicionado el desarrollo del trabajo.
+ Las conexiones anteriores no cuentan con la citada limitación y funcionan
+ sobre cualquier sistema operativo sobre el que sea instalado MATLAB.
+\end_layout
+
+\begin_layout Subsection
+Interacción con el proveedor
+\end_layout
+
+\begin_layout Standard
+La aplicación VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V proporciona toda la información sobre el mercado bursátil por medio de
+ una interfaz de usuario, como la mostrada en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:VisualChart V - Interfaz de usuario"
+
+\end_inset
+
+.
+ El problema, sin embargo, es que toda esa información ha de ser transferida
+ hacia MATLAB para ser utilizada.
+ Lo que sucede en este caso es que la aplicación VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V hace de intermediaria entre el proveedor de información y MATLAB.
+ En consecuencia, el proceso de interacción está dividido en dos fases:
+ en la primera MATLAB interactúa con VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V y en la segunda VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V lo hace con el proveedor de información bursátil.
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Conexión con los proveedores de datos/VisualChart Captura (1).gif
+	width 60page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Interfaz de usuario de la aplicación VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VisualChart V - Interfaz de usuario"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para acometer la primera fase del proceso, se utiliza la interfaz COM que
+ declara la aplicación VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ Por su parte, MATLAB es capaz de utilizar de forma nativa la interfaz COM,
+ para así dialogar con VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ Sucede, sin embargo, que los tipos de datos devueltos por la interfaz COM
+ de VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V son incompatibles con la versión del interfaz COM implementado en MATLAB.
+ El salto entre las aplicaciones se superó creando un proyecto con la tecnología
+ .NET e implementado en C#.
+ Tal proyecto consiste en una clase en forma de biblioteca de enlace dinámico
+ que interactúa con VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V y es utilizada desde MATLAB.
+ Este conflicto se comentó en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Recursos utilizados"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La segunda fase del proceso que comunica VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V con el mercado bursátil es transparente y se logra por medio de las llamadas
+ a la clase creada en la biblioteca de enlace dinámico.
+ Esta clase se encarga de gestionar el estado de las comunicaciones de VisualCha
+rt
+\begin_inset space \thinspace{}
+\end_inset
+
+V: abre la conexión con el proveedor, solicita los datos, descarga los resultado
+s de las peticiones y cierra la conexión.
+\end_layout
+
+\begin_layout Subsection
+Estructura de datos remota
+\end_layout
+
+\begin_layout Standard
+La estructura de datos remota puede concebirse como una base de datos sobre
+ la que se pueden realizar consultas.
+ Las consultas, al igual que en los casos anteriores, necesitan el identificador
+ de la acción, el tipo de compresión, las unidades de compresión y el intervalo
+ temporal.
+ Sobre el tipo de compresión, VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V permite obtener datos con las frecuencias de ticks, minutos, días, semanas
+ o meses.
+ Para gestionar las fuentes de datos originadas por las consultas, la interfaz
+ COM ofrece la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_DataSourceManager}
+\end_layout
+
+\end_inset
+
+.
+ El resultado de cada petición es un objeto de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_DataSerie}
+\end_layout
+
+\end_inset
+
+, que almacena un conjunto de registros.
+ Cada registro se representa por medio de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_BarValue}
+\end_layout
+
+\end_inset
+
+ de la interfaz y contiene la fecha, el precio de apertura, el precio más
+ alto, el precio más bajo, el precio de cierre, el volumen de transacciones
+ de la acción y el interés abierto
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+El interés abierto se refiere al número de órdenes de compra que existen
+ antes de que el mercado de acciones inicie una sesión.
+\end_layout
+
+\end_inset
+
+.
+ El conjunto de registros ordenados de forma cronológica es la forma en
+ que VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V codifica las series temporales de datos bursátiles.
+\end_layout
+
+\begin_layout Standard
+La clase envoltorio a través de la que opera MATLAB es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSourceManager}
+\end_layout
+
+\end_inset
+
+.
+ Esta hace uso de las clases 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{BarValue}
+\end_layout
+
+\end_inset
+
+.
+ Las clases son homólogas a aquellas provistas por la interfaz COM, cuyo
+ nombre comienza por el prefijo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_}
+\end_layout
+
+\end_inset
+
+.
+ Estas clases envoltorio ofrecen un subconjunto de la funcionalidad de las
+ clases originarias, que es la necesaria para llevar los datos hasta MATLAB.
+ Es importante destacar que existen en el trabajo dos clases con el nombre
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+: una es la clase abstracta implementada en MATLAB, a partir de la cual
+ se hereda para incorporar conexiones a proveedores de datos; y la otra
+ es la del desarrollo en C#, necesaria para comunicar MATLAB con VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+\end_layout
+
+\begin_layout Subsection
+Transferencia de datos
+\end_layout
+
+\begin_layout Standard
+La transferencia de datos la realiza el servidor de comunicaciones de VisualChar
+t
+\begin_inset space \thinspace{}
+\end_inset
+
+V al utilizar la interfaz COM.
+ Se requiere de conexión a Internet y del registro de una cuenta de usuario
+ gratuita.
+ La aplicación debe estar en ejecución para poder realizar las peticiones.
+\end_layout
+
+\begin_layout Subsection
+Extracción de la información
+\end_layout
+
+\begin_layout Standard
+Para extraer la información, se leen los datos desde las clases de la interfaz
+ COM y se almacenan en las clases homólogas creadas en C#.
+ A su vez, para extraer la información desde estas clases de C#, se definen
+ una serie de propiedades de sólo lectura que son accesibles por MATLAB.
+ En particular, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ en C# implementa la propiedad de sólo lectura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Matrix}
+\end_layout
+
+\end_inset
+
+, que devuelve una matriz de datos donde las filas contienen registros de
+ datos y las columnas se refieren a los diferentes campos de los registros.
+ Una descripción de las columnas de la matriz se muestra en la tabla
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:VisualChart V - DataSerie.Matrix"
+
+\end_inset
+
+.
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#columna
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Descripción
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Año
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Día
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hora
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Minuto
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Segundo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precio de apertura
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precio más alto
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precio más bajo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precio de cierre
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Volumen de transacciones
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Interés abierto
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Descripción de las columnas de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Matrix}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Descripción de la estructura de datos provista por el conector VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:VisualChart V - DataSerie.Matrix"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Almacenamiento local
+\end_layout
+
+\begin_layout Standard
+El método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ realiza los pasos anteriores mediante el uso de la biblioteca de enlace
+ dinámico 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartConnector.dll}
+\end_layout
+
+\end_inset
+
+.
+ Este archivo contiene todas las clases C# necesarias para mediar en el
+ proceso de comunicación entre MATLAB y VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ Una vez importados los valores desde la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Matrix}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ (clase del desarrollo en C#), ya se tiene todo lo necesario para instanciar
+ el objeto de la clase que hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ (clase abstracta que se hereda para incorporar la conexión al proveedor
+ de datos).
+\end_layout
+
+\begin_layout Standard
+En el proceso de almacenamiento local, se toman los vectores de información
+ devueltos por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ y se almacenan en las propiedades del objeto.
+ La llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ sólo la realiza el constructor de la clase durante la creación de una nueva
+ instancia.
+ Llegados a este punto el objeto contiene la información solicitada, que
+ se determina a partir de los argumentos en la llamada al constructor de
+ la clase.
+\end_layout
+
+\begin_layout Subsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartDataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartDataSerie}
+\end_layout
+
+\end_inset
+
+ consiste en la implementación de las indicaciones anteriores, para incorporar
+ el proveedor de datos bursátiles de VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ El desarrollo se encuentra en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartDataSerie}
+\end_layout
+
+\end_inset
+
+, que hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ e implementa el método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+ Respecto a la biblioteca de enlace dinámico 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartConnector.dll}
+\end_layout
+
+\end_inset
+
+, tiene que ser almacenada en la misma carpeta donde se encuentra la clase
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartDataSerie}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Aunque más compleja, la implementación de la conexión a este proveedor de
+ datos ha seguido el mismo esquema que en los casos anteriores.
+ No es casual la idoneidad con que la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ se adapta a su labor, pues es el resultado del perfeccionamiento de sucesivas
+ versiones anteriores.
+ Con indiferencia del origen de los datos con que se genera la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartDataSerie}
+\end_layout
+
+\end_inset
+
+, el resultado es una clase muy similar a las anteriores, que da la sensación
+ de homogeneidad al usuario.
+ Para una descripción detallada de las posibilidades que ofrece la clase
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartDataSerie}
+\end_layout
+
+\end_inset
+
+ es preciso consultar el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+La biblioteca de enlace dinámico 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VisualChartConnector.dll}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta biblioteca de enlace dinámico hace de pasarela para comunicar MATLAB
+ con VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ La manera en que lo consigue es utilizando el patrón envoltorio.
+ La interfaz COM que implementa MATLAB es un subconjunto de la utilizada
+ por parte de VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V, así que su comunicación directa no es posible.
+ Se eligió la tecnología .NET y el lenguaje C# porque la interfaz COM se
+ soporta de forma nativa.
+ Además, MATLAB es capaz de utilizar las clases .NET a través del intérprete.
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{BarValue}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta clase surge a partir de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_BarValue}
+\end_layout
+
+\end_inset
+
+ de la interfaz COM.
+ Contiene información sobre los precios, el volumen de transacciones y el
+ interés abierto en un instante de tiempo dado.
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clase homóloga a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_DataSerie}
+\end_layout
+
+\end_inset
+
+ de la interfaz COM.
+ Consiste en un contenedor que almacena un conjunto de objetos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{BarValue}
+\end_layout
+
+\end_inset
+
+, ordenados de forma cronológica.
+ Esta clase se utiliza para almacenar la información de las series temporales
+ de precios, volúmen e interés abierto de la acción.
+\end_layout
+
+\begin_layout Subsubsection
+El enumerado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{enumerates}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tipo enumerado que sirve para indicar el tipo de compresión temporal con
+ que VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V solicita los datos a su proveedor.
+ Los valores posibles son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ticks}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Minutes}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Days}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Weeks}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Months}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSourceManager}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clase creada a partir de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{VCDS
+\backslash
+_DataSourceManager}
+\end_layout
+
+\end_inset
+
+ de la interfaz COM.
+ El cometido de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSourceManager}
+\end_layout
+
+\end_inset
+
+ es el de gestionar el proceso de creación de objetos del tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{SafeDataSourceManager}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{SafeDataSourceManager}
+\end_layout
+
+\end_inset
+
+ es una implementación segura derivada a partir de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSourceManager}
+\end_layout
+
+\end_inset
+
+.
+ Esta versión utiliza el patrón singleton
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+El patrón de diseño singleton (instancia única) está diseñado para restringir
+ la creación de objetos pertenecientes a una clase o el valor de un tipo
+ a un único objeto.
+ Su intención consiste en garantizar que una clase sólo tenga una instancia
+ y proporcionar un punto de acceso global a ella.
+\end_layout
+
+\end_inset
+
+ para forzar la unicidad y asegurar resultados correctos ante entornos concurren
+tes.
+\end_layout
+
+\end_body
+\end_document

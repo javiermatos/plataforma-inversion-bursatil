@@ -1,0 +1,254 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Ejemplos de uso
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Ejemplos de uso"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En este último apéndice se referencian algunos ejemplos de uso de la plataforma
+ de inversión bursátil.
+ Los ejemplos están programados como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{scripts}
+\end_layout
+
+\end_inset
+
+ en el lenguaje MATLAB.
+ Con ellos se proporcionan ejemplos de uso para demostrar el potencial de
+ la plataforma de inversión.
+\end_layout
+
+\begin_layout Section
+Toma de contacto
+\end_layout
+
+\begin_layout Standard
+Consiste en una toma de contacto para familiarizarse con la plataforma de
+ inversión.
+ Se realizan algunas operaciones básicas sobre las series de datos y las
+ máquinas de trading.
+ Para cada objeto creado se muestran sus propiedades y se utilizan los métodos
+ de generación de gráficos para mostrar su representación.
+ El primer ejemplo se implementa en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ejemplo1.m}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Trabajando con series de datos
+\end_layout
+
+\begin_layout Standard
+En este caso, se comparan las series de datos obtenidas desde dos proveedores
+ de información bursátil respecto a la misma acción de la bolsa: el objetivo
+ es resaltar las diferencias entre los proveedores.
+ Este ejemplo se implementa en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ejemplo2.m}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Utilizando las máquinas de trading
+\end_layout
+
+\begin_layout Standard
+En el tercer ejemplo se trabaja con un grupo de máquinas de trading para
+ resaltar y evidenciar algunas de sus características.
+ Se trata la cuestión de la modificación de parámetros para observar la
+ forma en que afecta al comportamiento de las máquinas.
+ El ejemplo está implementado en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ejemplo3.m}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Diseñando una máquina de trading compuesta
+\end_layout
+
+\begin_layout Standard
+Trata sobre la creación de una máquina de trading compuesta de varios niveles.
+ Este es un ejemplo ilustrativo para resaltar la flexibilidad de las máquinas
+ compuestas.
+ Se advierte que las máquinas compuestas de varios niveles son construcciones
+ demasiado artificiosas que carecen de sentido práctico.
+ En el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ejemplo4.m}
+\end_layout
+
+\end_inset
+
+ se implementa el ejemplo.
+\end_layout
+
+\begin_layout Section
+Optimizando el desempeño de las máquinas
+\end_layout
+
+\begin_layout Standard
+Aquí se hace uso intensivo del mecanismo de optimización para sacar todo
+ el provecho posible a las máquinas de trading.
+ Se prueban diferentes funciones de evaluación y selección, y se comparan
+ los métodos de optimización implementados.
+ También se comprueba el tiempo de ejecución en virtud del número de procesadore
+s utilizados.
+ El quinto ejemplo se implementa en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ejemplo5.m}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Analizando los resultados
+\end_layout
+
+\begin_layout Standard
+El análisis de resultados es parte vital de una herramienta destinada al
+ uso en investigación.
+ El ejemplo consiste en el análisis de los resultados provistos por algunas
+ máquinas de trading: se observan las relaciones entre los valores de los
+ parámetros que mejores resultados proporcionan, se calculan los estadísticos
+ para resumir con ellos el comportamiento de la máquina, se muestran en
+ un histograma las configuraciones de la máquina de trading agrupadas de
+ acuerdo a su desempeño...
+ El último ejemplo de uso está implementado en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ejemplo6.m}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

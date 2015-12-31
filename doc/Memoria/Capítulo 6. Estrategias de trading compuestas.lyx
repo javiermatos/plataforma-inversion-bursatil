@@ -1,0 +1,3818 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Estrategias de trading compuestas
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Estrategias de trading compuestas"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cada estrategia de trading presentada en el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading"
+
+\end_inset
+
+ explota alguna característica de la serie de precios de la acción: la media
+ móvil sigue la tendencia, el indice de fuerza relativa mide la velocidad
+ y el cambio de los movimientos del precio, el estocástico sigue la velocidad
+ del impulso del precio...
+ No obstante, hay que ser consciente de las limitaciones.
+ En este sentido, los autores señalan que las estrategias deben emplearse
+ con rigor y en combinación con otros criterios.
+ Esto es así porque al centrarse cada estrategia en una característica de
+ la serie de precios, pasa a obviar todas las demás.
+ En consecuencia, ninguna de las estrategias se muestra infalible por sí
+ sola.
+\end_layout
+
+\begin_layout Standard
+Otra cuestión que reduce el éxito de las estrategias es su comportamiento
+ estático ante un mercado cambiante.
+ Una estrategia de trading consiste en una herramienta de apoyo al inversor
+ que emite señales para orientarle en la toma de decisiones.
+ Las estrategias utilizan parámetros en sus procedimientos de cálculo.
+ El valor de un parámetro puede ser adecuado ante cierta situación en el
+ mercado, sin embargo, conforme cambia la situación no se puede esperar
+ que el mismo valor siga siendo igual de efectivo, sino que debe adaptarse.
+\end_layout
+
+\begin_layout Standard
+Este capítulo explica la manera en que se afrontan los casos mencionados
+ en los párrafos anteriores con la plataforma.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conjunto"
+
+\end_inset
+
+ se examina la asociación de estrategias de trading como un conjunto que
+ funciona de forma armónica.
+ Este principio de asociación es la base de las estrategias siguientes.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Intersección"
+
+\end_inset
+
+ se hace trabajar al conjunto de manera colaborativa a través de la intersección
+ de sus posiciones en el mercado.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Intersección elitista"
+
+\end_inset
+
+ utiliza las estrategias del conjunto de forma competitiva, por medio de
+ la intersección de los mejores resultados.
+ Otra posibilidad se estudia en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Votación"
+
+\end_inset
+
+, donde las estrategias deciden por votación las posiciones que toman como
+ conjunto.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Fragmentación"
+
+\end_inset
+
+ se centra en la adaptación de los parámetros a la situación del mercado.
+ Por último, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Máquinas compuestas interpretadas como operadores"
+
+\end_inset
+
+ se discute sobre la interpretación de las máquinas compuestas como operadores
+ en el sentido matemático.
+ Esta sección proporciona un enfoque muy intuitivo para comprender las composici
+ones.
+\end_layout
+
+\begin_layout Section
+Conjunto
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conjunto"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que las estrategias de trading exhiben debilidades al ser utilizadas
+ de forma individual, cabe preguntarse cómo será su comportamiento en conjunto.
+ El principio que aparece tras esta propuesta es el siguiente: si en un
+ conjunto de máquinas de trading cada una de ellas sufre de ciertas debilidades
+ y posee ciertas fortalezas, entonces pueden existir maneras de combinarlas
+ para que se complementen.
+ Se busca que como conjunto reduzcan sus debilidades y potencien sus fortalezas,
+ para así obtener mejores resultados.
+\end_layout
+
+\begin_layout Standard
+En resumen, la agrupación de estrategias da lugar a una estrategia compuesta,
+ la cual calcula la señal de posición a partir de las contribuciones individuale
+s.
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ es la manera en que se representa al conjunto de estrategias que operan
+ de forma solidaria.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ y su objetivo es el de servir como contenedor.
+ Todas aquellas estrategias que se albergan en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ deben compartir la misma fuente de datos, es decir, han de operar sobre
+ la misma instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Una característica especial de esta clase es que facilita la interacción
+ con las estrategias que acoge.
+ En particular, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ crea y gestiona propiedades dinámicas que enlazan con aquellas de las máquinas
+ de trading del conjunto: cualquier operación de lectura o escritura sobre
+ estas propiedades de enlace repercuten sobre la propiedad enlazada.
+ Por ejemplo, si la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MáquinaA}
+\end_layout
+
+\end_inset
+
+ cuenta con las propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{A}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{B}
+\end_layout
+
+\end_inset
+
+, la máquina 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MáquinaB}
+\end_layout
+
+\end_inset
+
+ con las propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{A}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{C}
+\end_layout
+
+\end_inset
+
+, y la máquina 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MáquinaC}
+\end_layout
+
+\end_inset
+
+ con la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{D}
+\end_layout
+
+\end_inset
+
+, entonces una instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ que incluya estas máquinas genera las propiedades dinámicas 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{A1}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{B1}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{A2}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{C2}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{D3}
+\end_layout
+
+\end_inset
+
+.
+ Tal situación se ilustra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Propiedades dinámicas de la clase Joint"
+
+\end_inset
+
+, donde aparece una instancia de esta clase almacenando las máquinas en
+ la estructura de tipo array 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ En este caso, la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{A}
+\end_layout
+
+\end_inset
+
+ de la máquina 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MáquinaB}
+\end_layout
+
+\end_inset
+
+ se accede desde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{instanciaJoint.InnerAlgoTrader
+\backslash
+{2
+\backslash
+}.A}
+\end_layout
+
+\end_inset
+
+, o como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{instanciaJoint.A2}
+\end_layout
+
+\end_inset
+
+ si se hace uso de las propiedades dinámicas de enlace.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/instanciaJoint.eps
+	width 45page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gestión de propiedades dinámicas en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Propiedades dinámicas de la clase Joint"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ y el mecanismo de propiedades dinámicas abre un nuevo horizonte, permitiendo
+ entre otros la optimización simultanea de varias máquinas de trading, no
+ para obtener sus óptimos individuales, sino para computar el óptimo del
+ colectivo.
+\end_layout
+
+\begin_layout Standard
+Más allá de implementar un contenedor, esta clase no define la manera en
+ que se combinan las señales de posición de las máquinas.
+ Es responsabilidad del usuario extender la clase e implementar el método
+ abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ para especificar cómo se calcula la señal de posición del conjunto.
+\end_layout
+
+\begin_layout Standard
+Las propiedades y métodos de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ se listan a continuación:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+ Propiedad que se refiere a la estructura de datos donde se almacenan las
+ máquinas de trading.
+ Consiste en una estructura de acceso lineal de tipo array.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DynamicProperties}
+\end_layout
+
+\end_inset
+
+ Propiedad privada utilizada en la gestión de las propiedades dinámicas.
+ El proceso de creación y eliminación de propiedades dinámicas es transparente
+ al usuario.
+ Bajo ningún concepto se precisa de utilizar la información contenida en
+ esta propiedad.
+ 
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{add}
+\end_layout
+
+\end_inset
+
+ Método que sirve para agregar nuevas máquinas de trading al conjunto.
+ Tras las incorporaciones se generan las propiedades dinámicas pertinentes.
+ Las nuevas máquinas de trading tienen que utilizar la misma serie de datos
+ que las demás.
+ Este método almacena copias de las máquinas introducidas como argumentos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{clone}
+\end_layout
+
+\end_inset
+
+ Método para producir una copia de la máquina contenedor y de todas las
+ máquinas que contiene.
+ El proceso de copia es recursivo y afecta a todas las estrategias contenidas
+ en la jerarquía.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{recursiveUpdate}
+\end_layout
+
+\end_inset
+
+ Método privado que actualiza el valor de las propiedades de las máquinas
+ de trading en el conjunto.
+ De esta forma, los cambios en las propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TrainingSet}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TestSet}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InitialFunds}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InvestmentLimit}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TradingCost}
+\end_layout
+
+\end_inset
+
+ de la instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ se transmiten hacia aquellas máquinas que contiene.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{remove}
+\end_layout
+
+\end_inset
+
+ Método que elimina máquinas de trading del conjunto.
+ Para suprimir una máquina hay que referenciarla sobre la estructura de
+ datos, es decir, hay que indicar la posición que ocupa en el array 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método abstracto de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ destinado a implementar en las clases herederas el mecanismo de generación
+ de la señal de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{updateDynamicProperties}
+\end_layout
+
+\end_inset
+
+ Método privado que actualiza las propiedades dinámicas de la instancia
+ de clase.
+ Actúa en las llamadas a los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{add}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{remove}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{updateSignal}
+\end_layout
+
+\end_inset
+
+ Método privado que actualiza la señal de posición con cada cambio.
+\end_layout
+
+\begin_layout Section
+Intersección
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Intersección"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una manera de utilizar varias máquinas de trading consiste en adoptar posiciones
+ en el mercado sólo cuando exista consenso entre ellas, es decir, cuanto
+ todas las máquinas sugieran adoptar la misma posición.
+ Este procedimiento para combinar resultados es el más conservador, pues
+ requiere de la unanimidad en los resultados de las estrategias.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+El cálculo de la posición de la máquina de intersección es como sigue: si
+ todas las máquinas del conjunto están en largo, entonces esta máquina también
+ se posiciona en largo; si por el contrario todas las máquinas toman posiciones
+ cortas, entonces esta máquina abre posición corta; en los demás casos,
+ está fuera del mercado.
+ Este comportamiento queda reflejado en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Intersection.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Un ejemplo de funcionamiento de la estrategia se ilustra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Intersection"
+
+\end_inset
+
+.
+ Ahí aparecen cuatro recuadros, donde los tres superiores se refieren a
+ las posiciones de las estrategias del conjunto y el inferior es el resultado
+ de su combinación con la operación de intersección.
+ En cada recuadro, los rectángulos en verde representan posiciones largas
+ y los rojos cortas.
+ Las líneas verticales discontinuas sirven como apoyo.
+ Desde la perspectiva visual, los rectángulos de posiciones de esta estrategia
+ son fruto de la intersección de los rectángulos de las estrategias del
+ conjunto.
+ La vista en detalle de cómo se combinan las señales aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Intersection.Signal"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Intersection.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Intersección de las posiciones de las estrategias
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Intersection"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Intersection.Signal.eps
+	width 40page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Intersección de señales de posición
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Intersection.Signal"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, Señal_{m,i}=+1,\,\,\,\,\forall m\in\text{``Máquinas de trading''}\\
+-1 & ,\text{\text{si}}\,\, Señal_{m,i}=-1,\,\,\,\,\forall m\in\text{``Máquinas de trading''}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:Intersection.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Intersection}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Intersection}
+\end_layout
+
+\end_inset
+
+ implementa la máquina de intersección.
+ Hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ e implementa un único método:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición en la estrategia.
+ Realiza los cálculos conforme aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Intersection.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Intersección elitista
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Intersección elitista"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En un conjunto de estrategias cada una de ellas tiene un rendimiento diferente:
+ unas tienen más acierto y contribuyen de manera positiva al conjunto, mientras
+ que otras son nefastas y perjudican al resto.
+ Sin las herramientas adecuadas, estudiar este comportamiento colectivo
+ es una tarea compleja.
+\end_layout
+
+\begin_layout Standard
+La intersección elitista es una extensión de la estrategia anterior: consiste
+ en tomar sólo un subconjunto de las estrategias en el cálculo de la señal
+ de posición.
+ De esta manera, aquellas estrategias cuya aportación sea negativa pueden
+ ser deshabilitadas.
+\end_layout
+
+\begin_layout Standard
+Un aspecto importante de la intersección elitista es que introduce un nuevo
+ problema: la selección del subconjunto óptimo de estrategias que mejor
+ desempeño obtiene.
+ Este problema consiste en tomar las estrategias que mejor se complementan
+ con la intersección de sus señales.
+ El número de maneras en que puede ser elegido este subconjunto es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2^n$
+\end_layout
+
+\end_inset
+
+, con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ el número de máquinas en el conjunto.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+El cálculo de la señal de posición conjunta es similar al de la estrategia
+ anterior: la diferencia consiste en que la intersección se hace con las
+ señales de posición del subconjunto de máquinas seleccionadas.
+ La fórmula para computar la señal se muestra en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ElitistIntersection.Signal"
+
+\end_inset
+
+.
+ Esta máquina relaja las exigencias para tomar posiciones en el mercado,
+ pues la intersección de un subconjunto es menos restrictiva que la del
+ conjunto al completo.
+\end_layout
+
+\begin_layout Standard
+El ejemplo de actuación de esta estrategia se encuentra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ElitistIntersection"
+
+\end_inset
+
+.
+ Los tres recuadros superiores marcan las posiciones de las estrategias
+ del conjunto.
+ El segundo recuadro expresa con el color gris que la estrategia está fuera
+ del subconjunto seleccionado: se ha deshabilitado.
+ Como resultado, en el recuadro inferior aparece la señal de posición del
+ conjunto, que consiste en la intersección de las máquinas primera y tercera.
+ La figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ElitistIntersection.Signal"
+
+\end_inset
+
+ ofrece una imágen descriptiva del proceso de cálculo.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/ElitistIntersection.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Intersección elitista de las posiciones de las estrategias primera y tercera
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Intersección elitista de las posiciones de las estrategias
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ElitistIntersection"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/ElitistIntersection.Signal.eps
+	width 40page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Intersección elitista de señales de posición
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ElitistIntersection.Signal"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, Señal_{\hat{m},i}=+1,\,\,\,\,\forall\hat{m}\in\text{``Máquinas de trading seleccionadas''}\\
+-1 & ,\text{\text{si}}\,\, Señal_{\hat{m},i}=-1,\,\,\,\,\forall\hat{m}\in\text{``Máquinas de trading seleccionadas''}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:ElitistIntersection.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ElitistIntersection}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ElitistIntersection}
+\end_layout
+
+\end_inset
+
+ se implementa la estrategia de la intersección elitista.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Intersection}
+\end_layout
+
+\end_inset
+
+ y extiende de forma significativa su funcionalidad a partir de las propiedades
+ y métodos siguientes:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Selection}
+\end_layout
+
+\end_inset
+
+ Propiedad que se utiliza para marcar las máquinas del conjunto como habilitades
+ o deshabilitadas.
+ Con esta propiedad se establece el subconjunto seleccionado.
+ Consiste en un array de tipo binario cuya longitud es el número de máquinas
+ almacenadas en la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Una máquina contenida en la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i$
+\end_layout
+
+\end_inset
+
+ del array 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+ es parte del subconjunto sólo si el valor de la posición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i$
+\end_layout
+
+\end_inset
+
+ del array 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Selection}
+\end_layout
+
+\end_inset
+
+ es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{true}
+\end_layout
+
+\end_inset
+
+; si este valor es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{false}
+\end_layout
+
+\end_inset
+
+, entonces la máquina se excluye.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{add}
+\end_layout
+
+\end_inset
+
+ Método con el que se agregan nuevas máquinas de trading en el conjunto.
+ Las nuevas máquinas están inicialmente habilitadas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimizeSelection}
+\end_layout
+
+\end_inset
+
+ Método que computa la selección del subconjunto óptimo de máquinas que
+ mejoran el resultado.
+ Admite como argumentos la función de evaluación, la función de selección
+ y el método de optimización.
+ Más allá de estos, no precisa de ningún argumento adicional.
+ Las llamadas a este método mantienen el esquema que se sigue con el método
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+, que fue explicado en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Optimización de parámetros"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{remove}
+\end_layout
+
+\end_inset
+
+ Método que elimina máquinas de trading del conjunto.
+ Para suprimir una máquina hay que referenciarla sobre la estructura de
+ datos, es decir, hay que indicar la posición que ocupa en el array 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición de la máquina de trading de intersecció
+n elitista.
+ El cálculo es similar al de la estrategia anterior, con la salvedad de
+ que toma sólo las máquinas del subconjunto seleccionado, es decir, aquellas
+ que están habilitadas.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ElitistIntersection.Signal"
+
+\end_inset
+
+ se recoge el método de cálculo seguido.
+\end_layout
+
+\begin_layout Section
+Votación
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Votación"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La estrategia de votación es la última que se define para conjuntos de estrategi
+as.
+ Esta se basa en decidir la señal de posición que toma el conjunto a partir
+ de votaciones.
+ En consecuencia, la posición que respalda el agregado es aquella más popular
+ entre las estrategias individuales.
+ La estrategia de votación guarda relación con la estrategia de la intersección:
+ esta última es un caso especial de la primera donde las posiciones se adoptan
+ ante el consenso en la votación.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+En este caso, el cálculo de la señal resultante es algo más complejo, debido
+ a que hay que idear un sistema de votación para las estrategias.
+ En la votación se procede de la siguiente manera: si hay una mayoría de
+ estrategias que votan por una misma posición y además el umbral del mínimo
+ de votos es superado, entonces la posición que se adopta es la votada.
+ Por otra parte, se permanece fuera del mercado si se produce un empate
+ o si no se alcanzan los votos mínimos para aprobar una posición.
+ El umbral de votos se utiliza para exigir un nivel de acuerdo mínimo entre
+ las estrategias antes de abrir una posición.
+ Este proceso queda recogido en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting.Signal"
+
+\end_inset
+
+.
+ Los elementos que aparecen en dicha ecuación son: el número de votos de
+ posición larga 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_i^+$
+\end_layout
+
+\end_inset
+
+, el número de votos de posición corta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_i^-$
+\end_layout
+
+\end_inset
+
+, el número de votos para no entrar en el mercado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_i^
+\backslash
+varnothing$
+\end_layout
+
+\end_inset
+
+ y el umbral del mínimo de votos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V$
+\end_layout
+
+\end_inset
+
+.
+ La descripción matemática de estos elementos aparece en las ecuaciones
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting - S plus"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting - S minus"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting - S empty"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting - V"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El sistema de votación aparece ejemplificado en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Voting.Signal"
+
+\end_inset
+
+.
+ Una instancia real de la máquina que implementa esta estrategia se muestra
+ en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Voting"
+
+\end_inset
+
+.
+ De nuevo, los tres recuadros superiores son las estrategias del conjunto,
+ mientras que el último consiste en el resultado alcanzado mediante la votación,
+ donde el mínimo para alcanzar un acuerdo son dos votos.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Voting.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Votación de las posiciones de las estrategias
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Voting"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Voting.Signal (con conteo).eps
+	width 40page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Votación de señales de posición
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Voting.Signal"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, S_{i}^{+}>S_{i}^{-}\wedge S_{i}^{+}>S_{i}^{\varnothing}\wedge S_{i}^{+}\geq V\\
+-1 & ,\text{\text{si}}\,\, S_{i}^{-}>S_{i}^{+}\wedge S_{i}^{-}>S_{i}^{\varnothing}\wedge S_{i}^{-}\geq V\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:Voting.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+S_{i}^{+}=\left|\left\{ m\,\,\vert\,\, Señal_{m,i}=+1,\,\,\forall m\in\text{\text{``Máquinas de trading''}}\right\} \right|\label{eq:Voting - S plus}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+S_{i}^{-}=\left|\left\{ m\,\,\vert\,\, Señal_{m,i}=-1,\,\,\forall m\in\text{\text{``Máquinas de trading''}}\right\} \right|\label{eq:Voting - S minus}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+S_{i}^{\varnothing}=\left|\left\{ m\,\,\vert\,\, Señal_{m,i}=0,\,\,\forall m\in\text{\text{``Máquinas de trading''}}\right\} \right|\label{eq:Voting - S empty}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V=r\cdot\left|\text{\text{``Máquinas de trading''}}\right|\label{eq:Voting - V}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Voting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Voting}
+\end_layout
+
+\end_inset
+
+ hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Joint}
+\end_layout
+
+\end_inset
+
+ e implementa la estrategia de votación.
+ Las propiedades y métodos que define aparecen listados a continuación:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Ratio}
+\end_layout
+
+\end_inset
+
+ Propiedad con que se indica la proporción del mínimo de votos para acordar
+ una posición.
+ El mínimo de votos (parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V$
+\end_layout
+
+\end_inset
+
+) se calcula multiplicando esta proporción (parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$r$
+\end_layout
+
+\end_inset
+
+) por la cantidad de máquinas en el conjunto, según refleja la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting - V"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición con la votación de cada máquina.
+ El procedimiento que sigue aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Voting.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Fragmentación
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Fragmentación"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El mercado bursátil es un ente vivo que absorbe las noticias sobre finanzas.
+ En él, las novedades que afectan al precio de una acción se descuentan
+ de inmediato.
+ En consecuencia, los valores de los parámetros de las estrategias han de
+ adaptarse para obtener el máximo provecho.
+\end_layout
+
+\begin_layout Standard
+Sirva como ejemplo la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Óptimo de la media móvil según periodo"
+
+\end_inset
+
+, cuyos dos recuadros contienen la misma curva de precios.
+ Se aplica en ambas series la estrategia de la media móvil y se optimiza
+ el número de periodos para mejorar el resultado, aunque con una diferencia:
+ en el recuadro superior la optimización se hace sobre la primera mitad
+ de la serie y en el inferior sobre la segunda mitad.
+ Existe una diferencia sustancial en el número óptimo de periodos en cada
+ caso.
+\end_layout
+
+\begin_layout Standard
+El proceso de adaptación de los parámetros consiste en adecuar sus valores
+ para hacerlos cercanos al óptimo.
+ En este sentido, el esquema aplicado en la plataforma aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:No fragmentado"
+
+\end_inset
+
+, donde la serie de datos con el precio de la acción en el tiempo se divide
+ en dos intervalos disjuntos: el de entrenamiento y el de test.
+ Luego de la división, el proceso de optimización calcula los valores óptimos
+ en el intervalo de entrenamiento y los utiliza en el intervalo de test.
+ Los problemas principales de este enfoque son dos:
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Valor óptimo de la media móvil según periodo.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Valor óptimo de la media móvil según intervalo
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Óptimo de la media móvil según periodo"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/No fragmentado.eps
+	width 65page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+División de una serie de datos en los intervalos de entrenamiento y test
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:No fragmentado"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Fragmentado.eps
+	width 65page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+División de una serie de datos en múltiples intervalos de entrenamiento
+ y test
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Fragmentado"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Los valor óptimos así computados se vuelven más inapropiados conforme los
+ datos sobre los que se aplican se alejan en el tiempo del intervalo de
+ entrenamiento.
+ Esto sucede porque la fórmula del cálculo de la señal de posición toma
+ valores actuales del precio y utiliza parámetros cuyos valores óptimos
+ fueron computados para valores pasados del precio.
+\end_layout
+
+\begin_layout Itemize
+El tamaño del intervalo de entrenamiento repercute de manera negativa si
+ es demasiado grande.
+ Como el mercado se ve inmerso en diferentes situaciones a lo largo del
+ tiempo, entonces un intervalo de entrenamiento demasiado ámplio contiene
+ situaciones muy dispares.
+ Esto significa que los valores óptimos calculados en este intervalo no
+ son apropiados para ninguna situación concreta en el mercado.
+\end_layout
+
+\begin_layout Standard
+Para superar estas dos dificultades la plataforma proporciona la máquina
+ de fragmentación.
+ La manera en que esta máquina se sobrepone a las limitaciones explicadas
+ es mediante la partición de los intervalos de entrenamiento y test.
+ En contraposición a lo que ocurre en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:No fragmentado"
+
+\end_inset
+
+, la máquina de fragmentación realiza una división de estos intervalos como
+ la que se muestra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Fragmentado"
+
+\end_inset
+
+.
+ Los múltiples intervalos de entrenamiento pueden solaparse, si bien los
+ de test han de ser contiguos.
+ Las ventajas de la fragmentación son las siguientes:
+\end_layout
+
+\begin_layout Itemize
+Los intervalos de entrenamiento y test son pequeños y se adaptan mejor a
+ la situación que atraviesa el mercado bursátil.
+\end_layout
+
+\begin_layout Itemize
+Los valores óptimos de cada intervalo de entrenamiento se aplican sólo en
+ el intervalo de test correspondiente: se incrementa la validez y calidad
+ del valor óptimo usado para el parámetro.
+\end_layout
+
+\begin_layout Itemize
+Si se tiene en cuenta el paso del tiempo, entonces la estrategia de fragmentació
+n calcula antes los óptimos y los emplea más rápido que en la versión no
+ fragmentada.
+ Esto se debe a que en la fragmentación se intercalan los intervalos de
+ entrenamiento y test.
+\end_layout
+
+\begin_layout Itemize
+El proceso de fragmentación es transparente y se puede aplicar a cualquier
+ estrategia.
+\end_layout
+
+\begin_layout Standard
+Para implementar este mecanismo, la máquina de fragmentación crea múltiples
+ copias de la máquina de trading de partida y utiliza cada una de ellas
+ sobre un intervalo de entrenamiento y test diferente.
+ Estas copias reciben el nombre de fragmentos.
+\end_layout
+
+\begin_layout Standard
+En la tabla
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Intervalos de entrenamiento y test"
+
+\end_inset
+
+ aparece un ejemplo que muestra cómo es la partición de una serie de datos
+ con 200 valores del precio de una acción tomando fragmentos con intervalos
+ de entrenamiento de longitud 40 e intervalos de test de longitud 30.
+ Es importante que los intervalos de entrenamiento y test sean disjuntos,
+ pues de lo contrario el proceso de entrenamiento conoce algunos datos del
+ intervalo de test y el resultado queda falseado.
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#fragmento
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intervalo de entrenamiento
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intervalo de test
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[1 
+\backslash
+quad 40]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[41 
+\backslash
+quad 70]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[31 
+\backslash
+quad 70]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[71 
+\backslash
+quad 100]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[61 
+\backslash
+quad 100]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[101 
+\backslash
+quad 130]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[91 
+\backslash
+quad 130]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[131 
+\backslash
+quad 160]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[121 
+\backslash
+quad 160]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[161 
+\backslash
+quad 190]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[151 
+\backslash
+quad 190]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[191 
+\backslash
+quad 200]$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+División de una serie de datos de 200 valores en intervalos de entrenamiento
+ de longitud 40 e intervalos de test de longitud 30 para cada fragmento
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+División de una serie de datos en múltiples intervalos de entrenamiento
+ y test
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Intervalos de entrenamiento y test"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+En el proceso de generación de la señal de posición, la máquina de fragmentación
+ une las señales que las máquinas de fragmentos han creado.
+ El proceso de reconstrucción consiste en copiar de cada máquina fragmento
+ la señal de posición que ha computado para su intervalo de test.
+ Este proceso se resume en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fragmented.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=Señal_{m,i},\,\,\,\, i\in\text{``Intervalo de test del fragmento}\, m\text{''}\label{eq:Fragmented.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragmented}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragmented}
+\end_layout
+
+\end_inset
+
+ se implementa el mecanismo de fragmentación de máquinas de trading.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ El conjunto de propiedades y métodos que crea es el siguiente:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragment}
+\end_layout
+
+\end_inset
+
+ Propiedad que consiste en una estructura de datos lineal donde se almacenan
+ las máquinas fragmento con los diferentes intervalos de entrenamiento y
+ test.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InnerAlgoTrader}
+\end_layout
+
+\end_inset
+
+ Propiedad que almacena una copia de la máquina de trading sobre la que
+ se aplica el proceso de fragmentación.
+ Se utiliza para crear los fragmentos que se guardan en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragment}
+\end_layout
+
+\end_inset
+
+.
+ Cada vez que cambia el tamaño del intervalo de entrenamiento o el de test
+ se vuelven a generar las máquinas alojadas en la estructura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragment}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TrainingSetSize}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el tamaño de los intervalos de entrenamiento.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TestSetSize}
+\end_layout
+
+\end_inset
+
+ Propiedad que determina el tamaño de los intervalos de test.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{clone}
+\end_layout
+
+\end_inset
+
+ Método que crea una copia de la máquina de fragmentación y de sus fragmentos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessStatistics}
+\end_layout
+
+\end_inset
+
+ Método que calcula estadísticas acerca de la función de evaluación.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ Método que computa el valor óptimo de las propiedades de la máquina de
+ fragmentación y de sus fragmentos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace}
+\end_layout
+
+\end_inset
+
+ Método que representa el espacio de búsqueda de donde se obtienen los valores
+ óptimos de los parámetros.
+ Recrea espacios de cualquier dimensión descomponiéndolos en subespacios
+ de dos dimensiones.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace123}
+\end_layout
+
+\end_inset
+
+ Método que representa el espacio de búsqueda en donde se quieren hallar
+ los valores óptimos de los parámetros.
+ Es parecido al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace}
+\end_layout
+
+\end_inset
+
+, con la salvedad de que sólo dibuja espacios de una, dos y tres dimensiones.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{resetFragment}
+\end_layout
+
+\end_inset
+
+ Método privado que se utiliza para eliminar la estructura de datos contenida
+ en la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragment}
+\end_layout
+
+\end_inset
+
+.
+ Se llama cuando hay que recrear las máquinas fragmento con un tamaño diferente
+ para el intervalo de entrenamiento o test.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición de la máquina de trading de fragmentaci
+ón.
+ Construye esta señal como se recoge en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fragmented.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{updateFragment}
+\end_layout
+
+\end_inset
+
+ Método privado que actualiza la estructura de datos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Fragment}
+\end_layout
+
+\end_inset
+
+.
+ Es responsable de crear los fragmentos con sus respectivos intervalos de
+ entrenamiento y test.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{updateSignal}
+\end_layout
+
+\end_inset
+
+ Método privado que actualiza la señal de posición con cada cambio.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{wideGet}
+\end_layout
+
+\end_inset
+
+ Método que recoge el valor de una propiedad desde los múltiples fragmentos
+ de la máquina de fragmentación.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{wideSet}
+\end_layout
+
+\end_inset
+
+ Método que asigna un valor a la propiedad de todos los fragmentos.
+\end_layout
+
+\begin_layout Section
+Máquinas compuestas interpretadas como operadores
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Máquinas compuestas interpretadas como operadores"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Todas las máquinas de trading de este capítulo se definen a partir otras.
+ Así, la máquina de conjunto y las que heredan de esta (la máquina de intersecci
+ón, la de intersección elitista y la de votación) requieren de una colección
+ de máquinas iniciales.
+ Por su parte, la máquina de fragmentación precisa de una única máquina
+ de partida.
+\end_layout
+
+\begin_layout Standard
+Dada esta dependencia, las máquinas compuestas se pueden interpretar como
+ operadores entre máquinas de trading.
+ Estos operadores se encargan de combinar las máquinas de trading de alguna
+ manera para dar como resultado una nueva máquina.
+ Con esta visión se entiende a la combinación de máquinas como una extensión
+ natural de las máquinas de trading.
+\end_layout
+
+\begin_layout Subsection
+Operadores de intersección, intersección elitista y votación
+\end_layout
+
+\begin_layout Standard
+El primer grupo de operadores se debe a aquellas máquinas del tipo conjunto:
+ intersercción, intersección elitista y votación.
+ Estos operadores toman un número variable de máquinas de trading y devuelven
+ otra máquina, tal y como se recoge en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Operadores de conjunto"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Joint:M_{1}\times M_{2}\times\ldots\times M_{n}\rightarrow M\label{eq:Operadores de conjunto}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los operadores se representan gráficamente como árboles de dos niveles,
+ donde la raíz es el operador y las hojas las máquinas que toma.
+ En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Árbol operador de conjunto"
+
+\end_inset
+
+ se enseña cómo es la imagen que simboliza a todos los operadores de esta
+ familia.
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Composición Joint.eps
+	height 18pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Representación en árbol del operador de conjunto
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Árbol operador de conjunto"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Operador de fragmentación
+\end_layout
+
+\begin_layout Standard
+Este operador es consecuencia de la máquina de fragmentación.
+ A diferencia de los anteriores, el operador de fragmentación es unario
+ y toma una única máquina de trading para devolver otra fragmentada.
+ Esta situación queda reflejada en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Operador de fragmentación"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Fragmented:M\rightarrow M\label{eq:Operador de fragmentación}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El operador de fragmentación se representa como un árbol de dos niveles:
+ en el primer nivel el operador y en el segundo la máquina a fragmentar.
+ Este gráfico se muestra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Árbol operador de fragmentación"
+
+\end_inset
+
+.
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Composición Fragmented.eps
+	height 18pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Representación en árbol del operador de fragmentación
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Árbol operador de fragmentación"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Combinando operadores
+\end_layout
+
+\begin_layout Standard
+Al igual que sucede en matemáticas, los operadores se pueden combinan en
+ expresiones.
+ Estos operadores toman cualquier tipo de máquina de trading, sea esta una
+ simple o una compuesta, y devuelven una nueva máquina.
+ No hay limitación en cuanto al nivel de anidamiento de máquinas, aunque
+ combinaciones con demasiados niveles pierden el sentido y la utilidad.
+\end_layout
+
+\begin_layout Standard
+Como ejemplo para este último apartado se presenta la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Árbol de composición de operadores multinivel"
+
+\end_inset
+
+, que es la representación en forma de árbol de una máquina de trading compuesta.
+ Esta máquina consiste en la combinación de seis máquinas de trading básicas
+ por medio de los operadores de intersección, fragmentación y votación.
+ En los árboles como este, las hojas siempre contienen máquinas no compuestas,
+ pues de lo contrario dichos nodos no serian hojas.
+\end_layout
+
+\begin_layout Standard
+Además de la representación en árbol, la composición también se puede describir
+ como una expresión matemática.
+ Para hacerlo hay que escribir los operadores en forma de funciones con
+ los argumentos entre paréntesis.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Expresión con varios operadores"
+
+\end_inset
+
+ aparece la expresión cuya información es equivalente a la de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Árbol de composición de operadores multinivel"
+
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{equation}
+Voting(Intersection(M_{1},M_{2},M_{3}),Fragmented(M_{4}),Fragmented(M_{5}),M_{6})\label{eq:Expresión con varios operadores}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Float figure
+placement bh
+wide false
+sideways true
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading compuestas/Composición multinivel.eps
+	width 100page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Representación en árbol de una combinación de operadores
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Árbol de composición de operadores multinivel"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

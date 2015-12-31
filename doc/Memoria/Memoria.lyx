@@ -1,0 +1,424 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+%%
+% Cabeceras y pies de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\slshape \rightmark}
+\fancyhead[RE]{\slshape \leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+%%
+% Para incluir epígrafos (citas célebres al comienzo del capítulo)
+\usepackage{epigraph}
+\setlength{\epigraphrule}{0pt}
+%\renewcommand{\textflush}{flushright}
+%%
+% Para colocar los footnotes al fondo de la página
+\usepackage[bottom]{footmisc}
+%%
+% Cambia cuadro por tabla
+\AtBeginDocument{
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\tablename}{Tabla}}
+%%
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.97}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{green}{rgb}{0.13,0.55,0.13}
+\definecolor{lilac}{rgb}{0.63,0.13,0.94}
+%%
+% Packete listings para fragmentos de código
+\usepackage{listings}
+\lstset{language=Matlab}
+%\lstset{float}
+%\lstset{floatplacement=tbp}
+\lstset{frame=tb}
+\lstset{captionpos=b}
+\lstset{aboveskip=\bigskipamount}
+\lstset{belowskip=\bigskipamount}
+\lstset{backgroundcolor=\color{light-gray}}
+\lstset{basicstyle=\ttfamily}
+\lstset{keywordstyle=\ttfamily\color{blue}}
+\lstset{commentstyle=\ttfamily\color{green}}
+\lstset{stringstyle=\ttfamily\color{lilac}}
+\lstset{emph={parfor}, emphstyle=\color{blue}}
+% Cambia listing por código
+\AtBeginDocument{
+\renewcommand{\lstlistlistingname}{Índice de fragmentos de código}
+\renewcommand{\lstlistingname}{Código}}
+%%
+\usepackage{tabularx}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref true
+\pdf_title "Plataforma de inversión bursátil con fines de investigación: adquisición de datos, creación y simulación de estrategias, optimización de parámetros y generación de resultados"
+\pdf_author "Javier Matos Odut"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 2.5cm
+\bottommargin 3cm
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+Huge
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textsc{
+\end_layout
+
+\end_inset
+
+Plataforma de inversión bursátil con fines de investigación
+\begin_inset VSpace 0.5em
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+{
+\backslash
+Large
+\end_layout
+
+\end_inset
+
+ adquisición de datos, creación y simulación de estrategias, optimización
+ de parámetros y generación de resultados
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 2em
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+LARGE{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textsc{
+\end_layout
+
+\end_inset
+
+Javier Matos Odut
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 0. Resumen.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList table
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstlistoflistings
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 1. Introducción.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 2. Inversión bursátil.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 3. Plataforma de inversión bursátil.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 4. Conexión con los proveedores de datos.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 5. Estrategias de trading.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 6. Estrategias de trading compuestas.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 7. Optimización de parámetros.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 8. Generación de resultados.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Capítulo 9. Conclusiones y trabajo futuro.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset CommandInset include
+LatexCommand include
+filename "Apéndice A. La clase DataSerie.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Apéndice B. La clase AlgoTrader.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Apéndice C. Ejemplos de uso.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "Referencias"
+options "bibtotoc,unsrt"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

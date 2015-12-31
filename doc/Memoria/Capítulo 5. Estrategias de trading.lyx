@@ -1,0 +1,11067 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Estrategias de trading
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Estrategias de trading"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En finanzas, una estrategia de trading consiste en un conjunto de reglas,
+ comportamientos y procedimientos basados en modelos matemáticos, que tiene
+ por objetivo orientar al inversor que opera en la bolsa.
+ La estrategia de trading produce señales de compra y venta que ayudan al
+ inversor en la toma de decisiones.
+\end_layout
+
+\begin_layout Standard
+No hay que confundir las estrategias de trading con las estrategias de inversión
+: en estas últimas, el propósito consiste en elegir una cartera de inversiones,
+ compuesta por una combinación de instrumentos financieros de renta fija
+ y renta variable (entre los que se encuentran las acciones), para ofrecer
+ alta rentabilidad con un nivel de riesgo aceptable.
+ Así, una estrategia de inversión puede elegir invertir parte del capital
+ que gestiona en acciones de una empresa, utilizando las indicaciones de
+ compra y venta arrojadas por una estrategia de trading.
+\end_layout
+
+\begin_layout Standard
+La plataforma ofrece, por medio de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+, una manera sencilla, rápida y eficiente de implementar cualquier estrategia
+ de trading.
+ Para implementar tales estrategias el usuario sólo debe programar una clase
+ que herede de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Esta clase fue introducida en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Máquinas de trading"
+
+\end_inset
+
+ y es detallada de forma técnica en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El resto del capítulo presenta las estrategias de trading que fueron implementad
+as en la plataforma.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Basadas en indicadores técnicos"
+
+\end_inset
+
+ se introducen las estrategias basadas en indicadores técnicos.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Basadas en osciladores técnicos"
+
+\end_inset
+
+ explica los osciladores técnicos y las estrategias de trading implementadas
+ a partir de ellos.
+ Por último, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Basadas en otros conceptos"
+
+\end_inset
+
+ se hace una recopilación de otras estrategias de trading interesantes confeccio
+nadas durante el desarrollo del proyecto.
+\end_layout
+
+\begin_layout Subsubsection
+Gráficos de las máquinas de trading
+\end_layout
+
+\begin_layout Standard
+Antes de comenzar con las máquinas de trading, se explican los gráficos
+ que estas generan y que aparecen con frecuencia a lo largo del capítulo.
+\end_layout
+
+\begin_layout Standard
+La información visual constituye un apoyo imprescindible que aglutina un
+ ingente de datos en apenas espacio.
+ A través del uso de representaciones visuales adecuadas, se busca hacer
+ simple la comprensión global de los resultados.
+ Además, los gráficos entre máquinas son similares, con la intención de
+ facilitar las comparaciones.
+ Estos gráficos están constituidos por diferentes recuadros, cada uno de
+ los cuales se centra en la representación de ciertos valores.
+ Los recuadros aparecen dispuestos en columna y comparten el intervalo de
+ tiempo: de esta forma, se sigue la progresión de todos los valores dibujados
+ trazando una línea vertical imaginaria que avanza hacia la derecha.
+ Como ejemplo, en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:plot"
+
+\end_inset
+
+ se muestra el gráfico de una máquina de trading donde, como se aprecia,
+ aparecen tres recuadros:
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de una máquina de trading
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Serie/Position Este recuadro muestra la curva del precio de la acción a
+ lo largo del tiempo.
+\end_layout
+
+\begin_layout Description
+Position Aquí aparecen, representadas como rectángulos, las posiciones en
+ el tiempo que adopta la estrategia: estas pueden ser largas o cortas, aunque
+ también se contempla la posibilidad de permanecer fuera del mercado.
+ La longitud de los rectángulos es relativa al tiempo que dura la posición
+ en el mercado; por su parte, la altura es proporcional a la cantidad que
+ ha invertido la máquina.
+\end_layout
+
+\begin_layout Description
+Profit/Loss Recuadro que contiene la curva del beneficio o pérdida acumulada
+ en el tiempo.
+ Representa la cantidad en tanto por uno, donde la unidad corresponde a
+ la inversión inicial.
+\end_layout
+
+\begin_layout Standard
+El código de colores para el dibujado de las curvas y los rectángulos es
+ importante pues, para cada instante, indica la posición que mantiene la
+ máquina de trading: el verde se usa para indicar posición larga, el rojo
+ para corta y el negro señala que se permanece fuera del mercado.
+ En lo referente a la escala, se utiliza la lineal en todos los recuadros.
+\end_layout
+
+\begin_layout Standard
+Además de los anteriores, cada máquina de trading define sus propios recuadros
+ para mostrar la información conveniente.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Basadas en osciladores técnicos"
+
+\end_inset
+
+ por ejemplo, las máquinas definen un nuevo recuadro en el que presentan
+ el valor del oscilador en cada instante.
+\end_layout
+
+\begin_layout Section
+Basadas en indicadores técnicos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Basadas en indicadores técnicos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Un indicador técnico consiste en una serie de valores calculados al aplicar
+ una fórmula sobre el precio de la acción.
+ La información del precio incluye cualquier combinación de los precios
+ de apertura, más alto, más bajo y de cierre en un periodo de tiempo.
+ Algunos indicadores sólo emplean los precios de cierre, mientras que otros
+ incorporan el volumen y el interés abierto en sus fórmulas.
+ Los indicadores técnicos se basan en los principios y suposiciones del
+ análisis técnico.
+\end_layout
+
+\begin_layout Standard
+Con un indicador técnico se ofrece una perspectiva diferente desde la que
+ analizar la acción del precio.
+ Algunos indicadores, como la media móvil, se obtienen con fórmulas simples
+ y su interpretación es fácil de entender.
+ Otros, como el estocástico, se calculan con fórmulas más complejas y requieren
+ más tiempo de estudio para entenderlos por completo.
+ Con independencia de la complejidad de la fórmula, los indicadores técnicos
+ ofrecen una perspectiva única sobre la fuerza y dirección de la acción
+ del precio.
+\end_layout
+
+\begin_layout Standard
+Los indicadores técnicos cumplen tres funciones principales: alertar sobre
+ eventos importantes que se producen como consecuencia de las variaciones
+ en el precio de la acción, confirmar los resultados de otros indicadores
+ técnicos para comprender la acción del precio y predecir la dirección futura
+ del precio.
+\end_layout
+
+\begin_layout Standard
+En esta parte del documento se introducen algunos de los indicadores técnicos
+ más utilizados, y para cada uno de ellos se explica cómo es la clase que
+ lo implementa.
+\end_layout
+
+\begin_layout Standard
+En lo que a la programación se refiere, todas las clases que implementan
+ estrategias basadas en indicadores técnicos heredan de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+ o de algún descendiente suyo, que a su vez hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ De esta manera, cualquier cambio que se realiza sobre la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+ afecta a todas las máquinas de esta familia.
+\end_layout
+
+\begin_layout Subsection
+Media móvil
+\end_layout
+
+\begin_layout Standard
+La media móvil es un indicador técnico que identifica la dirección en la
+ tendencia del precio de la acción 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Murphy_1999,Pring_1997"
+
+\end_inset
+
+: tal tendencia en el precio de una acción puede ser alcista, bajista o
+ lateral.
+ No predice la dirección del precio, sino que define la dirección de la
+ tendencia con un retraso.
+ El retraso se debe a que la media móvil utiliza valores pasados del precio.
+ A pesar del retraso, la media movil ayuda a suavizar la serie de valores
+ del precio y filtra el ruido en los datos.
+ Por ser seguidora de tendencias, resulta más útil cuando existe una dirección
+ clara del mercado, es decir, cuando hay una tendencia alcista o bajista.
+ En momentos de tendencia lateral es preferible guiarse por las señales
+ que ofrecen los osciladores.
+ Los sistemas seguidores de tendencia se caracterizan por estar siempre
+ en mercado: pueden estar posicionados largos o cortos, pero nunca estan
+ fuera del mercado.
+\end_layout
+
+\begin_layout Standard
+La media móvil es el punto de partida de otros muchos indicadores y osciladores
+ técnicos.
+ Los dos tipos más comunes de medias móviles son la media móvil simple y
+ la media móvil exponencial.
+ En inglés se conocen como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Simple Moving Average}
+\end_layout
+
+\end_inset
+
+ o SMA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "SMA"
+description "Simple Moving Average"
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Exponential Moving Sverage}
+\end_layout
+
+\end_inset
+
+ o EMA
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "EMA"
+description "Exponential Moving Average"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+La media móvil simple se forma calculando el precio medio de la acción en
+ un número específico de periodos.
+ Se utiliza como base el precio de cierre de la acción.
+ Como su nombre indica, la media móvil es una media que se mueve: nuevos
+ resultados se producen con la entrada de nuevos datos.
+ Esto hace que la media se mueva con el tiempo.
+ La ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ recoge el comportamiento mencionado, siendo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ el número de periodos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+SMA_{i}=\frac{x_{i-p+1}+\ldots+x_{i-1}+x_{i}}{p}\label{eq:Media móvil simple}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la media móvil simple todos los datos de entrada 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_j$
+\end_layout
+
+\end_inset
+
+, que se corresponden con precios de la acción en los diferentes periodos,
+ tienen el mismo peso, es decir, no se discrimina entre más recientes y
+ más antiguos, por lo que la contribución a la media de cada valor es la
+ misma.
+ La media móvil exponencial reduce el tiempo que tarda en adaptarse al precio
+ respecto a la simple asignando un mayor peso a los valores del precio más
+ recientes.
+ El peso asignado a los valores de precio más recientes depende del número
+ de periodos que se toman.
+ El cálculo de la media móvil exponencial es recursivo y para el caso base
+ emplea el valor de la media móvil simple.
+ La ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+ muestra la manera en que se calcula el caso base y el caso recursivo, con
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ el número de periodos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+EMA_{i}=\left\{ \begin{array}{lll}
+SMA_{i}=\frac{x_{i-p+1}+\ldots+x_{i-1}+x_{i}}{p} &  & ,\text{si}\,(i=p)\\
+x_{i}\cdot K+EMA_{i-1}\cdot(1-K) & ,K=\frac{2}{1+p} & ,\text{si}\,(i>p)
+\end{array}\right.\label{eq:Media móvil exponencial}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tanto en el caso de la media móvil simple como en la exponencial, los valores
+ que toman para aquellos casos en que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i<p$
+\end_layout
+
+\end_inset
+
+ no están definidos.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+El precio de la acción se mueve con mayor velocidad que la media móvil.
+ Si el precio está por debajo de la media móvil y en un instante cruza hacia
+ arriba, entonces esta podría ser una indicación de que la tendencia en
+ el mercado va a cambiar y comenzará a ser alcista.
+ De misma manera, también se puede pensar que cambiará la tendencia si el
+ precio de la acción está por encima del valor de la media móvil y luego
+ la cruza hacia abajo, siendo el inicio de una tendencia bajista.
+ Estos cruces entre la media móvil y el precio de la acción se pueden utilizar
+ para generar señales de compra y venta con las que posicionarse largo o
+ corto en el mercado.
+ La señal se genera tal y como se indica en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverage.Signal"
+
+\end_inset
+
+ para cada periodo.
+ Se utiliza el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$XMA_i$
+\end_layout
+
+\end_inset
+
+ para referirse indistintamente a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$SMA_i$
+\end_layout
+
+\end_inset
+
+ y a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$EMA_i$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverage.plotSeriePosition"
+
+\end_inset
+
+ aparece la representación del valor de una acción a lo largo del tiempo
+ acompañanda de la media móvil exponencial en color azul.
+ Como se aprecia, la curva que representa al precio es más abrupta y sus
+ movimientos más rápidos; por el contario, la media móvil describe una curva
+ más suave que marca la tendencia del precio.
+ Mientras el precio de la acción está por encima del valor de la media móvil,
+ la señal que produce la estrategia es de posición larga; si se da el caso
+ contrario donde el precio de la acción está por debajo de la media móvil,
+ entonces la estrategia adopta una posición corta.
+ En los intervalos temporales en que no existe una tendencia clara del precio
+ los resultados de esta estrategia son deficientes.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverage.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Media móvil exponencial 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverage.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sobre la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverage.plotSeriePosition"
+
+\end_inset
+
+, cabe destacar que la curva relativa a la media móvil no comienza a la
+ misma par que la curva del precio de la acción.
+ Esto es así por la manera en que se calcula la media móvil, pues el primer
+ valor que define la fórmula es aquel con índice 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i=p$
+\end_layout
+
+\end_inset
+
+, siendo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ el periodo.
+ Para los índices tales que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i<p$
+\end_layout
+
+\end_inset
+
+, el valor es indefinido.
+ Esta situación se da en todas las estrategias que utilizan fórmulas cuyo
+ cálculo requiere de valores pasados.
+ 
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, precio_{i}>XMA_{i}\\
+-1 & ,\text{\text{si}}\,\, precio_{i}<XMA_{i}
+\end{array}\right.\label{eq:MovingAverage.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta clase implementa la estrategia de trading basada en la media móvil
+ simple o la media móvil exponencial.
+ La clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+, que a su vez hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ El conjunto de propiedades y métodos de la clase es el siguiente:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el tipo de media móvil, con el valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'s'}
+\end_layout
+
+\end_inset
+
+ para la simple y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'e'}
+\end_layout
+
+\end_inset
+
+ para la exponencial.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad para establecer el número de periodos en el calculo de la media
+ móvil.
+ Se corresponde con el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ que aparece en las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método de la clase que computa la señal de posición según aparece en la
+ ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverage.Signal"
+
+\end_inset
+
+.
+ Los precios de cotización de la acción se leen desde el objeto de tipo
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ asociado a la máquina.
+ El código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:MovingAverage.simulate"
+
+\end_inset
+
+ muestra una manera de implementar el método.
+ Para el cálculo de los diferentes tipos de medias móviles se utiliza la
+ función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{movavg}
+\end_layout
+
+\end_inset
+
+, incluida la plataforma.
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function computeSignal(algoTrader)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Parámetros
+\end_layout
+
+\begin_layout Plain Layout
+
+serie = algoTrader.DataSerie.Serie;
+\end_layout
+
+\begin_layout Plain Layout
+
+mode = algoTrader.Mode;
+\end_layout
+
+\begin_layout Plain Layout
+
+samples = algoTrader.Samples;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Media móvil
+\end_layout
+
+\begin_layout Plain Layout
+
+movingAverage = movavg(serie, mode, samples);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Señal
+\end_layout
+
+\begin_layout Plain Layout
+
+signal = zeros(1, length(serie));
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(serie>movingAverage) = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(serie<movingAverage) = -1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Actualiza el valor de la propiedad Signal
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTrader.Signal = signal;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverage}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:MovingAverage.simulate"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método que decora los gráficos de la curva de precios superponiendo el
+ trazado de la media móvil.
+ De esta manera, queda personalizada la representación visual que ofrecen
+ los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+.
+ El gráfico que presenta la máquina de trading, por medio del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+, se muestra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverage.plot"
+
+\end_inset
+
+.
+ Por su parte, el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+ produce gráficos como el de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverage.plotSeriePosition"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverage.plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverage}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverage.plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Media móvil desplazada
+\end_layout
+
+\begin_layout Standard
+Consiste en una media móvil ajustada en el tiempo por medio de un desplazamiento
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Murphy_1999,Pring_1997,DiNapoli_1969"
+
+\end_inset
+
+.
+ Se construye tomando la media móvil y desplazandola un número de intervalos.
+ El resultado consiste en una curva suave y desplazada que acompaña al precio,
+ como aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageDisplaced.plotSeriePosition"
+
+\end_inset
+
+.
+ Esta estategia introduce un retardo en el efecto que tienen las variaciones
+ del precio de la acción.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverageDisplaced.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Media móvil exponencial desplazada
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverageDisplaced.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+El cálculo es igual al que indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ para la media móvil simple y la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+ para la media móvil exponencial.
+ La repercusión del desplazamiento afecta al cálculo de la señal.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+La señal se genera de forma similar a como se hace en la media móvil, pero
+ tomando un valor pasado de la media para comparar con el precio vigente
+ de la acción, tal y como indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageDisplaced.Signal"
+
+\end_inset
+
+.
+ El desplazamiento al que se somete la media móvil es de un número de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$d$
+\end_layout
+
+\end_inset
+
+ intervalos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, precio_{i}>XMA_{i-d}\\
+-1 & ,\text{\text{si}}\,\, precio_{i}<XMA_{i-d}
+\end{array}\right.\label{eq:MovingAverageDisplaced.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageDisplaced}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageDisplaced}
+\end_layout
+
+\end_inset
+
+ implementa la estrategia descrita en esta sección.
+ Esta clase tiene como antecesores a las clases 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ ya que hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverage}
+\end_layout
+
+\end_inset
+
+.
+ Los siguientes son los métodos y propiedades que implementa la clase:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Displacement}
+\end_layout
+
+\end_inset
+
+ Propiedad que determina el desplazamiento de la media móvil.
+ No puede tomar valores negativos, pues esto supone conocer los valores
+ futuros del precio de la acción.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageDisplaced.Signal"
+
+\end_inset
+
+, esta propiedad se corresponde con el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$d$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de la máquina de trading según la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageDisplaced.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método que decora los gráficos de la serie de precios con la media móvil
+ desplazada para ofrecer un resultado como el que aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageDisplaced.plotSeriePosition"
+
+\end_inset
+
+.
+ Altera el comportamiento de los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Media móvil con umbral
+\end_layout
+
+\begin_layout Standard
+La media móvil con umbral, que es una mejora de la media móvil, introduce
+ un nivel de tolerancia en los cambios de posición de la señal 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Murphy_1999,Pring_1997"
+
+\end_inset
+
+.
+ De esta manera, se reduce el efecto negativo de las oscilaciones en el
+ precio de la acción, que cruzando una y otra vez sobre la media móvil no
+ se separa de ella de forma considerable: reduce el problema de la tendencia
+ lateral.
+ Como extensión, esta técnica hereda las demás bondades y limitaciones de
+ la media móvil.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+El cálculo es idéntico al de la media móvil.
+ Se mantienen las dos modalidades: media móvil simple, calculada a partir
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ y media móvil exponencial, con la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+.
+ La aplicación de los umbrales no interviene durante el proceso del cálculo
+ de la media móvil, sino que toma parte en el instante de generar la señal.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+La fórmula del cálculo de la señal, que cambia respecto a la utilizada para
+ la media móvil, hace uso de un par de umbrales: con ellos se regula la
+ tolerancia a las pequeñas fluctuaciones que se producen durante los intervalos
+ de tendencia lateral.
+ Un umbral es el de subida, que multiplica a la media móvil para establecer
+ una cota inferior.
+ Si esta cota es superada por el precio, entonces la estrategia adopta una
+ posición larga.
+ El otro umbral es el de descenso, que fija la cota superior al multiplicar
+ a la media móvil.
+ Si el precio de la acción es inferior a la cota superior, entonces la estrategi
+a toma una posición corta.
+ La ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageThreshold.Signal"
+
+\end_inset
+
+ resume la manera en que la señal es generada en cada periodo.
+\end_layout
+
+\begin_layout Standard
+En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageThreshold.plotSeriePosition"
+
+\end_inset
+
+ se muestra el precio de la acción acompañando de la media móvil exponencial
+ en color azul y las cotas superior e inferior en colores cian y magenta
+ respectivamente.
+ Cabe resaltar que la cota inferior está por encima de la cota superior.
+ Esto es así porque la cota inferior marca el mínimo valor a partir del
+ cual se toma una posición larga, mientras que la cota superior indica el
+ máximo valor por debajo del cual se mantiene una posición corta.
+ La media móvil suaviza el movimiento de los precios de la acción y las
+ cotas ayudan a evitar que la estrategia entre en el mercado en momentos
+ de alta volatilidad e incertidumbre.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverageThreshold.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Media móvil exponencial con umbral
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverageThreshold.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se asignan valores de umbral tales que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralSubida>1>umbralDescenso$
+\end_layout
+
+\end_inset
+
+, entonces la estrategia no está siempre en el mercado, sino que adopta
+ un comportamiento más conservador.
+ Esto se aprecia en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageThreshold.plotSeriePosition"
+
+\end_inset
+
+, donde las secciones en negro de la curva del precio indican momentos en
+ que la estrategia está fuera del mercado.
+ Si el umbral de subida es inferior al de descenso, entonces la máquina
+ de trading no se posiciona en el mercado.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, precio_{i}>cota\; inferior=umbralSubida\cdot XMA_{i}\\
+-1 & ,\text{\text{si}}\,\, precio_{i}<cota\; superior=umbralDescenso\cdot XMA_{i}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:MovingAverageThreshold.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageThreshold}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageThreshold}
+\end_layout
+
+\end_inset
+
+ implementa la estrategia de trading de media móvil con umbral.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverage}
+\end_layout
+
+\end_inset
+
+, luego sus antecesores son las clases 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y los métodos de la clase aparecen a continuación:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el umbral de subida.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageThreshold.Signal"
+
+\end_inset
+
+ se corresponde con el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralSubida$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que establece el umbral de descenso.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageThreshold.Signal"
+
+\end_inset
+
+ aparece como el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralDescenso$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Threshold}
+\end_layout
+
+\end_inset
+
+ Propiedad dependiente de sólo escritura que, al asignarle un valor, actualiza
+ las propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseThreshold}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallThreshold}
+\end_layout
+
+\end_inset
+
+ asignando a ambas dicho valor.
+ Además de unificar ambos umbrales en un mismo valor, esta propiedad sirve
+ para desplazar a lo largo del eje vertical el efecto de la media móvil.
+ De esta manera, puede relajarse o hacerse más estricta la condición para
+ entrar en posiciones largas o cortas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición de acuerdo a la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método para personalizar la representación visual de la información provista
+ por la máquina.
+ Modifica el comportamiento del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+, que produce gráficos como el de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageThreshold.plotSeriePosition"
+
+\end_inset
+
+.
+ También altera el funcionamiento del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+, que genera una representación como la que se ve en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageThreshold.plot"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverageThreshold.plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageThreshold}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverageThreshold.plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cruce de medias móviles
+\end_layout
+
+\begin_layout Standard
+Esta estrategia se basa en dos medias móviles que difieren en el valor de
+ sus periodos: el valor mayor corresponde a la media móvil larga y el valor
+ menor es el de la media móvil corta.
+ Consiste en una extensión de la estrategia de media móvil donde la media
+ móvil larga identificar la tendencia y la media móvil corta aporta estabilidad
+ a la estrategia 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Murphy_1999,Pring_1997"
+
+\end_inset
+
+; así se reduce el impacto negativo de las oscilaciones del precio de la
+ acción.
+ Como en el caso de la estrategia de la media móvil, esta estrategia es
+ deficiente cuando la tendencia en el mercado es lateral.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+Para el cálculo de las dos medias móviles, una vez más se utiliza la descripción
+ provista por la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ para el caso de la media móvil simple y la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+ para la exponencial.
+ El número de periodos de la media móvil corta tiene que ser menor que el
+ de la media móvil larga.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+El precio de la acción suele presentar fuertes oscilaciones.
+ La media móvil corta suaviza un poco estos movimientos bruscos, para así
+ conseguir una curva más estable.
+ La media móvil larga, con una cantidad mayor de periodos, consigue suavizar
+ más aún la curva del precio y marca además la tendencia que se presenta.
+ En combinación, los cruces entre estas medias sirven para generar la señal
+ con que la máquina de trading interviene en el mercado.
+ La estrategia adopta una posición larga cuando la media móvil corta es
+ mayor a la media móvil larga y una posición corta cuando la relación es
+ la contraria, es decir, cuando la media móvil corta es menor a la media
+ móvil larga.
+ La especificación sobre cómo se genera la señal se muestra de manera formal
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossing.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El comportamiento de la estrategia se observa en el ejemplo mostrado en
+ la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAveragesCrossing.plotSeriePosition"
+
+\end_inset
+
+.
+ La curva del precio de la acción aparece como la más irregular, acompañada
+ por la media móvil corta, en color magenta, y la media móvil larga, en
+ color azul.
+ Se comprueba que los cruces entre las dos medias originan el cambio de
+ posición en la estrategia.
+ Debido al número de periodos de cada una, las medias móviles comienzan
+ en instantes diferentes en la figura.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAveragesCrossing.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cruce de medias móviles exponenciales
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAveragesCrossing.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, XMA\_corta_{i}>XMA\_larga_{i}\\
+-1 & ,\text{\text{si}}\,\, XMA\_corta_{i}<XMA\_larga_{i}
+\end{array}\right.\label{eq:MovingAveragesCrossing.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossing}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossing}
+\end_layout
+
+\end_inset
+
+ se implementa la estrategia del cruce de medias móviles.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+, que a su vez lo hace de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y métodos de la clase son:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ Propiedad para indicar el tipo de media móvil: toma el valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'s'}
+\end_layout
+
+\end_inset
+
+ para la media móvil simple y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'e'}
+\end_layout
+
+\end_inset
+
+ para la media móvil exponencial.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossing.Signal"
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$XMA
+\backslash
+_corta_{i}$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$XMA
+\backslash
+_larga_{i}$
+\end_layout
+
+\end_inset
+
+ se refieren a las medias móviles corta y larga con indiferencia del tipo.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Lead}
+\end_layout
+
+\end_inset
+
+ Propiedad con el número de periodos de la media móvil corta.
+ Se corresponde con el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ que aparece en las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Lag}
+\end_layout
+
+\end_inset
+
+ Propiedad que guarda la cantidad de periodos de la media móvil larga.
+ Se refiere al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ de las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+.
+ Si no se cumple la condición 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Lead<Lag$
+\end_layout
+
+\end_inset
+
+, entonces la máquina permanece fuera del mercado en todo momento.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de la máquina de acuerdo a la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossing.Signal"
+
+\end_inset
+
+.
+ Una posible implementación del método se encuentra en el código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:MovingAveragesCrossing.simulate"
+
+\end_inset
+
+.
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function computeSignal(algoTrader)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Parámetros
+\end_layout
+
+\begin_layout Plain Layout
+
+serie = algoTrader.DataSerie.Serie;
+\end_layout
+
+\begin_layout Plain Layout
+
+mode = algoTrader.Mode;
+\end_layout
+
+\begin_layout Plain Layout
+
+lead = algoTrader.Lead;
+\end_layout
+
+\begin_layout Plain Layout
+
+lag = algoTrader.Lag;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Media móvil
+\end_layout
+
+\begin_layout Plain Layout
+
+leadMovingAverage = movavg(serie, mode, lead);
+\end_layout
+
+\begin_layout Plain Layout
+
+lagMovingAverage = movavg(serie, mode, lag);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Señal
+\end_layout
+
+\begin_layout Plain Layout
+
+signal = zeros(1, length(serie));
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(leadMovingAverage>lagMovingAverage) = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(leadMovingAverage<lagMovingAverage) = -1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Actualiza el valor de la propiedad Signal
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTrader.Signal = signal;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossing}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:MovingAveragesCrossing.simulate"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método para decorar los gráficos.
+ Superpone las curvas de las medias móviles al gráfico del precio de la
+ acción.
+ Altera el comportamiento del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+, que pinta gráficos como el de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAveragesCrossing.plotSeriePosition"
+
+\end_inset
+
+.
+ También modifica el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+, que dibuja la información de acuerdo a como aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAveragesCrossing.plot"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAveragesCrossing.plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossing}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAveragesCrossing.plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cruce de medias móviles con umbral
+\end_layout
+
+\begin_layout Standard
+El cruce de medias móviles con umbral es una extensión del cruce de medias
+ móviles.
+ Hace uso de dos valores de umbral para admitir cierta tolerancia y evitar
+ oscilaciones indeseables de la media móvil corta sobre la media móvil larga.
+ El uso del umbral reduce el efecto negativo de las fuertes oscilaciones
+ del precio durante la tendencia lateral.
+ De esta manera, la máquina de trading evita el oscilar en posiciones opuestas
+ en un espacio de tiempo corto.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+El componente base de la estrategia sigue siendo la media móvil, con la
+ ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+ para la simple y la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil exponencial"
+
+\end_inset
+
+ para la exponencial.
+ Igual que en el caso de la estrategia anterior, la media móvil corta tiene
+ que utilizar un número de periodos menor al de la media móvil larga.
+ La aplicación del umbral se hace durante el cálculo de la señal.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+En la generación de la señal intervienen la media móvil corta, la larga,
+ el umbral de subida y el de descenso.
+ La manera de generar la señal es la siguiente: si la media móvil corta
+ es mayor a la media móvil larga multiplicada por el umbral de subida, entonces
+ se toma una posición larga; en caso de que la media móvil corta sea menor
+ a la media móvil larga multiplicada por el umbral de descenso, entonces
+ se adopta una posición corta.
+ Esto se resume en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossingThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAveragesCrossingThreshold.plotSeriePosition"
+
+\end_inset
+
+ se muestra el comportamiento de la estrategia.
+ La curva de diferentes colores corresponde al precio.
+ En amarillo aparece la media móvil corta y en azul, la larga.
+ Las líneas discontinuas magenta y cian son las cotas inferior y superior.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAveragesCrossingThreshold.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cruce de medias móviles exponenciales con umbral
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAveragesCrossingThreshold.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, XMA\_corta_{i}>cota\; inferior=umbralSubida\cdot XMA\_larga_{i}\\
+-1 & ,\text{\text{si}}\,\, XMA\_corta_{i}<cota\; superior=umbralDescenso\cdot XMA\_larga_{i}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:MovingAveragesCrossingThreshold.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossingThreshold}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossingThreshold}
+\end_layout
+
+\end_inset
+
+, que implementa esta estrategia, hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAveragesCrossing}
+\end_layout
+
+\end_inset
+
+.
+ Cuenta con los métodos y propiedades siguientes:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que contiene el valor del umbral de subida.
+ Se refiere al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralSubida$
+\end_layout
+
+\end_inset
+
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossingThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad con el umbral de descenso que interviene en el cálculo de la
+ señal.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossingThreshold.Signal"
+
+\end_inset
+
+ se refiere a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralDescenso$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Threshold}
+\end_layout
+
+\end_inset
+
+ Propiedad de sólo lectura que unifica el valor de las propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseThreshold}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallThreshold}
+\end_layout
+
+\end_inset
+
+ al asignado.
+ Sirve para desplazar arriba o abajo la media móvil, esto es, relaja o refuerza
+ la condición para entrar en posiciones largas o cortas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que calcula la señal de posición de acuerdo a la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAveragesCrossingThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método que decora la representación visual de la clase.
+ Dibuja las curvas de las medias móviles y las cotas en los gráficos.
+ Altera el comportamiento del los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+ El gráfico que aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAveragesCrossingThreshold.plotSeriePosition"
+
+\end_inset
+
+ es consecuencia del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Bandas de Bollinger
+\end_layout
+
+\begin_layout Standard
+Las Bandas de Bollinger representan la volatilidad y se sitúan por encima
+ y por debajo de la media móvil.
+ La volatilidad se define en términos de la desviación estándar sobre el
+ precio de la acción.
+ El propósito de las Bandas de Bollinger es facilitar una definición relativa
+ de alto y bajo.
+ Por definición, los precios son altos en la banda superior y bajos en la
+ banda inferior.
+ Las Bandas de Bollinger determinan la fuerza de la tendencia en el precio
+ de la acción.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+La media móvil que utiliza esta técnica es la simple, cuya fórmula aparece
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Media móvil simple"
+
+\end_inset
+
+.
+ La banda superior se calcula a partir de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Banda de Bollinger superior"
+
+\end_inset
+
+ y la banda inferior, con la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Banda de Bollinger inferior"
+
+\end_inset
+
+.
+ En estas fórmulas aparece el factor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+, que regula la amplitud de la zona encerrada entre las bandas.
+ En ambos casos se necesita calcular la desviación estándar, que se hace
+ según aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bandas de Bollinger - Desviación típica"
+
+\end_inset
+
+, donde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+overline{precio_{i-p+1:i}}$
+\end_layout
+
+\end_inset
+
+ es la media de los precio de la acción en los últimos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ periodos.
+ Esta ecuación se puede definir en términos de la media móvil simple, como
+ aparece en la última igualdad.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+BandaSuperior_{i}=SMA_{i}+K\cdot\sigma_{i}\label{eq:Banda de Bollinger superior}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+BandaInferior_{i}=SMA_{i}-K\cdot\sigma_{i}\label{eq:Banda de Bollinger inferior}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sigma_{i}=\sqrt{\frac{1}{p}\cdot\sum_{j=0}^{p-1}(precio_{i-j}-\overline{precio_{i-p+1:i}})^{2}}=\sqrt{\frac{1}{p}\cdot\sum_{j=0}^{p-1}precio_{i-j}^{2}-SMA_{i}}\label{eq:Bandas de Bollinger - Desviación típica}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+Las Bandas de Bollinger reflejan la dirección con la media móvil simple
+ y la volatilidad con las bandas superior e inferior.
+ Como tal, se pueden utilizar para determinar si el precio está relativamente
+ alto o bajo.
+ De acuerdo a su creador, John Bollinger 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bollinger_2001"
+
+\end_inset
+
+, gran parte del movimiento del precio de la acción está contenido entre
+ las bandas, luego aquellos movimientos que se producen fuera de ellas son
+ significativos.
+ En el sentido técnico, los precios están relativamente altos cuando sobrepasan
+ la banda superior y bajos cuando caen por debajo de la banda inferior.
+\end_layout
+
+\begin_layout Standard
+Una manera en que se utiliza esta técnica es produciendo señales de venta
+ cuando el precio sobrepasa la banda superior, ante la creencia de que la
+ acción está sobrecomprada y hay una burbuja.
+ Por el contrario y siguiendo un razonamiento similar, se emite una señal
+ de compra cuando el precio cae por debajo de la banda inferior, pues la
+ acción está sobrevendida y tiene un precio inferior al que le corresponde.
+ Sin embargo, los precios pueden ser altos o bajos por alguna razón subyacente.
+ Como con los otros indicadores, las Bandas de Bollinger no deben utilizarse
+ solas sino en combinación.
+ En resumen, el cálculo de la señal se realiza según indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BollingerBands.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Una imágen representativa del uso de esta estrategia y la señal que produce
+ aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BollingerBands.plotSeriePosition"
+
+\end_inset
+
+.
+ Ahí se muestra el precio como una curva en colores verde, rojo y negro,
+ que identifica las diferentes posiciones que adopta la máquina de trading
+ en el tiempo.
+ Decorando el gráfico aparece la curva azul de la media móvil simple.
+ En magenta aparece la curva de la banda superior y en cian la de la banda
+ inferior.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/BollingerBands.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Bandas de Bollinger
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:BollingerBands.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, precio_{i}<BandaInferior_{i}\\
+-1 & ,\text{\text{si}}\,\, precio_{i}>BandaSuperior_{i}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:BollingerBands.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{BollingerBands}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{BollingerBands}
+\end_layout
+
+\end_inset
+
+ implementa la estrategia basada en las Bandas de Bollinger.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Indicator}
+\end_layout
+
+\end_inset
+
+, luego tiene como antecesor a la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y métodos que implementa la clase son:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad que especifica el número de periodos a tomar en el cálculo de
+ la media móvil y la desviación estándar.
+ Se corresponde con el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bandas de Bollinger - Desviación típica"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{K}
+\end_layout
+
+\end_inset
+
+ Propiedad que contiene el valor del factor que multiplica a la desviación
+ estándar en el cálculo de las bandas.
+ Aparece como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+ en las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Banda de Bollinger superior"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Banda de Bollinger inferior"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que aplica la estrategia descrita en el cálculo de la señal de posición.
+ Lo hace de acuerdo a las indicaciones de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BollingerBands.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método que decora el gráfico de la curva del precio de la acción con las
+ bandas de Bollinger y la media móvil.
+ Altera la representación provista por los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+ En particular, la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BollingerBands.plotSeriePosition"
+
+\end_inset
+
+ es producto del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Basadas en osciladores técnicos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Basadas en osciladores técnicos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los osciladores son modelos matemáticos aplicados al precio, basados en
+ alguna observación específica sobre el comportamiento del mercado.
+ Son un tipo especial de indicadores que oscilan en el tiempo por encima
+ y por debajo de una línea central o entre unos niveles.
+ Los osciladores técnicos se sustentan en las hipótesis sostenidas por el
+ análisis técnico.
+\end_layout
+
+\begin_layout Standard
+Normalmente, la curva del oscilador no se dibuja superpuesta a la del precio,
+ sino que se representa en un recuadro independiente.
+ Los ociladores no se expresan en las mismas unidades que el precio de la
+ acción, sino que los valores que toman carecen de unidades y están acotados.
+\end_layout
+
+\begin_layout Standard
+Esta parte del documento trata sobre la explicación de algunos de los osciladore
+s técnicos más utilizados y su implementación como máquinas de trading.
+\end_layout
+
+\begin_layout Standard
+Todas las máquinas de esta familia, que implementan estrategias basadas
+ en osciladores técnicos, heredan de la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+ o de alguna clase heredera suya.
+ En la jerarquía de clases de la plataforma, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+ hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Al compartir estas máquinas una misma clase antecesora, los cambios aplicados
+ a la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillador}
+\end_layout
+
+\end_inset
+
+ repercuten en todas ellas.
+\end_layout
+
+\begin_layout Standard
+La clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+ es algo más que el antecesor en común de las estrategias basadas en osciladores.
+ Esta clase redefine y aporta métodos propios respecto a la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Los métodos en cuestión son los siguientes:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ Este método dibuja el resultado de la máquina de trading.
+ El gráfico generado es similar al del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+, con la salvedad de que incorpora un recuadro adicional para mostrar la
+ curva de valores relativa al oscilador.
+ El contraste se aprecia al comparar las figuras 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAveragesCrossing.plot"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageConvergenceDivergence.plot"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+ Crea el recuadro con la representación gráfica del oscilador.
+ El método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ lo utiliza para la creación de los graficos de la máquina.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ Muestra un gráfico donde sólo aparecen los recuadros del precio de la acción
+ y del oscilador, colocados uno sobre el otro.
+ La vista que ofrece es similar a la del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+, pero ignorando los dos últimos recuadros.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método abstracto que realiza el dibujado de la curva dentro del recuadro
+ del oscilador.
+ Es responsabilidad de las clases que heredan de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+ el implementarlo.
+ Este método de dibujado se invoca desde el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+ para pintar el gráfico de dentro del recuadro.
+\end_layout
+
+\begin_layout Subsection
+Convergencia/divergencia de medias móviles
+\end_layout
+
+\begin_layout Standard
+Esta técnica, que fue ideada por Gerald Appel 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Appel_2005,Appel_and_Dobson_2008"
+
+\end_inset
+
+ y que se conoce como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Moving Average Convergence-Divegence}
+\end_layout
+
+\end_inset
+
+ o MACD
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "MACD"
+description "Moving Average Convergence-Divergence"
+
+\end_inset
+
+, da lugar a uno de los indicadores de momento más simples y efectivos.
+ Convierte dos indicadores seguidores de tendencia, que son las medias móviles,
+ en un oscilador de momento, sustrayendo la media móvil larga de la corta.
+ Como resultado, la técnica ofrece lo mejor de los dos mundos: seguimiento
+ de tendencia y momento.
+ El MACD fluctúa por encima y por debajo de la linea del cero en tanto las
+ medias móviles convergen, se cruzan y divergen.
+ Como los valores del MACD no están acotados, no es particularmente útil
+ para identificar niveles de sobrecompra o sobreventa.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+El MACD utiliza tres componentes: el MACD en sí mismo, que consiste en la
+ diferencia entre una media móvil exponencial corta y una larga, calculado
+ a partir de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - MACD"
+
+\end_inset
+
+; la señal, que no hay que confundir con la señal que genera la máquina
+ de trading, correspondiente a la media móvil exponencial del MACD, como
+ aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - Señal"
+
+\end_inset
+
+; y el histograma, que es la diferencia entre el MACD y la señal, según
+ se recoge en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - Histograma"
+
+\end_inset
+
+.
+ En las ecuaciones se utiliza una notación diferente a la seguida hasta
+ ahora: en este caso, los parámetros 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$MACD$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Se
+\backslash
+tilde{n}al^{MACD}$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Histograma$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$precio$
+\end_layout
+
+\end_inset
+
+ son vectores; 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$EMA$
+\end_layout
+
+\end_inset
+
+ es la función que computa la media móvil exponencial; y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_{mcorta}$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_{mlarga}$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_{se
+\backslash
+tilde{n}al}$
+\end_layout
+
+\end_inset
+
+ los números que determinan los diferentes periodos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+MACD=EMA(precio,periodos_{mcorta})-EMA(precio,periodos_{mlarga})\label{eq:MACD - MACD}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal^{MACD}=EMA(MACD,periodos_{señal})\label{eq:MACD - Señal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Histograma=MACD-Señal^{MACD}\label{eq:MACD - Histograma}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+En el MACD se trata la convergencia y divergencia de las dos medias móviles.
+ La convergencia ocurre cuando las medias móviles se aproximan entre sí.
+ La media móvil corta es más rápida y es responsable de la mayoría de los
+ movimientos del MACD.
+ La media móvil larga es más lenta y menos reactiva a los cambios del precio
+ de la acción.
+\end_layout
+
+\begin_layout Standard
+Tal y como resalta la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageConvergenceDivergence.plotSeriePositionOscillator"
+
+\end_inset
+
+, el MACD oscila por encima y por debajo de la linea del cero.
+ Los valores positivos del MACD, que se incrementan en tanto las medias
+ móviles se distancian, indican que la media móvil corta está por encima
+ de la larga, es decir, el impulso alcista está aumentando.
+ Valores negativos del MACD, que también aumentan en magnitud conforme las
+ medias móviles se distancian, indican que la media móvil corta está por
+ debajo de la larga, esto es, el impulso bajista se está imponiendo.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverageConvergenceDivergence.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Convergencia/divergencia de medias móviles
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverageConvergenceDivergence.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los cruces de la señal con el MACD son la forma más habitual de producir
+ señales con las que adoptar posiciones en el mercado.
+ La señal de esta estrategia consiste en la media móvil exponencial del
+ MACD.
+ Esta señal, que se calcula como la media móvil del indicador, sigue el
+ recorrido del MACD y hace más fácil reconocer sus cambios.
+ Un cruce alcista ocurre cuando el MACD cruza hacia arriba la línea de la
+ señal; un cruce bajista sucede cuando el MACD cruza hacia abajo la línea
+ de la señal.
+ Este proceso, que aparece resumido en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageConvergenceDivergence.Signal"
+
+\end_inset
+
+, es el seguido para producir la señal de posición de la estrategia.
+ Se insiste en que no hay que confundir la señal del MACD, que aparece explicada
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - Señal"
+
+\end_inset
+
+, con la señal de posición de la máquina, que se muestra en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageConvergenceDivergence.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, MACD_{i}>Señal_{i}^{MACD}\\
+-1 & ,\text{\text{si}}\,\, MACD_{i}<Señal_{i}^{MACD}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:MovingAverageConvergenceDivergence.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageConvergenceDivergence}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageConvergenceDivergence}
+\end_layout
+
+\end_inset
+
+, que hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+, implementa la estrategia descrita.
+ Las propiedades y métodos de la clase aparecen a continuación:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ Propiedad para indicar el tipo de media móvil que se utiliza en los cálculos:
+ aunque en las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - MACD"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - Señal"
+
+\end_inset
+
+ aparece la media móvil exponencial, pues es como está establecido para
+ esta técnica, se puede aplicar la simple.
+ Esto se hace empleando el valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'s'}
+\end_layout
+
+\end_inset
+
+ en vez del valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'e'}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Lead}
+\end_layout
+
+\end_inset
+
+ Propiedad referida al número de periodos de la media móvil corta.
+ Aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - MACD"
+
+\end_inset
+
+ como el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_{mcorta}$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Lag}
+\end_layout
+
+\end_inset
+
+ Propiedad que contiene el número de periodos de la media móvil larga.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - MACD"
+
+\end_inset
+
+ se corresponde al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_{mlarga}$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad para almacenar el número de periodos con que se calcula la media
+ móvil que da lugar a la señal del método.
+ Se refiere al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_{se
+\backslash
+tilde{n}al}$
+\end_layout
+
+\end_inset
+
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - Señal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición de la máquina de trading.
+ No hay que confundir la señal de posición de la máquina, calculada a partir
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MovingAverageConvergenceDivergence.Signal"
+
+\end_inset
+
+, con la señal propia del método, que aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MACD - Señal"
+
+\end_inset
+
+.
+ Una posible implementación del método aparece en el código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:MovingAverageConvergenceDivergence.simulate"
+
+\end_inset
+
+.
+ La función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{movavg}
+\end_layout
+
+\end_inset
+
+, incluida en la plataforma, es la responsable de calcular los diferentes
+ tipos de medias móviles.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function computeSignal(algoTrader)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Parámetros
+\end_layout
+
+\begin_layout Plain Layout
+
+serie = algoTrader.DataSerie.Serie;
+\end_layout
+
+\begin_layout Plain Layout
+
+mode = algoTrader.Mode;
+\end_layout
+
+\begin_layout Plain Layout
+
+lead = algoTrader.Lead;
+\end_layout
+
+\begin_layout Plain Layout
+
+lag = algoTrader.Lag;
+\end_layout
+
+\begin_layout Plain Layout
+
+signalMode = algoTrader.SignalMode;
+\end_layout
+
+\begin_layout Plain Layout
+
+signalSamples = algoTrader.SignalSamples;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Media móvil corta y larga
+\end_layout
+
+\begin_layout Plain Layout
+
+leadMovingAverage = movavg(serie, mode, lead);
+\end_layout
+
+\begin_layout Plain Layout
+
+lagMovingAverage = movavg(serie, mode, lag);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% MACD
+\end_layout
+
+\begin_layout Plain Layout
+
+macd = leadMovingAverage-lagMovingAverage;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Señal MACD
+\end_layout
+
+\begin_layout Plain Layout
+
+signalmacd = movavg(macd, signalMode, signalSamples);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Histograma
+\end_layout
+
+\begin_layout Plain Layout
+
+% histogram = macd-signalmacd;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Señal
+\end_layout
+
+\begin_layout Plain Layout
+
+signal = zeros(1, length(serie));
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(macd>signalmacd) = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(macd<signalmacd) = -1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Actualiza el valor de la propiedad Signal
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTrader.Signal = signal;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageConvergenceDivergence}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:MovingAverageConvergenceDivergence.simulate"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ Método de la clase que decora el gráfico de la curva del precio.
+ En concreto, superpone las curvas de la media móvil corta y la larga.
+ El resultado de modificar esta representación aparece en el recuadro superior
+ de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageConvergenceDivergence.plotSeriePositionOscillator"
+
+\end_inset
+
+, donde las medias móviles están dibujadas en cian y magenta.
+ Los métodos cuya representación se ve afectada por este método son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método de la clase responsable de dibujar el recuadro de los gráficos donde
+ se visualiza el valor del oscilador.
+ Tal recuadro aparece en la parte inferior de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageConvergenceDivergence.plotSeriePositionOscillator"
+
+\end_inset
+
+ donde, con la misma escala temporal, se muestran las variaciones en el
+ oscilador.
+ Este método es la base de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+, que dibuja el oscilador en singular, y del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+, que también dibuja el oscilador pero en compañía de la curva del precio
+ de la acción, cuya salida aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageConvergenceDivergence.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+ También altera la salida del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ que aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MovingAverageConvergenceDivergence.plot"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MovingAverageConvergenceDivergence.plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverageConvergenceDivergence}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MovingAverageConvergenceDivergence.plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Índice de fuerza relativa
+\end_layout
+
+\begin_layout Standard
+El índice de fuerza relativa, también conocido como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Relative Strength Index}
+\end_layout
+
+\end_inset
+
+ en inglés o símplemente RSI
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "RSI"
+description "Relative Strength Index"
+
+\end_inset
+
+, es un oscilador de momento que mide la velocidad y el cambio de los movimiento
+s del precio.
+ Muestra la fuerza del precio mediante una comparación de los movimientos
+ individuales al alza o a la baja 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wilder_1978,Brown_1999"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+Para simplificar la explicación del cálculo, el RSI se ha descompuesto en
+ sus componentes básicos: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$RS$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P
+\backslash
+acute{e}rdidaMedia$
+\end_layout
+
+\end_inset
+
+.
+ En el cálculo del RSI se utiliza un periodo, así se define el intervalo
+ durante el cual se acumulan las ganancias y pérdidas que experimenta el
+ precio de la acción.
+ En particular, el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia$
+\end_layout
+
+\end_inset
+
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RSI - RS"
+
+\end_inset
+
+ consiste en el valor medio de los incrementos del precio de la acción en
+ los últimos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ periodos.
+ Por su parte, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P
+\backslash
+acute{e}rdidaMedia$
+\end_layout
+
+\end_inset
+
+ se define como la media del decremento en el precio de la acción en los
+ anteriores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ periodos: este valor siempre se expresa como una cantidad positiva.
+\end_layout
+
+\begin_layout Standard
+El valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$RS$
+\end_layout
+
+\end_inset
+
+ representa cuántas veces es mayor el movimiento ascendente en el precio
+ de la acción que el movimiento descendente.
+ La fórmula del RSI, que aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RSI"
+
+\end_inset
+
+, normaliza el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$RS$
+\end_layout
+
+\end_inset
+
+ y lo convierte en un oscilador, cuyos valores fluctúan entre 0 y 100.
+ En tanto a su interpretación, de acuerdo a su autor, John W.
+ Wilder, se considera sobrecompra cuando su valor es superior a 70 y sobreventa
+ cuando está por debajo de 30 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wilder_1978"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+RSI=100-\frac{100}{1+RS}\label{eq:RSI}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+RS=\frac{GananciaMedia}{PérdidaMedia}\label{eq:RSI - RS}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Como aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RSI - Demostración"
+
+\end_inset
+
+, es posible desarrollar la fórmula para conseguir un resultado más fácil
+ de interpretar.
+ Con este nuevo enfoque, se aprecia que el RSI calcula qué proporción de
+ las variaciones en el precio se corresponden con subidas.
+ Si se da el caso de que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia/(GananciaMedia+P
+\backslash
+acute{e}rdidaMedia) 
+\backslash
+approx 0$
+\end_layout
+
+\end_inset
+
+, entonces la situación que sucede es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia 
+\backslash
+ll P
+\backslash
+acute{e}rdidaMedia$
+\end_layout
+
+\end_inset
+
+, es decir, la tendencia del precio es bajista; por el contrario si 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia/(GananciaMedia+P
+\backslash
+acute{e}rdidaMedia) 
+\backslash
+approx 1$
+\end_layout
+
+\end_inset
+
+, entonces el caso que ocurre es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia 
+\backslash
+gg P
+\backslash
+acute{e}rdidaMedia$
+\end_layout
+
+\end_inset
+
+, es decir, la tendencia del precio es alcista.
+ En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RelativeStrengthIndex.plotSeriePositionOscillator"
+
+\end_inset
+
+ se aprecia gráficamente la forma de este oscilador de acuerdo al valor
+ del precio.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/RelativeStrengthIndex.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Índice de fuerza relativa
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RelativeStrengthIndex.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{rl}
+RSI & =100-\frac{100}{1+RS}\\
+\\
+ & =\frac{100\cdot(1+RS)-100}{1+RS}\\
+\\
+ & =100\cdot\frac{RS}{1+RS}\\
+\\
+ & =100\cdot\frac{GananciaMedia}{GananciaMedia+PérdidaMedia}
+\end{array}\label{eq:RSI - Demostración}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+Para el cálculo de la señal se razona de la siguiente manera: si las subidas
+ del precio son mucho más abundantes que las bajadas, entonces la acción
+ está probablemente sobrecomprada y existe una burbuja
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Una burbuja económica (también llamada burbuja especulativa, burbuja de
+ mercado o burbuja financiera) es un fenómeno que se produce en los mercados,
+ en buena parte debido a la especulación, que se caracteriza por una subida
+ anormal y prolongada del precio de un activo o producto, de forma que dicho
+ precio se aleja cada vez más del valor real o intrínseco del producto.
+ 
+\end_layout
+
+\end_inset
+
+; por el contrario, si las bajadas en el precio son muy superiores a las
+ subidas, entonces la acción está sobrevendida.
+ Asumiendo cierta veracidad en la hipótesis anterior, la forma de proceder
+ es sencilla: hay que comprar o posicionarse en largo cuando la acción está
+ sobrevendida, pues el precio tiene que subir para corregirse; por el otro
+ lado, se tiene que vender o posicionarse en corto cuando la acción está
+ sobrecomprada, pues en este caso el precio tiene que bajar para corregirse.
+ El comportamiento descrito queda recogido en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RelativeStrengthIndex.Signal"
+
+\end_inset
+
+.
+ En realidad, la hipótesis anterior es bastante deficitaria, ya que el precio
+ de la acción posee en ocasiones cierta inercia que le hace mantener la
+ tendencia.
+ De nuevo se remite a la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RelativeStrengthIndex.plotSeriePositionOscillator"
+
+\end_inset
+
+, donde el recuadro inferior muestra el valor del oscilador en con los umbrales
+ de subida y descenso.
+ Como se aprecia, la inercia del precio provoca que, en ocasiones, suceda
+ lo contrario a lo esperado de acuerdo al razonamiento que propone esta
+ técnica: la sobrecompra no da lugar a bajadas en el precio y la sobreventa
+ no corrige el precio al alza.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
+-1 & ,\text{si}\,\, RSI_{i}>umbralSubida\\
++1 & ,\text{\text{si}}\,\, RSI_{i}<umbralDescenso\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:RelativeStrengthIndex.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RelativeStrengthIndex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RelativeStrengthIndex}
+\end_layout
+
+\end_inset
+
+ implementa la estrategia antes descrita.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+ que a su vez lo hace de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ El conjunto de propiedades y métodos implementados es el siguiente:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad con el valor del número de periodos que considera la estrategia
+ durante el cálculo.
+ En particular, se refiere al número de periodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ que toma parte en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RSI - RS"
+
+\end_inset
+
+ para calcular los valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$GananciaMedia$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$P
+\backslash
+acute{e}rdidaMedia$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que marca el umbral de subida a partir del cual se produce la
+ situación de sobrecompra.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RelativeStrengthIndex.Signal"
+
+\end_inset
+
+ se refiere al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralSubida$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el umbral de descenso que, si no es alcanzado por
+ el valor del RSI, representa una situación de sobreventa.
+ Se corresponde al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralDescenso$
+\end_layout
+
+\end_inset
+
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RelativeStrengthIndex.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método para computar la señal de posición generada por la estrategia.
+ Lo hace de acuerdo a las indicaciones de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RelativeStrengthIndex.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método que dibuja el oscilador en compañía de los umbrales de subida y
+ descenso.
+ Se utiliza en los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+ En particular, la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RelativeStrengthIndex.plotSeriePositionOscillator"
+
+\end_inset
+
+ es fruto de la representación generada por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Cruce del índice de fuerza relativa
+\end_layout
+
+\begin_layout Standard
+El cruce del índice de fuerza relativa es una extensión de la estrategia
+ anterior.
+ La extensión consiste en incluir una media móvil y tomar los cruces con
+ el RSI para generar las señales de posición.
+ De esta manera, se detecta cuándo las sobrecompras o sobreventas de la
+ acción se aceleran.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+La formulación del modelo emplea alguna de las medias móviles, tanto en
+ su variante simple como exponencial.
+ El otro elemento utilizado es el RSI, que ya fue explicado en la sección
+ anterior.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+Esta estrategia se basa en la hipótesis del RSI, que toma posiciones largas
+ en situaciones de sobreventa para anticipar las correcciones al alza y
+ adopta posiciones cortas en situaciones de sobrecompra en anticipo a la
+ corrección a la baja.
+ La inclusión de la media móvil sirve para detectar y medir las sobrecompras
+ y sobreventas que experimenta una acción.
+ Así, cuando más se acentúan estas situaciones es cuando la estrategia decide
+ posicionarse.
+ En consecuencia, la estrategia toma una posición corta cuando el RSI supera
+ a su media móvil y cambia a posición larga cuando el RSI es se sitúa por
+ debajo de la media móvil.
+ El proceso se recoge en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RelativeStrengthIndexCrossing.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El resultado de aplicar esta estrategia sobre una acción aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RelativeStrengthIndexCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+ En el recuadro del oscilador aparece el RSI en azul, el umbral de subida
+ en magenta, el umbral de descenso en cian y la media móvil del RSI en verde.
+ Se comprueba a partir del color de la curva del precio que esta estrategia
+ está siempre en el mercado debido a que utiliza el cruce como señal para
+ cambiar de posición.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/RelativeStrengthIndexCrossing.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cruce del índice de fuerza relativa
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RelativeStrengthIndexCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
+-1 & ,\text{si}\,\, RSI_{i}>XMA_{i}\\
++1 & ,\text{\text{si}}\,\, RSI_{i}<XMA_{i}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:RelativeStrengthIndexCrossing.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RelativeStrengthIndexCrossing}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RelativeStrengthIndexCrossing}
+\end_layout
+
+\end_inset
+
+ implementa la estrategia descrita en esta sección.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RelativeStrengthIndex}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y métodos de la clase se listan a continuación:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CMode}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el tipo de media móvil utilizada: con el valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'s'}
+\end_layout
+
+\end_inset
+
+ se refiere a la simple y con el valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'e'}
+\end_layout
+
+\end_inset
+
+ a la exponencial.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CSamples}
+\end_layout
+
+\end_inset
+
+ Propiedad para fijar el número de periodos en el cálculo de la media móvil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición en la máquina de trading.
+ Realiza los cálculos de acuerdo a las indicaciones que aparecen en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RelativeStrengthIndexCrossing.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método que dibuja los gráficos dentro del recuadro del oscilador: pinta
+ el RSI, los umbrales de subida y descenso y la media móvil.
+ Altera la representación provista por los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+ A partir de tal modificación, el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ ofrece gráficos como el de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RelativeStrengthIndexCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Estocástico
+\end_layout
+
+\begin_layout Standard
+El estocástico es una variable estadística que se basa en la posición de
+ la cotización con respecto a los máximos y mínimos en un intervalo 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Murphy_1999,Pring_1997"
+
+\end_inset
+
+.
+ Según George C.
+ Lane 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lane_1986"
+
+\end_inset
+
+, el oscilador no sigue el precio, no sigue el volumen ni nada de eso; este
+ oscilador sigue la velocidad del impulso del precio; como regla general,
+ el impulso cambia de dirección antes que el precio.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+El estocástico mide el nivel del precio de cierre respecto al rango determinado
+ por el precio más alto y el mas bajo.
+ Como aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico"
+
+\end_inset
+
+, se multiplica por 100 para restringir su valor entre 0 y 100.
+ Los parámetros 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$precioBajo_{i-s+1:i}$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$precioAlto_{i-s+1:i}$
+\end_layout
+
+\end_inset
+
+ se refieren, respectivamente, al precio más bajo y al más alto que sucede
+ en el intervalo de periodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i-s+1:i$
+\end_layout
+
+\end_inset
+
+.
+ La ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico - %K"
+
+\end_inset
+
+ calcula el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+, que consiste en la media móvil simple del estocástico: sirve para suavizar
+ la serie de valores del estocástico.
+ Por su parte, en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico - %D"
+
+\end_inset
+
+ se calcula 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+, que consiste en la media móvil de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En el recuadro inferior de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Stochastic.plotSeriePositionOscillator"
+
+\end_inset
+
+ se recogen los elementos que toman parte en la estrategia: en color rojo
+ el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+, en azul el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+ y en magenta y cian los umbrales de subida y descenso.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/Stochastic.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Estocástico
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Stochastic.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A partir de los elementos definidos, se pueden utilizar diferentes criterios
+ para generar señales de posición para la máquina de trading: el cruce del
+ estocástico por encima o debajo de valores de umbral, el cruce del estocástico
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+, el cruce entre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+...
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Estocástico=100\cdot\frac{precioCierre_{i}-precioBajo_{i-s+1:i}}{precioAlto_{i-s+1:i}-precioBajo_{i-s+1:i}}\label{eq:Estocástico}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\%K=SMA(Estocástico,periodos_{k})\label{eq:Estocástico - %K}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\%D=SMA(\%K,periodos_{d})\label{eq:Estocástico - %D}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+En lo que a esta estrategia se refiere, el criterio para generar señales
+ de posición consiste en el cruce del valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ con un par de umbrales.
+ La descripción exacta del método está recogida en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Stochastic.Signal"
+
+\end_inset
+
+: si 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ supera la cota inferior impuesta por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralSubida$
+\end_layout
+
+\end_inset
+
+, entonces el precio de la acción está próximo al máximo y se adopta una
+ posición larga en respuesta a la tendencia alcista; si sucede que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ está por debajo del valor de la cota superior 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralDescenso$
+\end_layout
+
+\end_inset
+
+, entonces el precio está cercano al más bajo de los últimos periodos, por
+ lo que se abre una posición corta como consecuencia de la tendencia bajista.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\,\%K_{i}>umbralSubida\\
+-1 & ,\text{\text{si}}\,\,\%K_{i}<umbralDescenso\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:Stochastic.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Stochastic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Stochastic}
+\end_layout
+
+\end_inset
+
+ implementa la estrategia del estocástico con el cruce de los umbrales.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y métodos que define son los siguientes:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el número de periodos que se toma en el cálculo de
+ los precios más alto y más bajo.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico"
+
+\end_inset
+
+ este valor aparece como el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que determina el umbral de subida.
+ Si el estocástico supera este valor, entonces se considera que el mercado
+ presenta un impulso alcista.
+ Esta propiedad atribuye valor al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%umbralSubida%
+\end_layout
+
+\end_inset
+
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Stochastic.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallThreshold}
+\end_layout
+
+\end_inset
+
+ Propiedad que fija el umbral de descenso.
+ Por debajo de este valor el estocástico sugiere un impulso bajista en el
+ mercado.
+ Esta propiedad se refiere al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$umbralDescenso$
+\end_layout
+
+\end_inset
+
+ de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Stochastic.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ Propiedad para seleccionar la media móvil que se utiliza en los cálculos:
+ aunque en las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico - %K"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico - %D"
+
+\end_inset
+
+ aparece la media móvil simple, que es la manera en que está definida esta
+ estrategia, también se puede aplicar la exponencial.
+ Los valores que toma esta propiedad son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'s'}
+\end_layout
+
+\end_inset
+
+ para la media móvil simple y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'e'}
+\end_layout
+
+\end_inset
+
+ para la exponencial.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{KSamples}
+\end_layout
+
+\end_inset
+
+ Propiedad para establecer el número de periodos que se utilizan en la media
+ móvil para calcular 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico - %K"
+
+\end_inset
+
+ este parámetro aparece como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_k$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DSamples}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el número de periodos empleados en la media móvil
+ para el cálculo de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+.
+ Aparece como el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos_d$
+\end_layout
+
+\end_inset
+
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Estocástico - %D"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que calcula la señal de posición para la máquina según la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Stochastic.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método que dibuja los diferentes elementos que utiliza la estrategia en
+ el recuadro del oscilador.
+ Modifica el comportamiento de los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+ Como muestras, la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Stochastic.plotSeriePositionOscillator"
+
+\end_inset
+
+ es fruto del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ y la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Stochastic.plot"
+
+\end_inset
+
+ del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/Stochastic.plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Stochastic}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Stochastic.plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cruce del estocástico
+\end_layout
+
+\begin_layout Standard
+Existen múltiples criterios para producir señales en el caso del estocástico.
+ Aquí se contempla el caso en que la señal se genera a consecuencia de un
+ cruce.
+ Por todo lo demás, esta estrategia es similar a la anterior.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+La formulación del modelo de esta máquina es idéntica al de la máquina de
+ la sección anterior, pues ambas se basan en el estocástico.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+La opción que se explora en esta máquina consiste en utilizar el cruce entre
+ dos valores para generar la señal de posición.
+ En concreto, se contrastan los valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+ para evaluar la aceleración y deceleración del impulso en el precio.
+ El principio en que se basa esta estrategia es el siguiente: si el valor
+ de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ es superior a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+, entonces la cotización experimenta un impulso alcista con una aceleración
+ proporcional a la distancia entre los dos valores; por su parte, si el
+ valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ es inferior a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+, entonces la cotización sufre un impulso bajista de aceleración proporcional
+ a la diferencia entre estos dos valores.
+ Dicho de otra forma: el cruce entre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+ detecta el refuerzo en las tendencias del precio.
+ De esta manera, se aprovechan aquellos momentos en que el impulso se hace
+ más fuerte para producir señales de posición en la máquina de trading.
+ Como resumen, la generación de la señal se realiza de acuerdo a la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:StochasticCrossing.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El comportamiento de esta estrategia, frente a la curva de precios de una
+ acción, se muestra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:StochasticCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+ Los elementos que aparecen en el recuadro del oscilador son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%K$
+\end_layout
+
+\end_inset
+
+ en color rojo, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+%D$
+\end_layout
+
+\end_inset
+
+ en azul y los umbrales en colores magenta y cian.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/StochasticCrossing.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cruce del estocástico
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:StochasticCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\,\%K_{i}>\%D_{i}\\
+-1 & ,\text{\text{si}}\,\,\%K_{i}<\%D_{i}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:StochasticCrossing.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{StochasticCrossing}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La estrategia se implementa en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{StochasticCrossing}
+\end_layout
+
+\end_inset
+
+, que hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Stochastic}
+\end_layout
+
+\end_inset
+
+.
+ Como sólo cambia el criterio para producir la señal, entonces sólo implementa
+ un método:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que genera la señal de posición de la máquina de trading.
+ Lleva a cabo los cálculos de acuerdo a la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:StochasticCrossing.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Oscilador de momento
+\end_layout
+
+\begin_layout Standard
+El oscilador de momento es un indicador técnico que, dada una acción del
+ mercado, mide cuánto varía su precio en un lapso de tiempo.
+ Este oscilador cuantifica la velocidad con la que cambia el precio y ofrece
+ un indicador de la tendencia.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+El cálculo para el caso de esta estrategia es bastante sencillo: consiste
+ en hallar la diferencia entre el precio más reciente y aquel que tenía
+ la acción hace cierta cantidad de periodos.
+ La ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momento"
+
+\end_inset
+
+ muestra cómo se realiza el cálculo, siendo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ el número de periodos que se saltan hacia el pasado.
+\end_layout
+
+\begin_layout Standard
+Con indicadores como este, que consiste en una resta, se obsevan tres tipos
+ de eventos significativos: valores extremos, que suceden cuando la distancia
+ entre los precios es máxima y señalan condiciones de sobrecompra o sobreventa;
+ divergencia, que es una advertencia de un posible cambio en la tendencia
+ del precio; y cruce de la línea central, que proporciona una indicación
+ importante en relación con la dirección de la tendencia del precio.
+ En el caso de esta estrategia, se opta por el tercer criterio para generar
+ señales de posición en la máquina de trading.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Momento_{i}=precio_{i}-precio_{i-s}\label{eq:Momento}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+Para calcular la señal de posición en cada periodo, se procede como indica
+ la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momentum.Signal"
+
+\end_inset
+
+: el valor en el lado derecho de ambas inecuaciones hace referencia a la
+ línea central.
+ La estrategia opta por posicionarse en largo cuando el precio más reciente
+ es mayor al más antiguo, es decir, cuando el mercado presenta una tendencia
+ alcista.
+ Por el contrario, se posiciona en corto si el precio actual es inferior
+ al precio pasado, pues este es un indicador de tendencia bajista.
+\end_layout
+
+\begin_layout Standard
+En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Momentum.plotSeriePositionOscillator"
+
+\end_inset
+
+ se presenta el resultado de esta estrategia sobre la cotización de una
+ acción.
+ En el recuadro del oscilador aparecen el oscilador de momento en azul y
+ la línea del cero en negro.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/Momentum.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Oscilador de momento
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Momentum.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, Momento_{i}>0\\
+-1 & ,\text{\text{si}}\,\, Momento_{i}<0\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:Momentum.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Momentum}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Momentum}
+\end_layout
+
+\end_inset
+
+, que hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Oscillator}
+\end_layout
+
+\end_inset
+
+, donde se implementa la estrategia del oscilador de momento.
+ Las propiedades y métodos de la clase son:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Delay}
+\end_layout
+
+\end_inset
+
+ Propiedad para fijar la cuantía, en número de periodos, del salto que hace
+ la máquina en el cálculo del oscilador de momento.
+ El valor de esta propiedad es el que se aplica en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momento"
+
+\end_inset
+
+ por medio del parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que calcula la señal de posición según indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momentum.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método que dibuja los gráficos del recuadro del oscilador.
+ En el caso de esta clase, plasma la curva del oscilador de momento y resalta
+ la línea del cero.
+ Este método modifica las representaciones provistas por los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+.
+ En particular, un gráfico representativo del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Momentum.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+ Por su parte, el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ crea gráficos como el que se muestra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Momentum.plot"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/Momentum.plot.eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Momentum}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Momentum.plot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cruce del oscilador de momento
+\end_layout
+
+\begin_layout Standard
+Una alternativa de uso para el oscilador de momento consiste en emplear
+ el cruce entre el indicador y su media móvil.
+ Este enfoque saca provecho de algunas características del oscilador que
+ la anterior estrategia no es capaz de explotar.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo
+\end_layout
+
+\begin_layout Standard
+Se omite desarrollar la formulación del modelo para esta máquina, pues es
+ idéntica a la empleada para la máquina de la sección anterior.
+ Tanto esta estrategia como la previa se basan en el oscilador de momento.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de la señal
+\end_layout
+
+\begin_layout Standard
+Además del caso contemplado en la estrategia del oscilador de momento, se
+ puede utilizar el cruce del oscilador con su media móvil como un segundo
+ criterio para producir señales de posición.
+ El razonamiento en este caso es el siguiente: si el oscilador de momento
+ mide la tendencia a partir de la variación en el precio, entonces la media
+ móvil sobre este valor sirve para discriminar entre tendencias cortas y
+ largas (o principales y secundarias).
+ Dada esta diferenciación entre tendencias cortas y largas, su cruce sirve
+ para generar señales.
+ Si el valor del oscilador de momento es superior al de su media móvil,
+ entonces se produce una variación al alza en la tendencia; por su parte,
+ si el valor del oscilador de momento es inferior al de su media móvil,
+ la variación que ocurre es a la baja.
+ La detección en el cambio de la tendencia es lo que utiliza esta estrategia
+ para generar la señal de posición.
+ Como resumen, el proceso de cálculo de la señal aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MomentumCrossing.Signal"
+
+\end_inset
+
+, donde la media móvil se calcula según indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momento Media Móvil"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El resultado de aplicar esta técnica aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MomentumCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+ En el recuadro inferior se muestra el oscilador de momento en color azul
+ y su media móvil en magenta.
+ Se puede ver el efecto de esta estrategia tomando nota de los colores en
+ los trazos de la curva de precios del recuadro superior.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/MomentumCrossing.plotSeriePositionOscillator.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cruce del oscilador de momento
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MomentumCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+MediaMóvil^{Momento}=XMA(Momento,periodos)\label{eq:Momento Media Móvil}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, Momento_{i}>MediaMóvil_{i}^{Momento}\\
+-1 & ,\text{\text{si}}\,\, Momento_{i}<MediaMóvil_{i}^{Momento}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:MomentumCrossing.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MomentumCrossing}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MomentumCrossing}
+\end_layout
+
+\end_inset
+
+, que hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Momentum}
+\end_layout
+
+\end_inset
+
+, implementa la estrategia de trading del cruce del oscilador de momento.
+ Las propiedades y métodos de la clase son:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ Propiedad para seleccionar el tipo de media móvil: con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'s'}
+\end_layout
+
+\end_inset
+
+ se refiere a la simple y con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{'e'}
+\end_layout
+
+\end_inset
+
+ a la exponencial.
+ Determina cómo se calcula 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$MediaMovil^{Momento}$
+\end_layout
+
+\end_inset
+
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momento Media Móvil"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad que contiene el número de periodos con que se calcula la media
+ movil.
+ Con ella se determina el valor del parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$periodos$
+\end_layout
+
+\end_inset
+
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Momento Media Móvil"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de la máquina de trading.
+ El cálculo que realiza este método concuerda con el de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MomentumCrossing.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawOscillator}
+\end_layout
+
+\end_inset
+
+ Método que dibuja el oscilador de momento junto a la media móvil.
+ Es utilizado por los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotOscillator}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+ para pintar los gráficos dentro del recuadro del oscilador.
+ Como ejemplo, hace que el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionOscillator}
+\end_layout
+
+\end_inset
+
+ genere gráficos similares al de la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MomentumCrossing.plotSeriePositionOscillator"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Basadas en otros conceptos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Basadas en otros conceptos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Además de los indicadores y osciladores técnicos, cualquier otro modelo
+ puede ser adecuado para implementar máquinas de trading.
+ En esta sección del capítulo se exploran otras posibilidades.
+ Algunas de las máquinas resultantes tienen usos especiales que se comentan
+ para cada caso.
+\end_layout
+
+\begin_layout Subsection
+Falso óptimo
+\end_layout
+
+\begin_layout Standard
+Entre las máquinas concebidas en el desarrollo del trabajo, la que mejores
+ resultados ofrece es la del falso óptimo.
+ Sin embargo, sucede que esta estrategia se basa en la trampa de mirar hacia
+ adelante el precio de la acción para decidir qué posición adoptar.
+ Así, si en el futuro el precio de una acción sube, hay que posicionarse
+ en largo; mientras que si baja, hay que hacerlo en corto.
+ Por motivos evidentes, esta estrategia no se puede utilizar en la realidad,
+ pero su implementación resulta interesante desde el punto de vista de la
+ investigación.
+\end_layout
+
+\begin_layout Standard
+A partir del resultado de esta máquina se obtiene una cota inferior del
+ beneficio máximo que se consigue invirtiendo en acciones de una empresa
+ determinada.
+ El nombre de falso óptimo es dado en alusión a que no calcula de manera
+ óptima el beneficio máximo, sino una mera aproximación que sirve como cota
+ inferior.
+ Esta medición cuantifica el potencial que tienen las diferentes acciones
+ del mercado para generar beneficios.
+ De esta manera, se puede establecer una ordenación entre acciones para
+ elegir las más provechosas sobre las que invertir con las máquinas de trading.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo y generación de la señal
+\end_layout
+
+\begin_layout Standard
+Utilizar información del precio futuro de la acción es la manera más sencilla
+ y adecuada de dar lugar a una máquina de trading rentable.
+ El problema es que en situaciones reales no se dispone de tan preciada
+ información.
+ No obstante, es posible relajar esta restricción en la plataforma.
+\end_layout
+
+\begin_layout Standard
+La serie de precios de la acción en un intervalo temporal se almacena en
+ un objeto de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ Durante el proceso de generación de la señal de posición, se viola la restricci
+ón de no mirar precios futuros de la acción si para generar el valor de
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Señal_i$
+\end_layout
+
+\end_inset
+
+ se toma el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$precio_j$
+\end_layout
+
+\end_inset
+
+, donde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i<j$
+\end_layout
+
+\end_inset
+
+.
+ Es justo esta la situación que se produce en la máquina de trading del
+ falso óptimo, que genera la señal según se indica en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FakeOptimum.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Una propiedad interesante de esta fórmula es que dispone de un parámetro
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ para ajustar el tamaño del salto en número de periodos hacia el futuro.
+ Si el precio por operación en el mercado es despreciable, entonces el mejor
+ resultado se alcanza con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s=1$
+\end_layout
+
+\end_inset
+
+.
+ Esto se debe a la desigualdad triangular, que establece que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$|precio_i-precio_k|<|precio_i-precio_j|+|precio_j-precio_k|$
+\end_layout
+
+\end_inset
+
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i<j<k$
+\end_layout
+
+\end_inset
+
+.
+ En consecuencia, un valor más pequeño de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ hace que esta máquina aproveche más cantidad de variaciones en el precio
+ de la acción y genere beneficios más cuantiosos.
+\end_layout
+
+\begin_layout Standard
+El resultado que arroja esta máquina de trading se aprecia en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FakeOptimum.plotSeriePositionProfitLoss"
+
+\end_inset
+
+.
+ El recuadro superior representa el precio de la acción a lo largo del tiempo.
+ El recuadro inferior contiene la curva de beneficios y pérdidas, característica
+ en esta máquina de trading por ser monótona creciente para indicar que
+ siempre se producen incrementos en el beneficio.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/FakeOptimum.plotSeriePositionProfitLoss.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Falso óptimo
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FakeOptimum.plotSeriePositionProfitLoss"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\, precio_{i}<precio_{i+s}\\
+-1 & ,\text{\text{si}}\,\, precio_{i}>precio_{i+s}\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:FakeOptimum.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FakeOptimum}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FakeOptimum}
+\end_layout
+
+\end_inset
+
+ hereda de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ La lista de propiedades y métodos de esta clase es la siguiente:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Foresee}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el número de periodos que se salta hacia el futuro
+ para la comparación de los precios de la acción.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FakeOptimum.Signal"
+
+\end_inset
+
+ se corresponde con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePositionProfitLoss}
+\end_layout
+
+\end_inset
+
+ Método que dibuja la curva del precio de la acción en el tiempo junto a
+ la curva de beneficios y pérdidas de la máquina.
+ Genera un gráfico como el que se muestra en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FakeOptimum.plotSeriePositionProfitLoss"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que genera la señal de posición según la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FakeOptimum.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Estrategia aleatoria
+\end_layout
+
+\begin_layout Standard
+La estrategia aleatoria consiste en adoptar posiciones sin utilizar más
+ criterio que el generador de números pseudoaleatorios.
+ Esta estrategia puede parecer innecesaria, aunque su importancia es bastante
+ notoria de cara a realizar un análisis exhaustivo de los resultados: simula
+ el comportamiento de los inversores de bolsa que carecen de conocimientos,
+ arroja resultados significativos sobre el retorno que se espera al invertir
+ de forma aleatoria en el mercado de acciones, sirve como estrategia base
+ para comparar con las demás...
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo y generación de la señal
+\end_layout
+
+\begin_layout Standard
+El modelo que sigue la estrategia aleatoria es el de asignar a cada elemento
+ del vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Se
+\backslash
+tilde{n}al$
+\end_layout
+
+\end_inset
+
+ un valor aleatorio y equiprobable del conjunto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+{+1,-1,0
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+, tal y como se desprende de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Random.Signal"
+
+\end_inset
+
+.
+ El inconveniente de este método es que mantiene la posición que adopta
+ durante escasos periodos: la probabilidad que tiene esta estrategia de
+ mantenerse en una misma posición durante 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ periodos es de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1/3^{p-1}$
+\end_layout
+
+\end_inset
+
+.
+ Para soslayar esta limitación, se introducen las variables 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$longitudM
+\backslash
+acute{i}nima$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $longitudMínima$
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$longitudM
+\backslash
+acute{a}xima$
+\end_layout
+
+\end_inset
+
+, que determinan el número mínimo y máximo de periodos durante los cuales
+ la estrategia aleatoria mantiene una misma posición.
+\end_layout
+
+\begin_layout Standard
+Una instancia de la máquina de trading aleatoria muestra sus resultados
+ en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Random.plot (1)"
+
+\end_inset
+
+.
+ La máquina de esta figura tiene en cuenta las variables de longitud en
+ el cálculo de la señal.
+ El efecto de estas variables es evitar situaciones donde la máquina de
+ trading aleatoria opera como aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Random.plot (2)"
+
+\end_inset
+
+, donde la duración de las posiciones es muy corta.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/Random.plot (1).eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Random}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Random.plot (1)"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/Random.plot (2).eps
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gráfico de la máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Random}
+\end_layout
+
+\end_inset
+
+ sin las restricciones de longitud mínima y máxima en la duración de la
+ posición
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Random.plot (2)"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=random(\{+1,-1,0\})\label{eq:Random.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Random}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Random}
+\end_layout
+
+\end_inset
+
+ es la clase que implementa la estrategia aleatoria.
+ Esta clase hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y los métodos que implementa son los siguientes:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MinimumPeriodLength}
+\end_layout
+
+\end_inset
+
+ Propiedad que fija la longitud mínima en número de periodos que tiene una
+ posición adoptada por la máquina aleatoria.
+ Esta propiedad se refiere a la variable 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$longitudM
+\backslash
+acute{i}nima$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $longitudMínima$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MaximumPeriodLength}
+\end_layout
+
+\end_inset
+
+ Propiedad para determinar la longitud máxima en número de periodos que
+ tiene una posición tomada por la máquina de trading.
+ Esta propiedad alude a la variable 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$longitudM
+\backslash
+acute{a}xima$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Dummy}
+\end_layout
+
+\end_inset
+
+ Propiedad para volver a computar la señal de posición de manera aleatoria.
+ Esta propiedad no conserva el valor que se le asigna sino que lo ignora
+ y mantiene su estado de no asignación.
+ Como efecto lateral, esta propiedad sustituye la señal de posición por
+ una nueva también calculada de forma aleatoria.
+ La utilidad de la propiedad se pone de relieve cuando se utiliza en combinación
+ con algunos métodos, como pueden ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossStatistics}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace123}
+\end_layout
+
+\end_inset
+
+.
+ Por ejemplo, con el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossStatistics}
+\end_layout
+
+\end_inset
+
+ se pueden obtener un conjunto de valores estadísticos sobre el rendimiento
+ de la estrategia en término de los beneficios y las pérdidas.
+ Este ejemplo de utilización de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Dummy}
+\end_layout
+
+\end_inset
+
+ se muestra en el código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:Random.profitLossStatistics"
+
+\end_inset
+
+.
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% Serie de datos
+\end_layout
+
+\begin_layout Plain Layout
+
+ds = YahooDataSerie('xom','weeks',1,'2006-01-01');
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Máquina de trading basada en la estrategia aleatoria
+\end_layout
+
+\begin_layout Plain Layout
+
+r = Random(ds,1,10);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Cálculo del mínimo, máximo, media y desviación típica
+\end_layout
+
+\begin_layout Plain Layout
+
+% del beneficio y pérdida de la máquina de trading.
+ Se
+\end_layout
+
+\begin_layout Plain Layout
+
+% repite el experimento 1000 veces como consecuencia
+\end_layout
+
+\begin_layout Plain Layout
+
+% del uso que se hace de la propiedad Dummy.
+\end_layout
+
+\begin_layout Plain Layout
+
+[min max mean std]=r.profitLossStatistics('Dummy',1:1000)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Resultado obtenido en la computación
+\end_layout
+
+\begin_layout Plain Layout
+
+% min =
+\end_layout
+
+\begin_layout Plain Layout
+
+%     0.3228
+\end_layout
+
+\begin_layout Plain Layout
+
+% max =
+\end_layout
+
+\begin_layout Plain Layout
+
+%     2.0706
+\end_layout
+
+\begin_layout Plain Layout
+
+% mean =
+\end_layout
+
+\begin_layout Plain Layout
+
+%     0.9960
+\end_layout
+
+\begin_layout Plain Layout
+
+% std =
+\end_layout
+
+\begin_layout Plain Layout
+
+%     0.2554
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cálculo de estadísticas con el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossStatistics}
+\end_layout
+
+\end_inset
+
+ de la máquina 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Random}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Cálculo de estadísticas con el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossStatistics}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Random.profitLossStatistics"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa, de forma aleatoria, la señal de posición de la máquina
+ de trading.
+ Cada posición que adopta la máquina se mantiene un mínimo de 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$longitudM
+\backslash
+acute{i}nima$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $longitudMínima$
+\end_inset
+
+ de periodos y un máximo de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$longitudM
+\backslash
+acute{a}xima$
+\end_layout
+
+\end_inset
+
+ de periodos.
+ Estos parámetros se ajustan en la máquina alterando los valores de las
+ propiedades 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MinimumPeriodLength}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MaximumPeriodLength}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Últimas n variaciones del precio
+\end_layout
+
+\begin_layout Standard
+Esta estrategia se basa en tomar posiciones en el mercado de acuerdo a las
+ variaciones del precio en el tiempo.
+ Como en el caso de la media móvil, esta estrategia sigue la tendencia.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo y generación de la señal
+\end_layout
+
+\begin_layout Standard
+La manera en que se averigua la tendencia que sigue el precio de una acción
+ es comparando los valores que toma a lo largo del tiempo.
+ A partir de este hecho, se comprueba que en ocasiones la tendencia en el
+ precio posee cierta inercia.
+ Tal característica es la que hace que se produzcan largas progresiones
+ ascendentes o descendentes en el precio de la acción.
+ No obstante, la inercia en la tendencia del precio no tiene por qué estar
+ presente, o puede que de producirse sea demasiado irregular como para aprovecha
+rla.
+ En cualquier caso, es interesante comprobar en qué medida la inercia interviene
+ en la predicción del movimiento en el precio.
+ Por ejemplo, si el nivel de inercia en la tendencia es alto, entonces las
+ variaciones en el precio son poco oscilantes y aparecen largos periodos
+ durante los cuales la tendencia mantiene su racha; si por el contrario
+ la inercia es inexistente, entonces el precio de la acción está caracterizado
+ por la alta volatilidad y las constantes oscilaciones.
+ La manera en que esta estrategia se plasma en fórmula para calcular la
+ señal viene recogida en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastN.Signal"
+
+\end_inset
+
+.Con valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ se elige el tamaño del salto en número de periodos para realizar la comparación
+ de los precios.
+\end_layout
+
+\begin_layout Standard
+La figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LastN.plotSeriePosition"
+
+\end_inset
+
+ muestra el resultado de utilizar esta estrategia con una acción del mercado.
+ La situación en que más provecho obtiene es cuando la inercia en la tendencia
+ es alta.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/LastN.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Últimas n variaciones del precio
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LastN.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\,\sum_{j=1}^{s}(precio_{i-j+1}-precio_{i-j})>0\\
+\\
+-1 & ,\text{\text{si}}\,\,\sum_{j=1}^{s}(precio_{i-j+1}-precio_{i-j})<0\\
+\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:LastN.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastN}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastN}
+\end_layout
+
+\end_inset
+
+ hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y métodos que implementa son:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica el número de periodos que se toma hacia el pasado
+ para calcular la señal que genera la máquina.
+ En la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastN.Signal"
+
+\end_inset
+
+ se corresponde con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método para calcular la señal de la máquina conforme a la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastN.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Últimas n variaciones del precio ponderadas
+\end_layout
+
+\begin_layout Standard
+Esta estrategia es una extensión de la anterior.
+ En este caso se considera un vector de pesos que da mayor importancia a
+ los precios más recientes frente a los más antiguos.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo y generación de la señal
+\end_layout
+
+\begin_layout Standard
+El precio de la acción puede variar en gran medida con el paso del tiempo,
+ es importante considerar los valores pasados, aunque es vital dar mayor
+ importancia a los valores presentes.
+ Esta estrategia utiliza el vector de pesos para este propósito, donde la
+ elección de cada elemento del vector depende del usuario.
+ Sin embargo, es recomendable atribuir un valor mayor a los últimos elementos
+ del vector, pues son los que multiplican al precio más reciente.
+ En resumen, el cálculo de la señal se hace conforme indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNWeighted.Signal"
+
+\end_inset
+
+.
+ En ella, el vector de pesos aparece en disposición de columna y contiene
+ un total de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ elementos.
+ Para reducir los precios y el vector de pesos a un número se utiliza el
+ producto escalar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\,\left[(precio_{i-s+1}-precio_{i-s})\,\ldots\,(precio_{i}-precio_{i-1})\right]\times\left[\begin{array}{c}
+peso_{1}\\
+\vdots\\
+peso_{s}
+\end{array}\right]>0\\
+-1 & ,\text{\text{si}}\,\,\left[(precio_{i-s+1}-precio_{i-s})\,\ldots\,(precio_{i}-precio_{i-1})\right]\times\left[\begin{array}{c}
+peso_{1}\\
+\vdots\\
+peso_{s}
+\end{array}\right]<0\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:LastNWeighted.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastNWeighted}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastNWeighted}
+\end_layout
+
+\end_inset
+
+ es la clase que implementa esta estrategia.
+ Hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastN}
+\end_layout
+
+\end_inset
+
+, por lo que tiene como antecesor a la clase a la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Las propiedades y métodos que implementa esta clase aparecen a continuación:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Weight}
+\end_layout
+
+\end_inset
+
+ Propiedad que consiste en un vector de pesos por el que se multiplican
+ los precios de la acción en el cálculo de la señal.
+ El vector de pesos aparece en forma de vector columna en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNWeighted.Signal"
+
+\end_inset
+
+.
+ El parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ de la ecuación es la longitud este vector.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que calcula la señal de la máquina a partir de la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNWeighted.Signal"
+
+\end_inset
+
+.
+ Una posible implementación del método es la que aparece en el código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:LastNWeighted.simulate"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function computeSignal(algoTrader)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Parámetros
+\end_layout
+
+\begin_layout Plain Layout
+
+serie = algoTrader.DataSerie.Serie;
+\end_layout
+
+\begin_layout Plain Layout
+
+weight = algoTrader.Weight;
+\end_layout
+
+\begin_layout Plain Layout
+
+samples = length(weight);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+N = length(serie);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diffSerie = diff(serie);
+\end_layout
+
+\begin_layout Plain Layout
+
+nPriceDiff = zeros(1, N);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:samples
+\end_layout
+
+\begin_layout Plain Layout
+
+	nPriceDiff = ...
+\end_layout
+
+\begin_layout Plain Layout
+
+		+ nPriceDiff ...
+\end_layout
+
+\begin_layout Plain Layout
+
+		+ [ ...
+\end_layout
+
+\begin_layout Plain Layout
+
+			zeros(1,i) ...
+\end_layout
+
+\begin_layout Plain Layout
+
+			diffSerie(1:end-i+1)* ...
+\end_layout
+
+\begin_layout Plain Layout
+
+			weight(samples-i+1) ...
+\end_layout
+
+\begin_layout Plain Layout
+
+		  ];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Señal
+\end_layout
+
+\begin_layout Plain Layout
+
+signal = zeros(1, N);
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(nPriceDiff>0) = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+signal(nPriceDiff<0) = -1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Actualiza el valor de la propiedad Signal
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTrader.Signal = signal;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastNWeighted}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:LastNWeighted.simulate"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Proporción relativa de las últimas n variaciones del precio
+\end_layout
+
+\begin_layout Standard
+Esta estrategia es similar a la estrategia de las últimas n variaciones
+ del precio.
+ La diferencia radica en que las últimas n variaciones suman los beneficios
+ y restan las pérdidas, mientras tanto, en esta estrategia se utiliza la
+ proporción de las variaciones positivas frente a las negativas y viceversa.
+ El resultado es una estrategia más potente que se ve perjudicada en menor
+ manera durante una tendencia lateral.
+\end_layout
+
+\begin_layout Subsubsection
+Formulación del modelo y generación de la señal
+\end_layout
+
+\begin_layout Standard
+La estrategia de las últimas n variaciones tiene un problema grave: este
+ consiste en que durante una tendencia lateral las oscilaciones del precio
+ hacen que se pase rápidamente de una posición a su opuesta, provocando
+ inestabilidad y gastos derivados de las operaciones de mercado.
+ Una manera de reducir el impacto de este problema es a través de la introducció
+n de un umbral.
+ Este umbral viene dado en forma de dos parámetros: uno fija el mínimo de
+ la proporción de subidas del precio frente a bajadas para abrir una posición
+ larga y el otro la proporción mínima de bajadas del precio frente a subidas
+ para comenzar una posición corta.
+ Tales parámetros aparecen en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNThreshold.Signal"
+
+\end_inset
+
+, empleando 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ratio_{rf}$
+\end_layout
+
+\end_inset
+
+ para denotar la proporción de subidas frente a bajadas y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ratio_{fr}$
+\end_layout
+
+\end_inset
+
+ para la proporción de bajadas frente a subidas.
+ El parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ de la ecuación indica el número de periodos que se consideran hacia el
+ pasado.
+ Así, el principio en que se basa la estrategia es el de frenar las operaciones
+ de mercado cuando la tendencia sea lateral y favorecerlas cuando la tendencia
+ sea alcista o bajista, como consecuencia de la fuerte inercia en el movimiento
+ del precio de la acción.
+\end_layout
+
+\begin_layout Standard
+En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LastNRatio.plotSeriePosition"
+
+\end_inset
+
+ se ilustra la manera en que funciona la estrategia.
+ Si los trazos de la curva del precio son de color verde cuando sube y rojos
+ cuando baja, entonces la estrategia acierta en su predicción.
+ A partir de la figura se observa que la estrategia no está siempre dentro
+ del mercado.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Estrategias de trading/LastNRatio.plotSeriePosition.eps
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Proporción relativa de las últimas n variaciones del precio
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LastNRatio.plotSeriePosition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Señal_{i}=\left\{ \begin{array}{rl}
++1 & ,\text{si}\,\,\frac{\sum_{j}precio_{j}}{\sum_{k}precio_{k}}>ratio_{rf},\,\forall j,k\in[i-p,i]\mid precio_{j}>0\wedge precio_{k}<0\\
+\\
+-1 & ,\text{\text{si}}\,\,\frac{\sum_{j}precio_{j}}{\sum_{k}precio_{k}}>ratio_{fr},\,\forall j,k\in[i-p,i]\mid precio_{j}<0\wedge precio_{k}>0\\
+\\
+0 & ,\text{en otro caso}
+\end{array}\right.\label{eq:LastNThreshold.Signal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastNRatio}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{LastNRatio}
+\end_layout
+
+\end_inset
+
+ hereda de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ En la implementación de esta clase se introducen las siguientes propiedades
+ y métodos:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ Propiedad para fijar el número de periodos hacia el pasado que la máquina
+ de trading considera en el cálculo de la señal.
+ Aparece en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNThreshold.Signal"
+
+\end_inset
+
+ como el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{RiseFallRatio}
+\end_layout
+
+\end_inset
+
+ Propiedad que indica la proporción mínima de subidas del precio frente
+ a bajadas para tomar una posición larga.
+ Se refiere al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ratio_{rf}$
+\end_layout
+
+\end_inset
+
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{FallRiseRatio}
+\end_layout
+
+\end_inset
+
+ Propiedad que marca la proporción mínima de bajadas del precio frente a
+ subidas para adoptar una posición corta.
+ Se corresponde con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ratio_{fr}$
+\end_layout
+
+\end_inset
+
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ Método que computa la señal de posición para la estrategia.
+ La implementación de este método se hace según establece la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LastNThreshold.Signal"
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

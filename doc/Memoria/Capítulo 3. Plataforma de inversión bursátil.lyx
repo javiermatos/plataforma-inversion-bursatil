@@ -1,0 +1,5471 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Plataforma de inversión bursátil
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Plataforma de inversión bursátil"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Este trabajo parte del desarrollo de una plataforma de creación de estrategias
+ de trading.
+ La plataforma automatiza todo el proceso relativo a la creación de estrategias
+ de trading en el mercado de acciones: adquisición de información desde
+ los proveedores de datos, normalización de la información de entrada, creación
+ y simulación de estrategias, optimización de parámetros y generación de
+ resultados.
+ Su necesidad se fundamentó en el vacío existencial de entornos adecuados
+ para tal propósito.
+ Previo al desarrollo de la plataforma se consideraron dos alternativas:
+\end_layout
+
+\begin_layout Itemize
+Utilizar una aplicación de inversión bursátil que permita crear estrategias.
+ Analizadas las opciones que había en el mercado, resultó que los mecanismos
+ que ofrecían para implementar estrategias eran toscos: sistemas basados
+ en reglas, lenguajes propietarios y otras alternativas igual de limitadas.
+ La falta de expresividad de estas herramientas hizo que se descartaran.
+\end_layout
+
+\begin_layout Itemize
+Hacer uso de alguna API para interactuar con una aplicación de inversión
+ bursátil.
+ Si es posible interactuar con una aplicación de inversión pero desde fuera
+ de ella, entonces se evitan las limitaciones que impone.
+ El problema en este caso es que las APIs no están pensadas para crear estrategi
+as y las que sí lo permiten no son muy flexibles.
+ Una cuestión adicional es el elevado coste de estas interfaces.
+\end_layout
+
+\begin_layout Standard
+Dado que ninguna de las dos opciones era adecuada, se optó por desarrollar
+ la plataforma.
+\end_layout
+
+\begin_layout Standard
+Los objetivos a alcanzar durante la creación de la plataforma fueron los
+ de conseguir un producto específico en funcionalidades y flexible en tanto
+ a las posibilidades de extensión.
+ Para satisfacer estas dos premisas se planteó una arquitectura que, a través
+ de un proceso de refinamiento en sus sucesivas versiones, dio lugar a un
+ resultado que favorecía el encapsulamiento, la coherencia, la cohesión
+ y la genericidad.
+ Alcanzar esta madurez en la arquitectura requirió de una versión prototipo,
+ dos versiones mayores y múltiples versiones menores.
+ Una cuestión crítica, resuelta durante esta etapa, fue la de definir puntos
+ de extensión en la plataforma.
+ Los puntos de extensión son un mecanismo para personalizar y extender el
+ funcionamiento de la plataforma sin necesidad de modificar ningún aspecto
+ interno.
+ A lo largo del documento se ilustran casos en que, a través de los puntos
+ de extensión, se logra el comportamiento deseado.
+\end_layout
+
+\begin_layout Standard
+En el aspecto técnico, la plataforma está constituida por una serie de bloques
+ funcionales que interactúan entre sí.
+ En la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bloques funcionales de la plataforma de inversión bursátil"
+
+\end_inset
+
+ se muestran de forma esquemática los bloques funcionales de la plataforma.
+ Para cada uno de ellos se indica el capítulo del documento en que se explican.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Plataforma de inversión bursátil/Bloques funcionales de la plataforma de inversión bursátil.eps
+	width 40page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Bloques funcionales construidos sobre la plataforma de inversión bursátil
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bloques funcionales de la plataforma de inversión bursátil"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dentro de la plataforma, la clase en torno a la cual sucede todo es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+, que implementa los algoritmos de trading, algoritmos automaticos de trading,
+ estrategias de trading o cualquier otro término equivalente con que se
+ quiera designar al concepto.
+ Las funcionalidades relativas a la optimización de parámetros y generación
+ de estadísticas están implementadas como métodos en esta clase.
+ El enfoque dado para el mecanismo de optimización de parámetros es súmamente
+ potente y depende de funciones externas, si bien esos detalles se revelan
+ en la secciones pertinentes.
+ Por su parte, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ es la clase encargada de la obtención, normalización, manipulación y representa
+ción de la información de los proveedores de datos.
+ A través de estas dos clases la plataforma ofrece un entorno homogéneo,
+ intuitivo, fácil de utilizar, potente y con un alto nivel de productividad.
+\end_layout
+
+\begin_layout Standard
+La implementación de la plataforma se ha realizado casi en su totalidad
+ con MATLAB, utilizando el paradigma de programación orientada a objetos.
+ Las bondades de este paradigma permiten una implementación elegante de
+ la plataforma para que cumpla con todos los requisitos deseables.
+ Además de un lenguaje de programación, MATLAB es un entorno de computación
+ numérica ámpliamente utilizado en ciencia, ingeniería y economía.
+ Como característica adicional, MATLAB ofrece primitivas para la ejecución
+ de código en paralelo: estas primitivas han sido utilizadas en la implementació
+n de la plataforma.
+ Donde más beneficio se obtiene del uso del paralelismo es en las funciones
+ de optimización, que son las más intensivas en términos computacionales.
+\end_layout
+
+\begin_layout Standard
+En el resto del capítulo se hace una presentación de los elementos de la
+ plataforma y se describe la manera en que interactúan para dar vida a la
+ aplicación.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Adquisición de datos"
+
+\end_inset
+
+ explica en qué consiste el proceso de adquisición de datos y cómo la clase
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ facilita la tarea de incorporar proveedores de información bursátil.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Máquinas de trading"
+
+\end_inset
+
+ se describe la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+, que es la parte central de la plataforma; también se indica cómo funcionan
+ las estrategias de trading y de qué manera esta clase ofrece una solución
+ versátil para implementarlas.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Optimización de parámetros"
+
+\end_inset
+
+ introduce el enfoque innovador con que se incorporan las técnicas de optimizaci
+ón para calcular los parámetros óptimos de las estrategias.
+ La generación de resultados se trata en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Generación de resultados"
+
+\end_inset
+
+ y es parte fundamental para el análisis de las máquinas.
+ Por último, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:El archivo de configuración Settings.m"
+
+\end_inset
+
+, se comenta sobre el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Settings.m}
+\end_layout
+
+\end_inset
+
+ que almacena configuraciones y valores por defecto.
+\end_layout
+
+\begin_layout Section
+Adquisición de datos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Adquisición de datos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que el problema trata sobre generar estrategias de trading, entonces
+ los datos de partida son todos los relacionados con las acciones de los
+ mercados bursátiles.
+ Contar con datos reales supone una ventaja considerable que aporta realismo
+ al trabajo realizado, sin embargo, no es una situación que se produzca
+ en todos los casos, a consecuencia de la complejidad que puede existir
+ para recabarlos.
+ Estas carencias, en caso de producirse, intentan ser suplidas por medio
+ de la utilización de sistemas que generan datos lo más fieles posibles
+ a la situación que modelan.
+ Como aclaración, en el trabajo se han utilizado en todo momento datos reales
+ obtenidos desde los proveedores.
+\end_layout
+
+\begin_layout Standard
+¿Qué información sobre las acciones se necesita? Respecto a esta pregunta,
+ hay que hacer primero la distinción entre información básica y derivada.
+ En los mercados bursátiles se comercia con acciones; las operaciones de
+ comercio con cada una de estas acciones da lugar a un registro de precios
+ y volúmenes de transacción a lo largo del tiempo, que constituye la información
+ básica.
+ Por su parte, la información derivada se origina a partir de la información
+ básica, a través de la aplicación de fórmulas y modelos matemáticos.
+ La información derivada permite estudiar, resumir y evidenciar ciertas
+ características de la información básica.
+ La adquisición de datos consiste en obtener la información básica de la
+ acción en forma de series temporales
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Una serie temporal es una secuencia de valores medidos en el tiempo, ordenados
+ de forma cronológica y habitualmente espaciados entre sí de manera uniforme.
+\end_layout
+
+\end_inset
+
+ de precios y volúmenes con que se comerció en el mercado de acciones.
+\end_layout
+
+\begin_layout Standard
+Se requieren varias series temporales sobre una acción para ofrecer información
+ precisa.
+ En una serie temporal, cada valor de la misma se corresponde con una medición
+ realizada a una variable en un instante de tiempo.
+ Si el espacio temporal que se utiliza entre mediciones sucesivas es grande,
+ entonces se pierde gran cantidad de información.
+ Así, por ejemplo, en el intervalo de tiempo entre mediciones es posible
+ que el valor de la variable comience con una medición, alcance máximos,
+ mínimos y termine en otra medición distinta, ¿qué valor se toma entonces?
+ Este problema se agudiza si la variable observada es de naturaleza cambiante.
+ Para reducir la falta de representatividad de una única serie temporal
+ se utilizan varias series temporales referidas a los precios de apertura,
+ más alto, más bajo y de cierre de la acción.
+ También se considera la serie temporal relativa al volumen de transacciones
+ de la acción.
+\end_layout
+
+\begin_layout Standard
+La información sobre las acciones se consigue por medio de los proveedores
+ de datos.
+ Estos proveedores son empresas o instituciones que tienen conexión directa
+ con el mercado bursátil y recogen entre otros los registros de información
+ sobre los precios y volúmenes de las acciones.
+ Posteriormente, se encargan de difundir la información por diferentes canales
+ de comunicación, incluido Internet.
+ En el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Conexión con los proveedores de datos"
+
+\end_inset
+
+ se explican los tres proveedores de información bursátil incorporados en
+ la plataforma.
+\end_layout
+
+\begin_layout Subsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ es la manera en que la plataforma desarrollada contempla el uso de información
+ relativa a las acciones; puede entenderse como un contenedor donde se vuelca
+ la información obtenida desde un proveedor de datos.
+ Además de almacenar información, es capaz de representarla gráficamente.
+ Aunque integrada en la plataforma, la clase es independiente y se puede
+ utilizar para cualquier otro propósito.
+\end_layout
+
+\begin_layout Standard
+Esta clase define las estructuras de datos necesarias para almacenar la
+ información de las acciones.
+ Para el caso de las series temporales, hay que notar que consisten en secuencia
+s de valores referenciados por los instantes de tiempo en que fueron tomados.
+ En consecuencia, son necesarios dos vectores para almacenar toda la información
+ relativa a una serie: un vector para los valores de la serie y otro vector
+ para los instantes de tiempo.
+ La información que hay que guardar de una acción es la siguiente: identificador
+ de la acción, tipo y unidades de compresión temporal, vector de instantes
+ temporales, vector de precios de apertura, vector de precios más altos,
+ vector de precios más bajos, vector de precios de cierre y vector de volumenes
+ de transacción.
+ El tipo y unidades de compresión temporal determinan la frecuencia con
+ que se toman los datos: un minuto, cinco días, dos meses...
+ Los detalles de implementación sobre las estructuras de datos se indican
+ en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:DataSerie - Propiedades"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Respecto a sus capacidades, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ ofrece gráficos elaborados de la información que contiene.
+ Con las invocaciones a los métodos pertinentes, se generan las representaciones
+ visuales de la información almacenada en el objeto.
+ Las series temporales que representan las cotizaciones de la acción se
+ muestran en forma de curva sobre el plano, donde el eje 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x$
+\end_layout
+
+\end_inset
+
+ o de abscisa representa el tiempo y el eje 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$y$
+\end_layout
+
+\end_inset
+
+ o de ordenada el valor de la cotización.
+ Por su parte, el volumen de transacciones, también contenido en una serie
+ temporal, se muestra en forma de gráfico de barras.
+ Los métodos de dibujado así como las demás funcionalidades provistas por
+ la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ se explican en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:DataSerie - Métodos"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+¿Cómo incorporar proveedores de datos en la plataforma?
+\end_layout
+
+\begin_layout Standard
+Ya se ha comentado suficiente sobre la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ como para dar una idea del rol que cumple dentro de la plataforma y las
+ capacidades que tiene.
+ Esta clase implementa todos los métodos necesarios para gestionar la informació
+n que almacena sobre la acción bursátil, aunque hay uno en concreto, el
+ metodo abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+, cuya implementación delega al programador.
+ Para incorporar un nuevo proveedor de datos hay que crear una clase que
+ herede de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ e implemente el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+ Al contener un método abstracto, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ es abstracta, por lo que no se pueden crear instancias a partir de ella.
+ La función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ y sus argumentos de entrada y salida se explican en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:DataSerie.get"
+
+\end_inset
+
+.
+ En esencia, esta función toma como argumentos de entrada el identificador
+ de la acción, el tipo y unidades de compresión temporal y dos fechas para
+ el intervalo de tiempo del que solicita la información; como resultado,
+ devuelve seis vectores columnas de igual longitud con la información de
+ los instantes temporales, las cotizaciones de apertura, más alta, más baja
+ y cierre junto al volumen de transacciones.
+ La signatura de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+ es la siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[dateTime, open, high, low, close, volume]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+= get(
+\backslash
+= symbolCode,compressionType,compressionUnits,initDateTime,endDateTime)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Organización de la documentación sobre la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los detalles sobre la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ se encuentran repartidos a lo largo del documento.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Adquisición de datos"
+
+\end_inset
+
+ se introduce la clase, mencionando qué información de la acción almacena.
+ También se comentan las capacidades de representación gráfica que tiene.
+ Por ultimo, se explica cómo hacer para incorporar nuevos proveedores con
+ la implementación del método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{get}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Si bien queda introducida la metodología para incorporar nuevos proveedores,
+ no es hasta el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Conexión con los proveedores de datos"
+
+\end_inset
+
+ donde se explican los proveedores de datos incluidos en la plataforma.
+ Cada uno de ellos se accede de forma distinta y la manera en que se obtiene
+ la información es bien diferente; sin embargo, todos los proveedores encajan
+ de forma adecuada en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+, que permite un tratamiento homogeneo.
+\end_layout
+
+\begin_layout Standard
+Para comprender las características técnicas de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ es necesario apoyarse en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+.
+ Aquí aparece un listado de las propiedades o atributos que componen la
+ estructura de datos y los métodos que implementa.
+ También explica el sistema de dibujado con el que se confeccionan los gráficos.
+ Los ejemplos de uso de la clase se encuentran en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Ejemplos de uso"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Máquinas de trading
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Máquinas de trading"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las máquinas de trading son programas que implementan estrategias de trading;
+ además, ofrecen mecanismos para manipular estas estrategias y obtener informaci
+ón de su desempeño.
+\end_layout
+
+\begin_layout Standard
+Como punto de partida, la máquina de trading tiene acceso a toda la información
+ sobre una acción bursátil: estos datos son proporcionados por un objeto
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ Después de procesar la entrada según su lógica interna, la máquina produce
+ la salida, que consiste en las señales de compra y venta de acciones.
+ La salida de la máquina se codifica como un vector de posiciones que indica,
+ para cada instante, la posición que tiene la máquina respecto al mercado:
+ posición larga si ha comprado, corta si ha vendido o sin posición si está
+ fuera del mercado.
+\end_layout
+
+\begin_layout Standard
+Una máquina de trading puede interpretarse como un agente inteligente que
+ percibe estímulos del entorno (cotizaciones de la acción bursátil), procesa
+ tales percepciones y actúa (decisiones de compra y venta de acciones bursátiles
+) de manera racional, es decir, de manera correcta y tendiendo a optimizar
+ el resultado esperado.
+\end_layout
+
+\begin_layout Standard
+Muchas de las estrategias de trading de la actualidad se basan en los modelos
+ matemáticos comentados en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Maneras de enfrentar el problema"
+
+\end_inset
+
+.
+ Estas estrategias y sus modelos constituyen el nucleo de las máquina de
+ trading.
+ En los capítulos 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading compuestas"
+
+\end_inset
+
+ se explican algunas de las máquinas desarrolladas sobre la plataforma.
+\end_layout
+
+\begin_layout Subsection
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las máquinas de trading se implementan a partir de la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Consiste en una clase que aporta todos los métodos necesarios para inicializar,
+ simular, optimizar, analizar y visualizar las estrategias de trading: puede
+ entenderse como un entorno donde se implementan las estrategias que se
+ quieren estudiar.
+\end_layout
+
+\begin_layout Standard
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ define las estructuras de datos necesarias con las que ofrecer una base
+ a partir de la cual implementar las máquinas de trading.
+ Cuenta con propiedades o atributos relevantes para configurar las estrategias:
+ un apuntador hacia un objeto de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ para conseguir los datos de partida, un vector donde almacenar la salida
+ generada por la estrategia, los índices de comienzo y fin de los conjuntos
+ de entrenamiento y test, el capital inicial que se invierte, el tope por
+ inversión...
+ Para un listado completo de las estructuras de datos y propiedades de la
+ clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ se ha de consultar la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Propiedades de la clase AlgoTrader"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Cada vez que cambia alguno de los parámetros de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+, es necesario actualizar el estado interno de la máquina de trading.
+ La actualización puede ser un proceso muy costoso, así que se ha implementado
+ un sistema de actualización perezosa que computa el nuevo estado sólo en
+ caso de que sea necesario.
+ Para lograr este comportamiento se utilizan eventos que, ante la modificación
+ de parámetros de la estrategia, marcan el estado del objeto como no actualizado.
+ El objeto mantiene su estado de no actualizado hasta el instante en que
+ se necesitan los resultados; en ese momento, el estado del objeto se actualiza
+ y se devuelven los resultados.
+ La ventaja de hacerlo así está en que si se cambian varios parámetros de
+ la estategia no se actualiza el estado con cada parámetro alterado, sino
+ que se espera hasta cuando se requieren los resultados.
+ Este sistema de actualización perezosa es transparente al usuario, que
+ sólo necesita indicar qué parámetros de la estrategia cambian el valor
+ de la señal de posiciones para que sean tenidos en cuenta.
+\end_layout
+
+\begin_layout Standard
+Una máquina de trading tiene que poner a disposición del usuario la información
+ que pueda necesitar, después de todo, esta es una herramienta destinada
+ al estudio y el análisis.
+ El grueso la clase lo constituyen los métodos que manipulan la estrategia
+ y realizan cálculos para extraer información sobre su desempeño.
+ Para cuestiones muy específicas sobre las máquinas de trading que no se
+ encuentren implementadas, está la posibilidad de extender la clase e implementa
+r los métodos necesarios o redefinir alguno de los ya existentes.
+ Los métodos de la clase están documentados en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Métodos de la clase AlgoTrader"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La información gráfica es de vital importancia, pues condensa una gran cantidad
+ de información y la muestra de forma conveniente.
+ La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ implementa muchos métodos que ofrecen diferentes vistas sobre las estrategias
+ de trading.
+ Supone un gran apoyo el contar con elementos visuales descriptivos: así
+ se facilita más aún el estudio de las estrategias.
+ El mecanismo para representar gráficamente las máquinas de trading es idéntico
+ al que utiliza la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ Este sistema de generación de gráficos consiste en un conjunto de métodos
+ desacoplados entre sí que colaboran dedicándose a implementar partes concretas
+ de los gráficos.
+ La ventaja de este sistema de dibujado es que es fácil de extender y mantener
+ por medio del mecanismo de herencia de clases.
+ Los métodos del sistema de dibujado se explican en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AlgoTrader - El sistema de dibujado"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+¿Cómo incorporar máquinas de trading en la plataforma?
+\end_layout
+
+\begin_layout Standard
+Para implementar máquinas de trading en la plataforma hay que heredar de
+ la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ e implementar su único método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+.
+ Este método no toma ni devuelve ningún argumento
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+En MATLAB cuando se utiliza el paradigma de programación orientada a objetos
+ los métodos de una clase tienen que declarar de forma obligatoria como
+ primer argumento de entrada una instancia de esa misma clase.
+ Esto es así porque MATLAB permite invocar los métodos de dos formas diferentes:
+ con el separador punto entre la variable del objeto y el nombre del método
+ como por ejemplo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{objeto.método(...)}
+\end_layout
+
+\end_inset
+
+ o con la sintaxis habitual de las funciones como en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{método(objeto, ...)}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ y se encarga de aplicar la estrategia para producir las señales de posición
+ en el mercado.
+ El método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ obtiene la información de partida del objeto y almacena el resultado también
+ en el objeto: actualiza su estado interno.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:AlgoTrader.computeSignal"
+
+\end_inset
+
+ se encuentra una descripción detallada del método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Organización de la documentación sobre la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La documentación referente a la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ está distribuida en todo el documento.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Máquinas de trading"
+
+\end_inset
+
+ se comenta sobre las máquinas de trading explicando qué son, qué datos
+ de partida requieren y qué resultados producen.
+ Las características de estas máquinas las asemejan a agentes inteligentes
+ que interactúan con su entorno.
+ También se trata el sobre la inclusión de nuevas máquinas de trading a
+ través del mecanismo de herencia y la implementación del método abstracto
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En los capítulos 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading compuestas"
+
+\end_inset
+
+ se explican las máquinas de trading desarrolladas en el proyecto.
+ Estas máquinas utilizan estrategias basadas en modelos matemáticos que,
+ aunque diferentes, tienen cabida en la plataforma.
+ También se describe cómo utilizar los puntos de extensión para alterar
+ el funcionamiento de las máquinas y lograr en cada caso el comportamiento
+ deseado.
+\end_layout
+
+\begin_layout Standard
+La descripción técnica de los elementos de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ se hace en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase AlgoTrader"
+
+\end_inset
+
+.
+ Ahí aparece un listado de las propiedades o atributos que configuran la
+ estructura de datos y los métodos que implementa.
+ También se explica el sistema de dibujado que da lugar a los gráficos que
+ genera la clase.
+ Por último, en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Ejemplos de uso"
+
+\end_inset
+
+ aparecen los ejemplos de uso de la clase.
+\end_layout
+
+\begin_layout Section
+Optimización de parámetros
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Optimización de parámetros"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las estrategias de trading se apoyan en modelos matemáticos que utilizan
+ parámetros.
+ La experiencia capacita para seleccionar valores adecuados de los parámetros
+ con la esperanza de mejorar los resultados, no obstante, este procedimiento
+ está sólo al alcance de los expertos y ni siquiera así se garantizan resultados
+ cercanos al óptimo.
+ ¿Cómo hacer entonces para calcular los valores óptimos? Los modelos matemáticos
+ en que se basan las estrategias de trading pueden ser simulados en la plataform
+a para cuantificar su desempeño; de esta forma, es posible comparar los
+ resultados obtenidos en las diferentes asignaciones y atribuir a los parámetros
+ los valores que proporcionan el mejor resultado.
+\end_layout
+
+\begin_layout Standard
+Desde el punto de vista matemático, una estrategia de trading puede concebirse
+ como una función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$g$
+\end_layout
+
+\end_inset
+
+, con los mismos parámetros de entrada 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$a$
+\end_layout
+
+\end_inset
+
+ que la estrategia y que devuelve como resultado las decisiones 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$d$
+\end_layout
+
+\end_inset
+
+ sobre cómo invertir.
+ Así mismo, es necesario emplear una segunda función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f$
+\end_layout
+
+\end_inset
+
+ que, dadas las decisiones 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$d$
+\end_layout
+
+\end_inset
+
+, calcula el desempeño 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$p$
+\end_layout
+
+\end_inset
+
+ de la estrategia; tal evaluación la hace sobre el conjunto de datos de
+ entrenamiento utilizando algún criterio: beneficio obtenido, riesgo asumido,
+ número de operaciones exitosas...
+ La utilidad de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f$
+\end_layout
+
+\end_inset
+
+ radica en que permite cambiar el criterio de evaluación aplicado a la estrategi
+a.
+ La ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Optimización de parámetros - Cálculo del desempeño"
+
+\end_inset
+
+ muestra cómo se hace el cálculo del desempeño de la estrategia.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f(g(a))=p\label{eq:Optimización de parámetros - Cálculo del desempeño}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A partir de las definiciones anteriores, el problema de la asignación de
+ valores para los parámetros se puede tratar como un problema de optimización.
+ Como indica la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Optimización de parámetros - Definición de óptimo"
+
+\end_inset
+
+, en un problema de optimización el objetivo es seleccionar el conjunto
+ de valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$a^*$
+\end_layout
+
+\end_inset
+
+, dentro del espacio de búsqueda 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A$
+\end_layout
+
+\end_inset
+
+, tales que ningún otro conjunto de valores produzca mejores resultados.
+ En la ecuación se utiliza el operador 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+succeq$
+\end_layout
+
+\end_inset
+
+, que compara valores expresados en las mismas medidas e indica que el valor
+ de la izquierda es mejor que el de la derecha.
+ El término 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{mejor}
+\end_layout
+
+\end_inset
+
+ se refiere indistintamente al mínimo en caso de minimizar o al máximo en
+ caso de maximizar y depende del criterio considerado.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{ll}
+f(g(a^{*}))\succeq f(g(a)) & ,\,\forall a\in A\end{array}\label{eq:Optimización de parámetros - Definición de óptimo}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para calcular el conjunto de valores óptimos de los parámetros se utilizan
+ los métodos de optimización.
+ En el contexto de este trabajo, un método de optimización 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$m$
+\end_layout
+
+\end_inset
+
+ consiste en un procedimiento que, a partir de la estrategia de trading
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$g$
+\end_layout
+
+\end_inset
+
+, la función de selección 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+, la función de evaluación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f$
+\end_layout
+
+\end_inset
+
+ y el espacio de búsqueda 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A$
+\end_layout
+
+\end_inset
+
+, calcula el conjunto de valores óptimos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$a^*$
+\end_layout
+
+\end_inset
+
+ que mejoran el resultado de la estrategia de trading sobre el conjunto
+ de datos de entrenamiento.
+ La función de selección 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ puede ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{máximo}
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{mínimo}
+\end_layout
+
+\end_inset
+
+ según se busque maximizar o minimizar el valor devuelto por la función
+ de evaluación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f$
+\end_layout
+
+\end_inset
+
+.
+ Todo lo anterior se resume en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Optimización de parámetros - Método de optimización"
+
+\end_inset
+
+, que descompone el problema de la optimización de parámetros en partes
+ bien definidas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+m(g,s,f,A)=a^{*}\label{eq:Optimización de parámetros - Método de optimización}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La descomposición del problema en las partes mencionadas es crucial para
+ lograr un sistema extensible y escalable.
+ Así, por ejemplo, en caso de implementar un número 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$M$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$G$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$F$
+\end_layout
+
+\end_inset
+
+ de métodos de optimización, estrategias de trading y funciones de evaluación
+ respectivamente, las dos alternativas extremas son:
+\end_layout
+
+\begin_layout Description
+Solución
+\begin_inset space ~
+\end_inset
+
+empotrada En este caso, la solución consiste en un código monolítico que
+ implementa uno de los métodos de optimización para una de las estrategias
+ de trading y ante una función de evaluación.
+ Como resultado, y para cubrir todas las combinaciones posibles, es necesario
+ implementar 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$M 
+\backslash
+cdot G 
+\backslash
+cdot F$
+\end_layout
+
+\end_inset
+
+ procedimientos diferentes.
+ Sobra decir que este enfoque es inviable en una plataforma escalable.
+\end_layout
+
+\begin_layout Description
+Solución
+\begin_inset space ~
+\end_inset
+
+modular En la solución modular cada componente se implementa por separado,
+ así se evita la explosión combinatoria de procedimientos que es preciso
+ implementar que, en esta situación, es de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$M + G + F$
+\end_layout
+
+\end_inset
+
+.
+ Luego, en tiempo de ejecución, se combinan los módulos para que trabajen
+ en conjunto.
+ Esta es la opción seguida en la plataforma.
+\end_layout
+
+\begin_layout Subsection
+El método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El cálculo de los valores óptimos de los parámetros lo realiza el método
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Tal método es el responsable de lanzar el método de optimización con la
+ función de selección, la función de evaluación y el espacio de búsqueda.
+ La forma que tiene la instrucción de llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ es la mostrada en el código siguiente: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTraderInstance.opti
+\backslash
+=mize(@evaluationFunction, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> @selectionFunction, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> @optimizationMethod, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> 'Parameter1', Domain1, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> 'Parameter2', Domain2, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> 'ParameterN', DomainN)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los elementos que intervienen en la llamada son los mismos que aparecen
+ en la ecuación
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Optimización de parámetros - Método de optimización"
+
+\end_inset
+
+, aunque el orden es diferente.
+ La máquina de trading 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTraderInstance}
+\end_layout
+
+\end_inset
+
+ (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$g$
+\end_layout
+
+\end_inset
+
+ en las ecuaciones anteriores) es una instancia de clase y por eso se utiliza
+ la notación punto.
+ Los tres primeros parámetros que son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{evaluationFunction}
+\end_layout
+
+\end_inset
+
+ para la función de evaluación (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f$
+\end_layout
+
+\end_inset
+
+ en las ecuaciones anteriores), 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{selectionFunction}
+\end_layout
+
+\end_inset
+
+ para la función de selección (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s$
+\end_layout
+
+\end_inset
+
+ en las ecuaciones anteriores) y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimizationMethod}
+\end_layout
+
+\end_inset
+
+ para el método de optimización (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$m$
+\end_layout
+
+\end_inset
+
+ en las ecuaciones anteriores) utilizan el prefijo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{@}
+\end_layout
+
+\end_inset
+
+ en la instrucción, pues es la manera en que MATLAB referencia funciones.
+ Los pares 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Parameter*}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Domain*}
+\end_layout
+
+\end_inset
+
+ sirven para indicar el nombre de los parámetros que se someten al proceso
+ de optimización y el conjunto de valores en donde se buscan los óptimos
+ (se corresponden con el espacio de búsqueda 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A$
+\end_layout
+
+\end_inset
+
+ en las ecuaciones anteriores)
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+El espacio de búsqueda consiste en todas las combinaciones de valores de
+ los parámetros que se pueden generar.
+ Si, por ejemplo, se quieren optimizar los parámetros 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ParametroA$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ParametroB$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ParametroC$
+\end_layout
+
+\end_inset
+
+ cuyos conjuntos de valores permitidos son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A = 
+\backslash
+{a_1, a_2, ..., a_i
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$B = 
+\backslash
+{b_1, b_2, ..., b_j
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$C = 
+\backslash
+{c_1, c_2, ..., c_k
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+ respectivamente, entonces el espacio de búsqueda generado es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$E = A 
+\backslash
+times B 
+\backslash
+times C$
+\end_layout
+
+\end_inset
+
+.
+ Este espacio 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$E$
+\end_layout
+
+\end_inset
+
+ tiene tres dimensiones y el número de estados que contiene es de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$i 
+\backslash
+cdot j 
+\backslash
+cdot k$
+\end_layout
+
+\end_inset
+
+.
+ Cualquier terna 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(a_r, b_s, c_t)$
+\end_layout
+
+\end_inset
+
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$r 
+\backslash
+in 
+\backslash
+{1, ..., i
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$s 
+\backslash
+in 
+\backslash
+{1, ..., j
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t 
+\backslash
+in 
+\backslash
+{1, ..., k
+\backslash
+}$
+\end_layout
+
+\end_inset
+
+ es un elemento del espacio de búsqueda 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$E$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ El nombre del parámetro consiste en una cadena de texto que identifica
+ una propiedad de la máquina de trading.
+ Respecto al conjunto de valores en donde se busca el óptimo, se especifica
+ como un array de tipo numérico (notación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{[]}
+\end_layout
+
+\end_inset
+
+ en MATLAB) o como un array de celdas (admite números y cadenas de texto,
+ notación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{
+\backslash
+{
+\backslash
+}}
+\end_layout
+
+\end_inset
+
+ en MATLAB), según sean los valores que se utilicen.
+\end_layout
+
+\begin_layout Standard
+Como resultado de una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+, se actualizan los parámetros especificados de la estrategia, tomando estos
+ los mejores valores que haya sido capaz de encontrar el método de optimización.
+ En tanto a los métodos de optimización, no están obligados a encontrar
+ el conjunto de valores óptimos para los parámetros, aunque sí un conjunto
+ de valores adecuados.
+ Para su funcionamiento, el método de optimización requiere de la función
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{evaluationFunction}
+\end_layout
+
+\end_inset
+
+ que evalúa el desempeño de la estrategia sobre el conjunto de datos de
+ entrenamiento: es en esta fase donde se utiliza el simulador de estrategias
+ implementado en la plataforma.
+ Una descripción técnica del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ se encuentra en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:AlgoTrader.optimize"
+
+\end_inset
+
+.
+ Los ejemplos de uso del método aparecen en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Ejemplos de uso"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+¿Cómo incorporar funciones de evaluación de estrategias en la plataforma?
+\end_layout
+
+\begin_layout Standard
+Una función de evaluación mide el desempeño de una estrategia de trading
+ atendiendo a algún criterio: beneficio obtenido, riesgo asumido, número
+ de operaciones exitosas...
+ La función de evaluación parte de las decisiones tomadas por la estrategia,
+ que consisten en una serie de registros que describen cada una de las posicione
+s adoptadas en el mercado.
+ Estos registros están compuestos por los siguientes campos:
+\end_layout
+
+\begin_layout Description
+Tipo
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+posición Se refiere al tipo de operación con que se posiciona la estrategia
+ en el mercado: puede ser una operación de compra (identificada con el valor
+ 1) o de venta (-1).
+ También se contempla el caso en que la estrategia permanece fuera del mercado
+ (en cuyo caso se identifica la no posición con el valor 0).
+\end_layout
+
+\begin_layout Description
+Índices
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+apertura
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+cierre Índices a partir de los cuales se abre y cierra la posición en el
+ mercado.
+ Estos índices son relativos a la serie de precios de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Fechas
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+apertura
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+cierre Fechas correspondientes a la apertura y cierre de la operación de
+ mercado.
+ Se calculan a partir de los índices de apertura y cierre sobre la propiedad
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ El formato en que está codificada la fecha es aquel utilizado por la propiedad
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Precios
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+apertura
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+cierre Precios en los instantes de tiempo en que se abre y cierra la posición
+ en el mercado.
+ Son el resultado de acceder a las posiciones indicadas por los índices
+ de apertura y cierre sobre la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Beneficio/Pérdida Factor que multiplica a los fondos con que cuenta la estrategi
+a para calcular los nuevos fondos tras la operación bursátil.
+\end_layout
+
+\begin_layout Standard
+Los registros se empaquetan en forma de tabla para ser pasados como argumento
+ a la función de evaluación de las máquinas de trading.
+ Las filas de la tabla se corresponden con los registros y se ordenan de
+ forma cronológica; las columnas se refieren a los campos que componen los
+ registros: tipo de posición, índice de apertura, índice de cierre, fecha
+ de apertura, fecha de cierre, precio de apertura, precio de cierre y beneficio/
+pérdida.
+ En la tabla
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Tabla de registros de posición"
+
+\end_inset
+
+ se muestra la estructura de los datos relativos a las posiciones adoptadas
+ en el mercado.
+ A partir de esta información, la función de evaluación calcula un valor
+ numérico que se corresponde con una medición del rendimiento de la estrategia
+ de acuerdo a cierto criterio.
+ La función de evaluación debe respetar la siguiente signatura:
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="8">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tipo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Índice
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$_1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Índice
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$_N$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fecha
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$_1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fecha
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$_N$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precio
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$_1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precio
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$_N$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Beneficio/Pérdida
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+58
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+731979
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732133
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.9199
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+112
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732133
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732357
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.57
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.8882
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+112
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+120
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732357
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732413
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.57
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+120
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+133
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732413
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732504
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.70
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1681
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+133
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+147
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732504
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732602
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.70
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.37
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1419
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+147
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+161
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732602
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732700
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.37
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.89
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0555
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+161
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+169
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732700
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+732756
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.89
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9.53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Tabla de registros de posición: contiene la información de las posiciones
+ adoptadas por la máquina de trading en el mercado
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Tabla de registros de posición
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Tabla de registros de posición"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+performance = evaluationFunction(positionsLog, ...)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En este caso, la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{evaluationFunction}
+\end_layout
+
+\end_inset
+
+ toma como primer parámetro la tabla de datos, pudiendo aceptar además una
+ cantidad adicional de argumentos para realizar la computación.
+ Esta función no la invoca el usuario de forma directa, sino que está pensada
+ para ser llamada desde el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+, el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitness}
+\end_layout
+
+\end_inset
+
+ y el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessStatistics}
+\end_layout
+
+\end_inset
+
+.
+ Como el usuario no realiza la llamada, entonces los parámetros adicionales
+ que se desean enviar a la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{evaluationFunction}
+\end_layout
+
+\end_inset
+
+ han de ser indicados en el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ (lo mismo es aplicable sobre los otros dos métodos).
+ Por ejemplo, si se desean incluir los parámetros de entrada 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Arg1}
+\end_layout
+
+\end_inset
+
+ hasta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ArgN}
+\end_layout
+
+\end_inset
+
+ en la función de evaluación, entonces es necesario sustituir en la llamada
+ al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ el argumento correspondiente a la función de evaluación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{@evaluationFunction}
+\end_layout
+
+\end_inset
+
+ por una construcción más expresiva, como es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{
+\backslash
+{@evaluationFunction, Arg1, ..., ArgN
+\backslash
+}}
+\end_layout
+
+\end_inset
+
+.
+ De esta forma, se puede pasar una cantidad arbitraria de parámetros a la
+ función de evaluación.
+ Como resultado de la computación, la función devuelve un argumento 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{performance}
+\end_layout
+
+\end_inset
+
+ con el valor de la medición asociada al criterio implementado.
+\end_layout
+
+\begin_layout Standard
+Un ejemplo de función de evaluación consiste en aquella que mide el beneficio
+ o pérdida de una estrategia, que se calcula multiplicando los valores de
+ la columna de beneficio/pérdida de la tabla.
+ Las funciones de evaluación implementadas en la plataforma se detallan
+ en la sección
+\begin_inset space ~
+\end_inset
+
+
+\lang english
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Funciones de evaluación"
+
+\end_inset
+
+
+\lang spanish
+.
+\end_layout
+
+\begin_layout Subsubsection
+¿Cómo incorporar métodos de optimización en la plataforma?
+\end_layout
+
+\begin_layout Standard
+En lo que a este trabajo se refiere, un método de optimización consiste
+ en un procedimiento que calcula valores para los parámetros de las máquinas
+ de trading, con el objetivo de mejorar su desempeño.
+ No es necesario que el método de optimización garantice el alcanzar valores
+ óptimos para los parámetros, pues la condición de optimalidad en los resultados
+ es demasiado fuerte e incompatible con muchos de ellos.
+\end_layout
+
+\begin_layout Standard
+Para incorporar un método de optimización en la plataforma, el único requisito
+ consiste en respetar el siquiente esquema en la signatura de la función:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+bestIndexArray = opti
+\backslash
+=mizationMethod(@selectionFunction,
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> @fitnessFunction,
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> searchSpaceSize, ...)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se aprecia que la función que implementa el método acepta un mínimo de tres
+ argumentos: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{selectionFunction}
+\end_layout
+
+\end_inset
+
+ para la función de selección, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessFunction}
+\end_layout
+
+\end_inset
+
+ para la función de aptitud y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{searchSpaceSize}
+\end_layout
+
+\end_inset
+
+ para especificar las dimensiones y tamaño del espacio de búsqueda.
+ Es posible declarar argumentos de entrada adicionales para utilizar con
+ el método.
+ La función devuelve en el vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{bestIndexArray}
+\end_layout
+
+\end_inset
+
+ el mejor resultado hallado por el método de optimización.
+ Al igual que en el caso de la función de evaluación, el usuario no realiza
+ la llamada a la función de forma directa, sino que esta se hace desde del
+ método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ La descripción de los parámetros de entrada y salida ayuda a comprender
+ cómo tienen que implementarse los métodos de optimización:
+\end_layout
+
+\begin_layout Description
+Función
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+selección Se trata de la función que marca la dirección que sigue el proceso
+ de optimización: puede ser maximizar o minimizar.
+ Es el primer argumento del método de optimización y se identifica en la
+ instrucción anterior con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{selectionFunction}
+\end_layout
+
+\end_inset
+
+, que está precedida por el carácter 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{@}
+\end_layout
+
+\end_inset
+
+ al tratarse de una función MATLAB.
+ Los valores que toma son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{max}
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{min}
+\end_layout
+
+\end_inset
+
+ según se busque maximizar o minimizar la característica que mide la función
+ de evaluación.
+ Las funciones de selección se explican en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Funciones de selección"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Función
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+aptitud Es la función encargada de medir una característica de la estrategia
+ de trading.
+ Ocupa la segunda posición entre los argumentos y en la instrucción se identific
+a con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessFunction}
+\end_layout
+
+\end_inset
+
+, precedida por el carácter 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{@}
+\end_layout
+
+\end_inset
+
+.
+ Esta función la genera de forma automática el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+, a partir de la función de evaluación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{evaluationFunction}
+\end_layout
+
+\end_inset
+
+ y del espacio de búsqueda constituido por los pares 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Parameter*}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Domain*}
+\end_layout
+
+\end_inset
+
+.
+ Consiste en una función envoltorio que conoce los detalles sobre la función
+ de evaluación y el espacio de búsqueda.
+ Sirve para desacoplar al método de optimización de las características
+ del problema que resuelve.
+ La función de aptitud toma como argumento de entrada un vector de números
+ enteros cuya longitud es igual al número de dimensiones del espacio de
+ búsqueda y hace con esto una asignación de valores a los parámetros que
+ se busca optimizar; después, la función mide y devuelve el desempeño de
+ la estrategia, fruto de la asignación de valores a los parámetros utilizando
+ la función de evaluación.
+ Las funciones de evaluación que encapsula la función de aptitud aparecen
+ en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Funciones de evaluación"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Tamaño
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+espacio
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+búsqueda Queda determinado por el número de dimensiones y el tamaño de cada
+ una de ellas.
+ Este argumento está en la tercera posición y se identifica con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{searchSpaceSize}
+\end_layout
+
+\end_inset
+
+.
+ Se codifica como un vector de números enteros con tantos elementos como
+ dimensiones tenga el espacio de búsqueda y donde el valor de cada elemento
+ se corresponde con el tamaño de la dimensión asociada, siendo el primer
+ elemento el responsable de indicar el tamaño de la primera dimensión, el
+ segundo elemento de la segunda dimensión y así sucesivamente.
+\end_layout
+
+\begin_layout Description
+Array
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+índices El método de optimización devuelve un array de índices.
+ Estos índices referencian a los valores de los parámetros que hacen que
+ la estrategia consiga el mejor resultado.
+ Es el argumento de salida de la función y se identifica con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{bestIndexArray}
+\end_layout
+
+\end_inset
+
+ en la instrucción.
+ Con este array de índices, el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ selecciona los valores de los parámetros de la estrategia.
+\end_layout
+
+\begin_layout Standard
+La parte más complicada del proceso consiste en comprender cómo se utiliza
+ la función de aptitud y de qué manera su argumento de entrada está relacionado
+ con el tamaño del espacio de búsqueda.
+ Para aclarar estos detalles, se muestra un ejemplo ilustrativo que consiste
+ en la ejecución de una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+, donde se utiliza: la máquina de trading basada en la media móvil explicada
+ en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Basadas en indicadores técnicos"
+
+\end_inset
+
+, el método de optimización por enumeración de la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Métodos de optimización"
+
+\end_inset
+
+ y la función de evaluación de beneficios y pérdidas de la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Funciones de evaluación"
+
+\end_inset
+
+.
+ La instrucción de partida es la que aquí aparece:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+ma.opti
+\backslash
+=mize(@profitLoss, @max, @exhaustive, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> 'Samples', 5:35, 'Mode', 
+\backslash
+{'e', 's'
+\backslash
+})
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Supuesta la existencia de una variable con nombre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ma}
+\end_layout
+
+\end_inset
+
+ que sea instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{MovingAverage}
+\end_layout
+
+\end_inset
+
+, entonces la instrucción anterior calcula el valor óptimo del parámetro
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ utilizando el conjunto de valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{5:35}
+\end_layout
+
+\end_inset
+
+ y del parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ en el conjunto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{
+\backslash
+{'e', 's'
+\backslash
+}}
+\end_layout
+
+\end_inset
+
+, aplicando el método de optimización 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{exhaustive}
+\end_layout
+
+\end_inset
+
+.
+ Al concluir la ejecución del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+, estos dos parámetros toman aquellos valores que más mejoran el desempeño
+ de la estrategia: en particular, el proceso de optimización busca maximizar
+ el beneficio que logra la estrategia, propósito que se consigue con las
+ funciones 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLoss}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{max}
+\end_layout
+
+\end_inset
+
+ facilitadas como argumentos del método.
+\end_layout
+
+\begin_layout Standard
+Antes de lanzar el proceso de optimización 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{exhaustive}
+\end_layout
+
+\end_inset
+
+ hay que crear la función de aptitud, que se le pasa como uno de los argumentos.
+ Esta función se genera a partir de la función de evaluación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLoss}
+\end_layout
+
+\end_inset
+
+ y de todos los pares de parámetros y conjuntos de valores introducidos
+ en la llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ con los valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{5:35}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+ con los valores 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{
+\backslash
+{'e', 's'
+\backslash
+}}
+\end_layout
+
+\end_inset
+
+.
+ Para el ejemplo que se trata, el resultado es una función de aptitud que
+ toma como argumento de entrada un vector de dos elementos, donde el primero
+ referencia los valores asociados a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ y el segundo los relativos a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+.
+ Si esta función de aptitud 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessFunction}
+\end_layout
+
+\end_inset
+
+ toma el argumento de entrada 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{[1 1]}
+\end_layout
+
+\end_inset
+
+, entonces evalúa el desempeño de la estrategia para el caso en que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples = 5}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode = 'e'}
+\end_layout
+
+\end_inset
+
+, si el argumento de entrada es sin embargo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{[10 2]}
+\end_layout
+
+\end_inset
+
+, entonces mide el desempeño para el caso en que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples = 14}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode = 's'}
+\end_layout
+
+\end_inset
+
+.
+ En cada una de las evaluaciones que hace la función de aptitud, se utiliza
+ el simulador de máquinas de trading de la plataforma.
+ Como se aprecia, esta función generada de forma automática es un elemento
+ clave en el sistema de optimización de parámetros: primero, desacopla al
+ método de optimización de conocer detalles sobre el tipo de los valores
+ que maneja, que en el ejemplo abordado consiste en números y cadenas de
+ caracteres; segundo, oculta la complejidad inherente a la ejecución del
+ sistema de simulación de máquinas de trading; y tercero, hace posible cambiar
+ el criterio para medir el desempeño de la máquina de trading al utilizar
+ diferentes funciones de evaluación.
+ Los demás parámetros de la máquina, cuyos valores no se busca optimizar,
+ se consideran como constantes y no se alteran.
+\end_layout
+
+\begin_layout Standard
+El último argumento obligatorio que hay que pasar al método de optimización
+ es el tamaño del espacio de búsqueda.
+ Sucede que la función de aptitud toma un vector de elementos que referencia
+ valores de los parámetros; para no introducir en este vector índices que
+ estén fuera del rango es necesario saber cuáles son los límites.
+ Siguiendo con el ejemplo, el tamaño del espacio de estados es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{[31, 2]}
+\end_layout
+
+\end_inset
+
+ pues 31 son los valores considerados para el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Samples}
+\end_layout
+
+\end_inset
+
+ y 2 los del parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Mode}
+\end_layout
+
+\end_inset
+
+.
+ Con la información sobre el tamaño del espacio de búsqueda, el método de
+ optimización sabe cuáles son los valores de los índices que puede introducir
+ en la función de aptitud, sin provocar una excepción por referirse a valores
+ fuera de rango.
+\end_layout
+
+\begin_layout Standard
+Tras generar los argumentos que consume la función de optimización, el método
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ llama a dicha función.
+ Siguiendo con el ejemplo, la llamada a la función de optimización es:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+bestIndexArray = exhaustive(@max, @fitnessFunction, [31, 2])
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finalizada la ejecución del método de optimización que implementa la función
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{exhaustive}
+\end_layout
+
+\end_inset
+
+, se devuelven en el vector 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{bestIndexArray}
+\end_layout
+
+\end_inset
+
+ los índices de aquellos valores de los parámetros que más mejoran el resultado
+ de la estrategia de trading, atendiendo al objetivo marcado por las funciones
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{max}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessFunction}
+\end_layout
+
+\end_inset
+
+.
+ Para concluir, el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ toma el vector de índices devuelto y efectúa las asignaciones sugeridas.
+\end_layout
+
+\begin_layout Standard
+Un resumen gráfico de las partes que interactúan en el proceso de optimización
+ de parámetros aparece en la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Elementos que intervienen en el método optimize"
+
+\end_inset
+
+.
+ Ahí se resalta cuáles son los argumentos del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+: la función de evaluación, la función de selección, el método de optimización
+ y el espacio de búsqueda.
+ Aparece también en la figura la función de fitness, que se identifica con
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessFunction}
+\end_layout
+
+\end_inset
+
+ y que requiere de la función de evaluación y del espacio de búsqueda.
+ A su vez, el espacio de búsqueda se utiliza para calcular su tamaño, que
+ aparece como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{searchSpaceSize}
+\end_layout
+
+\end_inset
+
+.
+ Por último, se aprecia cómo todos estos elementos conforman los argumentos
+ del método de optimización, que aparece como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimizationMethod}
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Gráficos/Plataforma de inversión bursátil/optimize.eps
+	width 60page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Elementos que intervienen en la llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Elementos que intervienen en el método optimize"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Al igual que en el caso de la función de evaluación, se pueden pasar parámetros
+ al método de optimización por medio de la llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+.
+ También aquí la razón para permitir tal posibilidad es la misma: el usuario
+ no lanza de forma directa el método de optimización, luego ha de permitirse
+ un canal para indicar parámetros en caso de ser necesarios.
+ La manera en que se hace es utilizando una llamada que siga un patron como
+ el siguiente:
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTraderInstance.opti
+\backslash
+=mize(@evaluationFunction, @selectionFunction, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> 
+\backslash
+{@optimizationMethod, Arg1, ..., ArgN
+\backslash
+}, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> 'Parameter1', Domain1, ..., 'ParameterN', DomainM)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De esta manera, todos los parámetros 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Arg1}
+\end_layout
+
+\end_inset
+
+..., 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ArgN}
+\end_layout
+
+\end_inset
+
+ se pasan al método de optimización.
+ Para transmitir estos parámetros, la llamada que hace el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ hacia la función de optimización mantiene el formato mostrado a continuación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+bestIndexArray = opti
+\backslash
+=mizationMethod(@max, @fitnessFunction, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> [SizeDomain1, ..., SizeDomainM], ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> Arg1, ..., ArgN)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los métodos de optimización implementados se describen en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Métodos de optimización"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Organización de la documentación sobre el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los elementos que intervienen en el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ son la función de evaluación, la función de selección, el método de optimizació
+n, la función de fitness y el espacio de búsqueda.
+ En la sección anterior se explicó de forma global el funcionamiento del
+ método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+ y los elementos que toman parte en la computación.
+ En tanto a las partes más complejas del método, son explicadas en secciones
+ posteriores.
+ Las funciones de evaluación están documentadas en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Funciones de evaluación"
+
+\end_inset
+
+ y las de selección en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Funciones de selección"
+
+\end_inset
+
+.
+ Los métodos de optimización se recogen en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Métodos de optimización"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Generación de resultados
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Generación de resultados"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una herramienta de investigación debe facilitar el realizar experimentos
+ y recoger los resultados obtenidos de ellos.
+ En el estudio de las máquinas de trading hay un sinfín de características
+ que pueden ser objeto de interés por parte del investigador: el rendimiento
+ de la máquina de acuerdo al beneficio (o pérdida) conseguido, la influencia
+ de los costes de operación (el coste de comprar y vender acciones), la
+ mejor racha (posiciones consecutivas exitosas que adopta la máquina en
+ el mercado), la peor racha (posiciones consecutivas fallidas que toma la
+ máquina en el mercado), los posibles rendimientos de la máquina de acuerdo
+ a los valores que toman sus parámetros...
+\end_layout
+
+\begin_layout Standard
+Los bloques funcionales que extienden a la plataforma fueron mostrados en
+ la figura
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bloques funcionales de la plataforma de inversión bursátil"
+
+\end_inset
+
+.
+ Cada uno de ellos genera resultados de acuerdo a los aspectos en que se
+ centra.
+ A lo largo del documento se describen los resultados que estas partes producen.
+ Las propiedades, métodos y funciones que generan resultados se recogen
+ en el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Generación de resultados"
+
+\end_inset
+
+, luego de que hayan sido explicados los bloques funcionales.
+\end_layout
+
+\begin_layout Section
+El archivo de configuración 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Settings.m}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:El archivo de configuración Settings.m"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Settings.m}
+\end_layout
+
+\end_inset
+
+ se almacenan las configuraciones y los valores por defecto de las clases
+ de la plataforma.
+ Con esta solución se facilita el aplicar cambios sin manipular los archivos
+ de código.
+ Los aspectos que permite modificar son los siguientes:
+\end_layout
+
+\begin_layout Itemize
+Los valores por defecto de las propiedades de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+, como son: el tipo de posiciones que puede adoptar la máquina (sólo posiciones
+ largas, sólo posiciones cortas o ambas), los intervalos de entrenamiento
+ y test, los fondos iniciales con que cuenta la máquina de trading, la cantidad
+ máxima que se puede invertir y el coste de operar en el mercado.
+ Las propiedades de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ están recogidas en el apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase AlgoTrader"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Los valores por defecto de las propiedades particulares de cada una de las
+ máquinas de trading.
+ Así, se evita la molestia de conocer los argumentos del constructor de
+ la máquina.
+ El único argumento obligatorio en todo caso es la serie de datos, que consiste
+ en una instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ que se pasa al constructor como primer parámetro; el resto son opcionales.
+ Las máquinas de trading y sus propiedades están documentadas en los capítulos
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading compuestas"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Los colores y tipos de gráficos utilizados en el sistema de dibujado.
+ Muchas de las características de los gráficos que generan las diferentes
+ clases están definidas en este archivo de configuración.
+ Alterando estos valores se cambian las representaciones que ofrecen las
+ clases que heredan de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

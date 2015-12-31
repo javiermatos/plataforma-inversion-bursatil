@@ -1,0 +1,930 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Introducción
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Introducción"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En este primer capítulo se presenta el proyecto realizado, que consiste
+ en el desarollo de una plataforma de inversión bursátil con fines de investigac
+ión.
+ El propósito perseguido es el de crear un entorno potente con el que se
+ puedan emprender estudios y análisis rigurosos sobre las estrategias de
+ trading
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Una estrategia de trading consiste en un conjunto de reglas que establecen
+ la manera en que se negocia con ciertas acciones de la bolsa.
+ Esto no es lo mismo que las estrategias de inversión, que se refieren al
+ conjunto de reglas diseñadas para orientar al inversor en la selección
+ de una cartera de inversiones.
+\end_layout
+
+\end_inset
+
+.
+ Para ello, la plataforma ofrece una solución integral que cubre todas las
+ estapas del proceso: adquisición de datos desde los proveedores de información
+ bursátil, creación y simulación de estrategias, optimización de parámetros
+ y generación de resultados.
+\end_layout
+
+\begin_layout Standard
+En conjunto con la plataforma se han implementado las estrategias de trading
+ más populares.
+ Con estas, el usuario puede comenzar sus estudios o utilizarlas de punto
+ de partida para crear nuevas estrategias.
+ También se incluyen unas estrategias especiales con las que el usuario
+ puede combinar un grupo de estrategias para lograr resultados más elaborados.
+\end_layout
+
+\begin_layout Standard
+La plataforma fue desarrollada con fines de investigación, y ofrece una
+ gran flexibilidad y productividad a expensas de un pequeño coste en forma
+ de curva de aprendizaje.
+ Hay que resaltar que esta no es una herramienta destinada al uso profesional.
+\end_layout
+
+\begin_layout Standard
+La culminación del proyecto ha requerido del empleo de algunas de las herramient
+as más vanguardistas del campo de las ciencias computacionales.
+ En concreto, se han utilizado técnicas de metaprogramación, modelos de
+ aprendizaje para la predicción de series temporales y algoritmos basados
+ en metaheurísticas para el cálculo de los parámetros óptimos.
+\end_layout
+
+\begin_layout Standard
+El resto del capítulo proporciona más información sobre el proyecto realizado.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Motivación"
+
+\end_inset
+
+ se habla de la motivación de abordar un problema sobre la inversión en
+ bolsa: la esperanza de conseguir grandes beneficios.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Objetivos"
+
+\end_inset
+
+ menciona los objetivos que se plantean.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Metodología de trabajo"
+
+\end_inset
+
+ describe la metodología de trabajo seguida durante la ejecución del proyecto.
+ Los recursos hardware y software utilizados quedan recogidos en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Recursos utilizados"
+
+\end_inset
+
+.
+ En la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Aportaciones realizadas"
+
+\end_inset
+
+ se enumeran las aportaciones del proyecto.
+ Por último, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Estructura del documento"
+
+\end_inset
+
+ se detalla la estructura del documento.
+\end_layout
+
+\begin_layout Section
+Motivación
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Motivación"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La inversión en bolsa se erige como una actividad lucrativa con potencial
+ para producir grandes beneficios.
+ Empujadas por estas expectativas, muchas personas se dedican a invertir
+ en bolsa.
+ Esta situación da lugar a grandes movimientos de capital, en los que cada
+ participante se ve recompensado o penalizado de forma monetaria según el
+ grado de acierto de las decisiones con las que intervino en el mercado.
+ En este sentido, sería interesante contar con estrategias que indiquen
+ cómo operar en bolsa para maximizar el beneficio y minimizar las pérdidas.
+ La motivación principal de este proyecto consiste en desarrollar una plataforma
+ con la que enfrentar el reto de generar estrategias de trading competitivas.
+\end_layout
+
+\begin_layout Standard
+Acercar el problema de la creación de estrategias de trading al mundo académico
+ permite contar con herramientas formales que introducen medida y control.
+ A partir de la medida es posible cuantificar y atribuir valor a cada aspecto
+ del problema: la importancia de la medida radica en que aporta objetividad
+ en la comprensión del problema.
+ El control permite articular soluciones al problema con conocimiento y
+ previsión.
+\end_layout
+
+\begin_layout Standard
+Otra motivación consiste en el uso de metaheurísticas para optimizar los
+ resultados de las estrategias.
+ Las metaheurísticas son técnicas potentes que resuelven problemas de computació
+n generales de manera eficiente.
+ La fortaleza de estas técnicas radica en su efectividad para resolver problemas
+ de optimización no resolubles con otros métodos.
+\end_layout
+
+\begin_layout Section
+Objetivos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Objetivos"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los objetivos del proyecto son cada una de las partes que conforman la plataform
+a de inversión, que se complementan para ofrecer una solución integral.
+ Estas partes aparecen listadas a continuación:
+\end_layout
+
+\begin_layout Description
+Plataforma
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+inversión
+\begin_inset space ~
+\end_inset
+
+bursátil Entorno que provee la funcionalidad base requerida para el diseño,
+ implementación y estudio de cualquier estrategia de trading: facilita la
+ conectividad con los proveedores de información, ofrece gráficos representativo
+s para los datos de entrada y las estrategias de trading, cuenta con un
+ motor de simulación para evaluar las estrategias...
+ Define interfaces para extender cualquier aspecto de la plataforma gracias
+ al mecanismo de herencia de clases.
+\end_layout
+
+\begin_layout Description
+Conexión
+\begin_inset space ~
+\end_inset
+
+con
+\begin_inset space ~
+\end_inset
+
+los
+\begin_inset space ~
+\end_inset
+
+proveedores
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+datos Sistema de recepción de datos desde los proveedores de información
+ bursátil.
+ Implementa la conectividad con dos proveedores gratuitos como son Yahoo!
+ Finance y Google Finance.
+ También incorpora conectividad con la aplicación VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V, que permite obtener datos con mayor resolución (en intervalos de tiempo
+ más cortos).
+\end_layout
+
+\begin_layout Description
+Estrategias
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+trading Conjunto de estrategias creadas sobre la plataforma.
+ Están basadas principalmente en técnicas recogidas en el análisis técnico.
+ Para cada una de estas estrategias se explica cómo funciona, el modelo
+ matemático en que se basa y la manera en que ha sido implementada.
+\end_layout
+
+\begin_layout Description
+Estrategias
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+trading
+\begin_inset space ~
+\end_inset
+
+compuestas Conjunto de estrategias concebidas para la creación de nuevas
+ estrategias.
+ Pueden interpretarse como elementos constructores que toman unas estrategias
+ de partida y dan lugar a nuevas estrategias producto de la combinación.
+\end_layout
+
+\begin_layout Description
+Optimización
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+parámetros Mecanismo para el cálculo de los parámetros óptimos en las estrategia
+s de trading.
+ Define funciones de evaluación, funciones de selección y métodos de optimizació
+n que pueden ser empleados para mejorar el desempeño de las estrategias.
+ Las posibilidades del mecanismo de optimización soy muy amplias, como consecuen
+cia de la manera en que ha sido implementado.
+\end_layout
+
+\begin_layout Description
+Generación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+resultados Métodos para generar resultados descriptivos del funcionamiento
+ de las estrategias de trading.
+ Es una parte esencial de la plataforma, pues la generación de resultados
+ es vital en el análisis y estudio de las estrategias.
+ Es necesario implementar una gran cantidad de funciones y métodos con el
+ objetivo de recopilar información de casi cualquier aspecto de las estrategias.
+\end_layout
+
+\begin_layout Section
+Metodología de trabajo
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Metodología de trabajo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se ha seguido la metodología de trabajo del diseño incremental.
+ Consiste en un proceso de desarrollo basado en iteraciones sucesivas que
+ en cada ocasión incrementa la funcionalidad del software producido.
+ Inicialmente, se contó con la definición del problema y el conjunto de
+ objetivos a cumplir.
+ Luego, se descompusieron los objetivos en un conjunto de subobjetivos que
+ correspondían con funcionalidades concretas.
+ En cada iteración del desarrollo se seleccionaban un grupo de funcionalidades
+ que eran implementadas.
+\end_layout
+
+\begin_layout Standard
+Para las fases de trabajo se detectaron las dependencias entre los subobjetivos,
+ estableciéndose un orden relativo entre ellos.
+ Por ejemplo, existían subobjetivos consistentes en obtener información
+ bursátil de los proveedores y también otros que trataban sobre representar
+ gráficamente la información adquirida.
+ Como es necesario contar con la información antes de poder representarla,
+ entonces el subobjetivo relativo a esta funcionalidad fue alcanzado antes
+ que el subobjetivo relativo a la representación gráfica de la información.
+\end_layout
+
+\begin_layout Section
+Recursos utilizados
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Recursos utilizados"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta sección se incluye para ofrecer una idea del entorno de desarrollo
+ utilizado en la realización del proyecto.
+ Se facilita así la posibilidad de reproducir los resultados obtenidos utilizand
+o los mismos medios.
+ También, se incluye un apartado dedicado a justificar el porqué de esta
+ elección del software de desarrollo en detrimento de cualquier otra.
+\end_layout
+
+\begin_layout Subsection
+Hardware y equipamiento
+\end_layout
+
+\begin_layout Itemize
+Estación de trabajo con capacidad de procesamiento paralelo
+\end_layout
+
+\begin_layout Itemize
+Conexión a Internet
+\end_layout
+
+\begin_layout Subsection
+Software para desarrollo
+\end_layout
+
+\begin_layout Itemize
+Sistema operativo Microsoft Windows 7 Ultimate Service Pack 1 (64 bits)
+\end_layout
+
+\begin_layout Itemize
+Entorno de desarrollo MATLAB R2011a (64 bits)
+\end_layout
+
+\begin_layout Itemize
+Entorno de desarrollo Microsoft Visual Studio 2010 Professional Service
+ Pack 1
+\end_layout
+
+\begin_layout Itemize
+Software para trading VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V
+\end_layout
+
+\begin_layout Subsection
+Software para redactar la documentación
+\end_layout
+
+\begin_layout Itemize
+LyX 2.0.0
+\end_layout
+
+\begin_layout Itemize
+MiKTeX 2.9
+\end_layout
+
+\begin_layout Subsection
+Justificación de las elecciones
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Justificación de las elecciones"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Considerando la naturaleza del problema y su caracter matemático, el entorno
+ de desarrollo elegido ha sido MATLAB.
+ Este potente entorno ofrece una alta productividad y permite extender sus
+ capacidades a partir de la utilización de las diferentes 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{toolboxes}
+\end_layout
+
+\end_inset
+
+ con las que cuenta.
+ Existen en el mercado alternativas como Octave, Scilab o Sage, aunque no
+ son productos lo suficientemente maduros como para permitir el desarrollo
+ de este proyecto.
+\end_layout
+
+\begin_layout Standard
+Dada la intención de obtener datos con información bursátil de calidad (con
+ la precisión deseada y en el intervalo que se considere oportuno), se hace
+ uso del software de trading VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ De cuantos programas fueron analizados, es el único gratuito que ofrece
+ una API (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Application Programming Interface}
+\end_layout
+
+\end_inset
+
+)
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "API"
+description "Application Programming Interface"
+
+\end_inset
+
+ con la que descargar datos del mercado bursátil.
+ El primer problema que tiene este programa es que sólo funciona bajo el
+ sistema operativo Windows.
+ El segundo problema es que la interacción con su API se hace por medio
+ de la interfaz COM (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Component Object Model}
+\end_layout
+
+\end_inset
+
+)
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "COM"
+description "Component Object Model"
+
+\end_inset
+
+.
+ A consecuencia de esto último, MATLAB no puede tratar directamente con
+ VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V, ya que las capacidades COM que implementa MATLAB son sólo un subconjunto
+ de las propuestas por la interfaz, y no alcanza a reconocer ciertos tipos
+ de datos.
+\end_layout
+
+\begin_layout Standard
+Para superar los problemas de conectividad entre MATLAB y VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V se utilizan las tecnologías de Microsoft.
+ La plataforma .NET, desarrollada por Microsoft, ofrece soporte nativo con
+ la interfaz COM, también creada por esta misma compañía.
+ Además, sucede que la integración de .NET con MATLAB es tal que incluso
+ se pueden crear y gestionar instancias de clases .NET desde la consola de
+ MATLAB.
+ De esta manera, se desarrolló un programa en el lenguaje C# que se encarga
+ de las comunicaciones entre MATLAB y VisualChart
+\begin_inset space \thinspace{}
+\end_inset
+
+V.
+ Este programa es imperceptible para el usuario, pues las instancias producidas
+ durante su ejecución se controlan de forma transparente por MATLAB.
+\end_layout
+
+\begin_layout Section
+Aportaciones realizadas
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Aportaciones realizadas"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La principal aportación del proyecto es la plataforma de inversión, que
+ es una herramienta de investigación de gran utilidad.
+ Con esta plataforma se simplifica todo el proceso de creación, análisis
+ y estudio de las estrategias de trading.
+ Más allá de este software, las contribuciones del proyecto son las siguientes:
+\end_layout
+
+\begin_layout Itemize
+La definición formal del problema de la negociación de acciones.
+ Habitualmente, los trabajos que tratan sobre este problema omiten cualquier
+ tipo de definición precisa y la suponen como conocida.
+\end_layout
+
+\begin_layout Itemize
+El mecanismo de optimización de parámetros.
+ Esta es una parte muy importante de la plataforma, en cuya implementación
+ se han utilizado técnicas de metaprogramación y patrones de diseño que
+ favorecen la genericidad y modularidad.
+ La ventaja de este enfoque es que permite optimizar cualquier característica
+ medible de la estrategia con los algoritmos de optimización elegidos.
+ El mecanismo de optimización tiene la capacidad de detectar los parámetros
+ que tienen las estrategias de trading (implementadas como máquinas de trading)
+ y optimizar los valores que toman.
+\end_layout
+
+\begin_layout Itemize
+La implementación de un algoritmo genético distribuido en MATLAB.
+ Con este método de optimización paralelo se pueden afrontar los problemas
+ de optimización de parámetros más duros.
+\end_layout
+
+\begin_layout Itemize
+Las estrategias de trading compuestas.
+ Son una extensión de las estrategias de trading que surgen para paliar
+ algunos de sus problemas.
+ Con ellas se pueden combinar otras estrategias para producir mejores resultados.
+ El objetivo detrás de la combinación de varias estrategias es el de potenciar
+ las fortalezas y reducir las debilidades.
+ Esta aportación en particular introduce una infinidad de posibilidades
+ para generar nuevas estrategias de trading.
+\end_layout
+
+\begin_layout Itemize
+La generación de resultados.
+ Se ofrecen resultados muy elaborados y expresivos: es posible dibujar el
+ espacio de búsqueda asociado a los valores de varios parámetros para apreciar
+ de forma visual el comportamiento de una estrategia en cada caso.
+ De esta forma, se evidencian las relaciones existentes entre aquellos conjuntos
+ de valores de los parámetros que mejores resultados ofrecen.
+ Así mismo, también se proporcionan estudios estadísticos derivados de los
+ espacios de búsqueda.
+\end_layout
+
+\begin_layout Section
+Estructura del documento
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Estructura del documento"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El documento está estructurado de la siguiente manera:
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Introducción"
+
+\end_inset
+
+ Introduce el proyecto desarrollado: la descripción general, los objetivos
+ perseguidos, la metodología de trabajo aplicada, los recursos utilizados
+ y las aportaciones realizadas.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Inversión bursátil"
+
+\end_inset
+
+ Describe el contexto en el que se formula el problema de finanzas para
+ el que se ha creado la plataforma: explica en qué consiste la inversión
+ bursátil, qué son las acciones, cómo se negocia con ellas y qué es la Bolsa
+ de valores.
+ Define el problema de la negociación de acciones de forma concisa.
+ Recoge las maneras en que se ha intentado resolver este problema desde
+ diferentes enfoques.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Plataforma de inversión bursátil"
+
+\end_inset
+
+ Ofrece una vista global de la plataforma de inversión: enumera las partes
+ que la componen y explica cómo se relacionan.
+ Los detalles concernientes a cada una de las partes de la plataforma están
+ recogidos en los siguientes capítulos.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Conexión con los proveedores de datos"
+
+\end_inset
+
+ Explica en detalle el proceso de conexión con los proveedores de datos.
+ Para cada uno de ellos se cuenta cómo sucede la interacción, cuál es la
+ estructura de datos, de qué manera se efectúa la transferencia, cómo se
+ extrae la información y la forma en que se almacena.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading"
+
+\end_inset
+
+ Explica las estrategias de trading implementadas en la plataforma: describe
+ el fundamento en que se sustentan, presenta los modelos matemáticos en
+ se basan, revela la manera en que se calculan las señales de indicación
+ para invertir en el mercado e introduce las clases en que se implementan.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading compuestas"
+
+\end_inset
+
+ Documenta todos los aspectos relativos a las estrategias de trading compuestas:
+ el motivo por el que surgen, los problemas que resuelven, los principios
+ en que se sostienen y la manera en que se implementan.
+ Analiza las posibilidades de interpretar las estrategias de trading compuestas
+ como operadores en el sentido matemático.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Optimización de parámetros"
+
+\end_inset
+
+ Describe el mecanismo de optimización centrándose en la explicación de
+ sus partes: las funciones de evaluación, las funciones de selección y los
+ métodos de optimización.
+ Comenta la manera en que colaboran estos elementos durante el proceso de
+ optimización.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Generación de resultados"
+
+\end_inset
+
+ Analiza las posibilidades de generación de resultados que ofrece la plataforma.
+ Comenta la manera en que se pueden agregar nuevas funciones para medir
+ características adicionales de las máquinas de trading.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Conclusiones y trabajo futuro"
+
+\end_inset
+
+ Recoge las conclusiones derivadas del proyecto y las líneas de trabajo
+ futuro.
+\end_layout
+
+\begin_layout Description
+Apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase DataSerie"
+
+\end_inset
+
+ Documenta los aspectos técnicos de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ que implementa el contenedor de datos bursátiles.
+ Enumera las propiedades y métodos de la clase.
+\end_layout
+
+\begin_layout Description
+Apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La clase AlgoTrader"
+
+\end_inset
+
+ Documenta las características técnicas de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ con la que se implementan las estrategias de trading.
+ Enumera las propiedades y métodos de la clase.
+\end_layout
+
+\begin_layout Description
+Apéndice
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Ejemplos de uso"
+
+\end_inset
+
+ Proporciona referencias hacia los ejemplos de uso que se incluyen en conjunto
+ con la plataforma de inversión bursátil.
+ Estos ejemplos ilustran el potencial que tiene la plataforma desarrollada
+ como herramienta para la investigación de estrategias de trading.
+\end_layout
+
+\end_body
+\end_document

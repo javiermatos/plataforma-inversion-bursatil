@@ -1,0 +1,8462 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:La clase AlgoTrader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las máquinas de trading heredan de la clase abstracta 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Esta clase facilita la programación de máquinas gracias a los métodos que
+ implementa y la interfaz que ofrece.
+ Se encuentra en el archivo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader.m}
+\end_layout
+
+\end_inset
+
+, siendo una clase MATLAB de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{handle}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Una clase de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{handle}
+\end_layout
+
+\end_inset
+
+ se define en MATLAB como aquella que se manipula a través de un puntero
+ y no de forma directa.
+ Las diferencias entre una clase normal y una clase de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{handle}
+\end_layout
+
+\end_inset
+
+ son sutiles y afectan al comportamiento de los objetos de la clase.
+\end_layout
+
+\end_inset
+
+.
+ La máquina de trading que hereda de esta clase tiene que implementar el
+ método abstracto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+, que es el que calcula la señal de posiciones de la máquina en el mercado.
+ Esta clase se introdujo en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Máquinas de trading"
+
+\end_inset
+
+ y se usó de forma extensiva en los capítulos 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Estrategias de trading compuestas"
+
+\end_inset
+
+ para implementar máquinas de trading.
+ En el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Optimización de parámetros"
+
+\end_inset
+
+ se explicaron sus características en relación a la optimización de parámetros.
+ Por último, en el capítulo
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Generación de resultados"
+
+\end_inset
+
+ de describieron las posibilidades de generación de resultados para el estudio
+ de las máquinas de trading.
+\end_layout
+
+\begin_layout Standard
+Aquí se documenta la información técnica de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Primero, en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Propiedades de la clase AlgoTrader"
+
+\end_inset
+
+, se enumeran las propiedades.
+ La sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Métodos de la clase AlgoTrader"
+
+\end_inset
+
+ contiene un listado de los métodos de la clase.
+ Por último, el sistema de dibujado se explica en la sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AlgoTrader - El sistema de dibujado"
+
+\end_inset
+
+\SpecialChar \@.
+
+\end_layout
+
+\begin_layout Section
+Propiedades
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Propiedades de la clase AlgoTrader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las propiedades de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ se pueden separar según su naturaleza en no dependientes y dependientes.
+ Las propiedades no dependientes son aquellas que reservan memoria donde
+ almacenar el valor.
+ Las propiedades dependientes, según se definen en MATLAB, no reservan memoria:
+ en caso de lectura, la propiedad dependiente calcula el valor a devolver
+ a partir de una función asociada (su comportamiento es similar al de un
+ método sin argumentos que devuelve un valor); para operaciones de escritura,
+ la propiedad dependiente invoca a una segunda función asociada que altera
+ alguna de las propiedades no dependientes del objeto (en este caso se asemeja
+ a un método con el nuevo valor de la propiedad como argumento de entrada
+ que modifica el estado interno del objeto).
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AllowedPositions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AllowedPositions}
+\end_layout
+
+\end_inset
+
+ indica qué tipo de posiciones se le permite adoptar a la máquina de trading:
+ con valor 0 limita su acción a posiciones largas, con 1 a posiciones cortas
+ y con 2 permite cualquier tipo de posición.
+ El valor de esta propiedad afecta a la señal que genera la máquina, contenida
+ en la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Signal}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CurrentFunds}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con la propiedad dependiente de sólo lectura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CurrentFunds}
+\end_layout
+
+\end_inset
+
+ la máquina de trading muestra la cantidad de capital que tiene tras haber
+ operado en el mercado durante el intervalo de test.
+ Este valor se expresa en las mismas unidades que el capital inicial, contenido
+ en la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InitialFunds}
+\end_layout
+
+\end_inset
+
+.
+ Si el valor de esta propiedad es mayor que el de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InitialFunds}
+\end_layout
+
+\end_inset
+
+, entonces la máquina ha generado beneficios; si es menor, entonces ha incurrido
+ en pérdidas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ contiene una instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+.
+ Es de esta instancia de donde se obtiene la información de las series de
+ precios de la acción para realizar las computaciones.
+ El valor de esta propiedad se fija en el instante de creación de la máquina
+ y no se puede alterar durante el tiempo de vida del objeto.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InitialFunds}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La cantidad de fondos de que dispone una máquina se indica con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InitialFunds}
+\end_layout
+
+\end_inset
+
+: representa el capital que utiliza para operar en el mercado bursátil.
+ Si se modifica esta cantidad, entonces se vuelven a calcular los beneficios
+ y pérdidas consecuencia de las posiciones tomadas por la máquina.
+ También se actualiza el valor de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{CurrentFunds}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InvertSignal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InvertSignal}
+\end_layout
+
+\end_inset
+
+ se invierte el tipo de posiciones que toma la máquina de trading.
+ Si su valor es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{false}
+\end_layout
+
+\end_inset
+
+, entonces la señal se calcula de la forma habitual según determina la estrategi
+a de la máquina de trading; si su valor es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{true}
+\end_layout
+
+\end_inset
+
+, entonces la señal queda invertida, es decir, las posiciones largas tornan
+ en cortas y las cortas en largas.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InvestmentLimit}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{InvestmentLimit}
+\end_layout
+
+\end_inset
+
+ marca la cantidad máxima que invierte la máquina de trading en una operación
+ de mercado: si el capital que resta a la máquina es menor a esta cantidad,
+ entonces lo invierte por completo; sino, entonces invierte el máximo indicado
+ por este valor.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ProfitLossTestSet}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad dependiente de sólo lectura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ProfitLossTestSet}
+\end_layout
+
+\end_inset
+
+ indica el capital que posee la máquina después de invertir durante el intervalo
+ de test.
+ Esta cantidad está normalizada, de manera que el valor 1 representa a la
+ inversión inicial.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ProfitLossTrainingSet}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad dependiente de sólo lectura 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ProfitLossTrainingSet}
+\end_layout
+
+\end_inset
+
+ indica el capital que posee la máquina después de invertir durante el intervalo
+ de entrenamiento.
+ Esta cantidad está normalizada, de manera que el valor 1 representa a la
+ inversión inicial.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Signal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Signal}
+\end_layout
+
+\end_inset
+
+ almacena las posiciones que adopta la máquina en el mercado a lo largo
+ del tiempo.
+ Consiste en un vector fila de misma longitud que la serie de precios del
+ objeto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ referenciado por la máquina de trading.
+ El valor de esta propiedad es calculado por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+ de acuerdo a la estrategia de trading.
+\end_layout
+
+\begin_layout Standard
+El sistema de actualización perezosa hace que el valor de esta propiedad
+ sólo se calcule cuando se lo requiere y no cuando cambian los parámetros
+ que alteran su valor.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TestSet}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TestSet}
+\end_layout
+
+\end_inset
+
+ establece el intervalo de test en los datos de entrada.
+ Consiste en un vector de dos elementos donde el primero marca el inicio
+ del intervalo y el segundo el final.
+ El valor de estos elementos se corresponde con índices de las series de
+ datos del objeto de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ de la máquina de trading.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TradingCost}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TradingCost}
+\end_layout
+
+\end_inset
+
+ se fija el coste de emitir una operación al mercado de acciones.
+ Cada apertura o cierre de posición conlleva una operación de mercado.
+ El coste de operación depende del capital transferido y se descompone en
+ una cantidad fija y otra variable.
+ Esta propiedad consiste en una tabla de tres columnas donde la primera
+ es la cantidad máxima por debajo de la cual se aplica cierta tarifa, la
+ segunda representa la comisión fija y la tercera la comisión variable.
+ Si hay varias filas, entonces se ordenan de manera creciente de acuerdo
+ a la primera columna: en este caso, la tarifa se aplica por franjas.
+ Una última fila debe utilizar el valor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Inf}
+\end_layout
+
+\end_inset
+
+ en la primera columna para así cubrir todas las posibilidades.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TrainingSet}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{TrainingSet}
+\end_layout
+
+\end_inset
+
+ establece el intervalo de entrenamiento en los datos de entrada.
+ Consiste en un vector de dos elementos donde el primero marca el inicio
+ del intervalo y el segundo el final.
+ El valor de estos elementos se corresponde con índices de las series de
+ datos del objeto de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ de la máquina de trading.
+\end_layout
+
+\begin_layout Section
+Métodos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Métodos de la clase AlgoTrader"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es necesario comentar la manera en que MATLAB permite organizar el código
+ para implementar una clase: una forma consiste en crear un único archivo
+ monolítico que contenga toda la definición e implementación de la clase;
+ otra posibilidad es crear un archivo con el nombre de la clase y almacenarlo
+ en un directorio con el mismo nombre que este archivo, aunque sin la extensión
+ y precedido del carácter @.
+ La clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ se organiza de acuerdo a la segunda opción.
+ Utilizando tal posibilidad, se crean los métodos de la clase como archivos
+ independientes contenidos en el directorio 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{@AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ En este caso, hay que especificar en el archivo de la clase los atributos
+ del método: estos son las restricciones de acceso (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{public}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{private}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{protected}
+\end_layout
+
+\end_inset
+
+) y sus características (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{static}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{abstract}
+\end_layout
+
+\end_inset
+
+).
+ Los métodos de las clases en MATLAB, a excepción del constructor, tienen
+ como primer argumento la instancia de la clase.
+ Esto es así porque MATLAB permite utilizar los métodos de dos formas diferentes
+: una de ellas consiste en emplear el separador '.', colocando delante la
+ instancia de la clase y detrás el método; la otra posibilidad es usar el
+ método como si fuera una función, donde el primer argumento es la instancia
+ de la clase.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Constructor de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+algoTrader = AlgoTrader(dataSerie)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{dataSerie}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ con la información de la acción bursátil.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{clone}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hace una copia de la máquina de trading.
+ Las variables que maneja MATLAB son apuntadores hacia instancias de máquinas
+ de trading, de manera que una asignación copia el apuntador, pero no la
+ instancia.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+newObj = clone(this)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{this}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ a copiar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{newObj}
+\end_layout
+
+\end_inset
+
+ Nueva instancia creada.
+ Consiste en una copia de la instancia pasada en el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{this}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{computeSignal}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:AlgoTrader.computeSignal"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula la señal de posición de la máquina de trading.
+ Es un método abstracto que ha de ser implementado por la clase que hereda
+ de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ para definir la manera en que se calcula la señal de posición.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+computeSignal(algoTrader)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{diffProfitLossSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula la diferencia entre valores sucesivos de la serie de beneficio/pérdida.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[diffProfitLossSerie, positionSerie, priceSerie, dateTimeSerie, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ longPosition, shortPosition, noPosition] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = diffProfitLossSerie(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{diffProfitLossSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del diferencial entre valores sucesivos de la serie
+ de beneficio/pérdida.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del capital invertido en el mercado por la máquina
+ de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del beneficio/pérdida consecuencia de la inversión
+ de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{priceSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del precio de la acción.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{datetimeSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del instante en que se tomaron las observaciones en
+ las series temporales.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{longPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ larga en la máquina de trading.
+ La primera columna se refiere al índice de comienzo del intervalo y la
+ segunda columna al índice de final del intervalo.
+ La matriz tiene tantas filas como posiciones largas hayan sido efectuadas
+ por la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{shortPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ corta en la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{noPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo durante el que la máquina
+ permanece fuera del mercado.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawDiffProfitLoss}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica de la diferencia en los valores sucesivos de la serie
+ de beneficio/pérdida.
+ Los datos que visualiza son los calculados por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{diffProfitLoss}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawDiffProfitLoss(
+\backslash
+= algoTrader, axesHandle, setSelector, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice a partir del cual efectuar los cálculos en el método.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice hasta el cual efectuar los cálculos.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawPosition}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica de la posición adoptada en el mercado por la máquina de
+ trading.
+ Los datos que visualiza son los calculados por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionSerie}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawPosition(
+\backslash
+= algoTrader, axesHandle, setSelector, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice a partir del cual efectuar los cálculos en el método.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice hasta el cual efectuar los cálculos.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawProfitLoss}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica del beneficio/pérdida logrado por la máquina de trading.
+ Los datos que visualiza son los calculados por el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossSerie}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawProfitLoss(
+\backslash
+= algoTrader, axesHandle, setSelector, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice a partir del cual efectuar los cálculos en el método.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice hasta el cual efectuar los cálculos.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica de la cotización de la acción coloreando los trazos según
+ la posición que toma la máquina respecto al mercado.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Serie}
+\end_layout
+
+\end_inset
+
+ del objeto de tipo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DataSerie}
+\end_layout
+
+\end_inset
+
+ asociado a la máquina de trading a lo largo del intervalo temporal determinado
+ por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawSeriePosition(
+\backslash
+= algoTrader, axesHandle, setSelector, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice a partir del cual efectuar los cálculos en el método.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice hasta el cual efectuar los cálculos.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSignal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dibuja la gráfica de la señal que determina la posición que adopta la máquina
+ de trading en el mercado.
+ Los datos que visualiza son los de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Signal}
+\end_layout
+
+\end_inset
+
+ a lo largo del intervalo temporal determinado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DateTime}
+\end_layout
+
+\end_inset
+
+.
+ Este método se utiliza como argumento de la función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+drawSignal(
+\backslash
+= algoTrader, axesHandle, setSelector, initIndex, endIndex)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice a partir del cual efectuar los cálculos en el método.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice hasta el cual efectuar los cálculos.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitness}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:AlgoTrader.fitness"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Efectúa la medición de una característica de la máquina de trading.
+ La característica concreta que mide depende de la función de evaluación
+ pasada como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+performance = fitness(algoTrader, eFunction)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{eFunction}
+\end_layout
+
+\end_inset
+
+ Función de evaluación para calcular el desempeño de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{performance}
+\end_layout
+
+\end_inset
+
+ Valor de la medición según establece la función de evaluación.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessFunctionWrapper}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Método protegido (sólo accesible desde clases que heredan de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+) con cuya inicialización parcial se crea la función de aptitud que utilizan
+ los métodos de optimización.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+performance = fitnessFunctionWrapper(algoTrader, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ eFunction, propertyName, propertyDomain, indexArray)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{eFunction}
+\end_layout
+
+\end_inset
+
+ Función de evaluación para calcular el desempeño de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{propertyName}
+\end_layout
+
+\end_inset
+
+ Estructura de acceso lineal (array de celdas en MATLAB) que contiene el
+ nombre de aquellas propiedades cuyos valores óptimos se calculan durante
+ el proceso de optimización.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{propertyDomain}
+\end_layout
+
+\end_inset
+
+ Estructura de acceso lineal (array de celdas en MATLAB) que contiene el
+ dominio de valores de cada una de las propiedades cuyos valores óptimos
+ se calculan durante el proceso de optimización.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{indexArray}
+\end_layout
+
+\end_inset
+
+ Estructura de acceso lineal (array en MATLAB) que referencia los valores
+ de las propiedades con que se evalúa la máquina de trading.
+ La longitud de este array es igual al número de propiedades de la máquina
+ que se buscan optimizar.
+ Cada elemento de este array indica, según su posición, el valor de la propiedad
+ con que se mide el desempeño de la máquina.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{performance}
+\end_layout
+
+\end_inset
+
+ Valor de la medición según establece la función de evaluación.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fitnessStatistics}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aglutina la información del espacio de búsqueda en una serie de valores
+ estadísticos.
+ Dibuja un histograma donde las máquinas de trading son agrupadas de acuerdo
+ a su desempeño.
+ El espacio de búsqueda es inducido por la función de evaluación sobre los
+ valores de los parámetros con que se llama al método.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[minFitness, maxFitness, meanFitness, stdFitness] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = fitnessStatistics(algoTrader, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[minFitness, maxFitness, meanFitness, stdFitness] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = fitnessStatistics(algoTrader, eFunction, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{eFunction}
+\end_layout
+
+\end_inset
+
+ Función de evaluación para calcular el desempeño de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{varargin}
+\end_layout
+
+\end_inset
+
+ Resto de argumentos que se pasan al método.
+ Sirve para establecer las configuraciones de la máquina de trading que
+ se someten al proceso de evaluación en el cálculo de estadísticos.
+ Para cada parámetro de la máquina que se quiere examinar hay que escribir
+ primero su nombre y luego el conjunto de valores en donde se busca el óptimo.
+ La forma de introducir estos pares es idéntica a como se hace para el caso
+ del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{minFitness}
+\end_layout
+
+\end_inset
+
+ Mínimo valor de las mediciones hechas con la función de evaluación.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{maxFitness}
+\end_layout
+
+\end_inset
+
+ Máximo valor de las mediciones hechas con la función de evaluación.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{meanFitness}
+\end_layout
+
+\end_inset
+
+ Valor promedio de las mediciones hechas con la función de evaluación.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{stdFitness}
+\end_layout
+
+\end_inset
+
+ Desviación típica de las mediciones hechas con la función de evaluación.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:AlgoTrader.optimize"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Optimiza los valores de los parámetros de la máquina de trading.
+ Este método es el responsable de ejecutar el algoritmo de optimización
+ con las funciones de evaluación y selección sobre el espacio de búsqueda
+ especificado.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+optimize(algoTrader, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+optimize(algoTrader, eFunction, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+optimize(algoTrader, eFunction, sFunction, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+optimize(algoTrader, eFunction, sFunction, oFunction, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{eFunction}
+\end_layout
+
+\end_inset
+
+ Función de evaluación para calcular el desempeño de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{sFunction}
+\end_layout
+
+\end_inset
+
+ Función de selección para elegir la máquina de trading óptima.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{oFunction}
+\end_layout
+
+\end_inset
+
+ Función que implementa el método de optimización a emplear.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{varargin}
+\end_layout
+
+\end_inset
+
+ Resto de argumentos que se pasan al método.
+ Sirve para establecer las posibles configuraciones de la máquina de trading
+ de donde se busca aquella óptima.
+ Para cada parámetro de la máquina que se quiere examinar hay que escribir
+ primero su nombre y luego el conjunto de valores en donde se busca el óptimo.
+ Por ejemplo, si se quiere optimizar la máquina 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{m}
+\end_layout
+
+\end_inset
+
+ hallando el valor óptimo del parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{a}
+\end_layout
+
+\end_inset
+
+ en el conjunto 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{[1 2 3]}
+\end_layout
+
+\end_inset
+
+ y del parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{b}
+\end_layout
+
+\end_inset
+
+ en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{
+\backslash
+{'x', 'y', 'z'
+\backslash
+}}
+\end_layout
+
+\end_inset
+
+, entonces la llamada al método es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{m.optimize('a',[1 2 3],'b',
+\backslash
+{'x', 'y', 'z'
+\backslash
+})}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa a la máquina de trading.
+ Crea y configura la ventana, y mediante llamadas sucesivas al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ produce los gráficos deseados.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plot(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotDiffProfitLoss}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al diferencial de los valores sucesivos
+ de la serie de beneficio/pérdida.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawDiffProfitLoss}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotDiffProfitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual dibujar las gráficas.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotPosition}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa a las posiciones que toma la máquina
+ de trading en el mercado.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawPosition}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotPosition(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotProfitLoss}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa la curva del beneficio/pérdida conseguid
+o por la máquina de trading a lo largo del tiempo.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawProfitLoss}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotProfitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico que representa al espacio de búsqueda inducido por la
+ función de evaluación y el dominio de valores de los parámetros.
+ Descompone el espacio de búsqueda resultante para obtener un equivalente
+ en dos dimensiones que mostrar por pantalla.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSearchSpace(algoTrader, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSearchSpace(algoTrader, eFunction, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{eFunction}
+\end_layout
+
+\end_inset
+
+ Función de evaluación para calcular el desempeño de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{varargin}
+\end_layout
+
+\end_inset
+
+ Resto de argumentos que se pasan al método.
+ Sirve para establecer las configuraciones de la máquina de trading que
+ se someten al proceso de evaluación en la generación del espacio de búsqueda.
+ Para cada parámetro de la máquina que se quiere representar hay que escribir
+ primero su nombre y luego el conjunto de valores que toma.
+ La forma de introducir estos pares es idéntica a como se hace para el caso
+ del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSearchSpace123}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico que representa al espacio de búsqueda inducido por la
+ función de evaluación y el dominio de valores de los parámetros.
+ Muestra espacios de búsqueda de hasta tres dimensiones.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSearchSpace123(algoTrader, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSearchSpace123(algoTrader, eFunction, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{eFunction}
+\end_layout
+
+\end_inset
+
+ Función de evaluación para calcular el desempeño de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{varargin}
+\end_layout
+
+\end_inset
+
+ Resto de argumentos que se pasan al método.
+ Sirve para establecer las configuraciones de la máquina de trading que
+ se someten al proceso de evaluación en la generación del espacio de búsqueda.
+ Para cada parámetro de la máquina que se quiere representar hay que escribir
+ primero su nombre y luego el conjunto de valores que toma.
+ La forma de introducir estos pares es idéntica a como se hace para el caso
+ del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{optimize}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSeriePosition}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa al precio de la acción y las posiciones
+ adoptadas por la máquina.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSeriePosition}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSeriePosition(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotSignal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Genera el gráfico con que se representa a la señal de posición producida
+ por la máquina de trading.
+ Realiza una llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ utilizando el método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawSignal}
+\end_layout
+
+\end_inset
+
+ como argumento.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotSignal(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inicializa y configura la ventana donde se muestran los gráficos.
+ Se encarga de establecer la manera en que se interactúa con los gráficos
+ a partir de la función de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{panning}
+\end_layout
+
+\end_inset
+
+, que cambia la sección del gráfico mostrado en pantalla ante eventos del
+ ratón, y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{zooming}
+\end_layout
+
+\end_inset
+
+, que aumenta o disminuye la escala en que se visualiza el gráfico.
+ A partir de la llamada al método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+, utilizando como argumento alguno de los métodos de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+, se consigue la representación de la información de la acción bursátil.
+ Este método es utilizado por los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot*}
+\end_layout
+
+\end_inset
+
+ para generar los gráficos.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+fig = plotWrapper(
+\backslash
+= algoTrader, customizer, axesHandle, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+> setSelector, rangeInit, rangeEnd, varargin)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{customizer}
+\end_layout
+
+\end_inset
+
+ Método de dibujado para representar la información de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{axesHandle}
+\end_layout
+
+\end_inset
+
+ Apuntador al eje de la figura en el que dibujar.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{varargin}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fig}
+\end_layout
+
+\end_inset
+
+ Apuntador a la figura generada.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula las posiciones que toma la máquina de trading en el mercado.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[positionSerie, priceSerie, dateTimeSerie, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ longPosition, shortPosition, noPosition] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = positionSerie(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{diffProfitLossSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del diferencial entre valores sucesivos de la serie
+ de beneficio/pérdida.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del capital invertido en el mercado por la máquina
+ de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del beneficio/pérdida consecuencia de la inversión
+ de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{priceSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del precio de la acción.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{datetimeSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del instante en que se tomaron las observaciones en
+ las series temporales.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{longPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ larga en la máquina de trading.
+ La primera columna se refiere al índice de comienzo del intervalo y la
+ segunda columna al índice de final del intervalo.
+ La matriz tiene tantas filas como posiciones largas hayan sido efectuadas
+ por la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{shortPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ corta en la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{noPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo durante el que la máquina
+ permanece fuera del mercado.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionsLog}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula las columnas de la tabla de registros de posición.
+ En ella se almacenan los resultados conseguidos por la máquina de trading
+ para cada una de las posiciones adoptadas en el mercado.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[positionType, openIndex, closeIndex, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ openDate, closeDate, openPrice, closePrice, profitLoss] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = positionsLog(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionType}
+\end_layout
+
+\end_inset
+
+ Tipo de posición tomada por la máquina de trading.
+ Se corresponde con los datos de la columna del tipo de posición en la tabla
+ de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{openIndex}
+\end_layout
+
+\end_inset
+
+ Índice de apertura de posición.
+ Se corresponde con los datos de la columna del índice de apertura en la
+ tabla de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{closeIndex}
+\end_layout
+
+\end_inset
+
+ Índice de cierre de posición.
+ Se corresponde con los datos de la columna del índice de cierre en la tabla
+ de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{openDate}
+\end_layout
+
+\end_inset
+
+ Fecha de apertura de posición.
+ Se corresponde con los datos de la columna de fecha de apertura en la tabla
+ de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{closeDate}
+\end_layout
+
+\end_inset
+
+ Fecha de cierre de posición.
+ Se corresponde con los datos de la columna de fecha de cierre en la tabla
+ de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{openPrice}
+\end_layout
+
+\end_inset
+
+ Precio de la acción en la apertura de la posición.
+ Se corresponde con los datos de la columna de precio de apertura en la
+ tabla de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{closePrice}
+\end_layout
+
+\end_inset
+
+ Precio de la acción en el cierre de la posición.
+ Se corresponde con los datos de la columna de precio de cierre en la tabla
+ de registros de posición.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLoss}
+\end_layout
+
+\end_inset
+
+ Beneficio/pérdida consecuencia de la posición adoptada.
+ Se corresponde con los datos de la columna de beneficio/pérdida en la tabla
+ de registros de posición.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{printPositionsLog}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Escribe por pantalla la tabla de registros de posición.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+printPositionsLog(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLoss}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula el beneficio/pérdida logrado por la máquina de trading.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+profitLoss = profitLoss(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLoss}
+\end_layout
+
+\end_inset
+
+ Beneficio/pérdida consecuencia de la actuación de la máquina de trading
+ en la bolsa.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossSerie}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calcula la serie de beneficio/pérdida que refleja la evolución del resultado
+ conseguido por la máquina de trading en el mercado.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[profitLossSerie, positionSerie, priceSerie, dateTimeSerie, ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ longPosition, shortPosition, noPosition] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = profitLossSerie(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{diffProfitLossSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del diferencial entre valores sucesivos de la serie
+ de beneficio/pérdida.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{positionSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del capital invertido en el mercado por la máquina
+ de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{profitLossSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del beneficio/pérdida consecuencia de la inversión
+ de la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{priceSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del precio de la acción.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{datetimeSerie}
+\end_layout
+
+\end_inset
+
+ Serie con los datos del instante en que se tomaron las observaciones en
+ las series temporales.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{longPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ larga en la máquina de trading.
+ La primera columna se refiere al índice de comienzo del intervalo y la
+ segunda columna al índice de final del intervalo.
+ La matriz tiene tantas filas como posiciones largas hayan sido efectuadas
+ por la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{shortPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ corta en la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{noPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo durante el que la máquina
+ permanece fuera del mercado.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{resetSignal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Método privado que maneja los eventos que reinician la señal de posición
+ almacenada en la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Signal}
+\end_layout
+
+\end_inset
+
+.
+ Este método es parte del mecanismo de actualización perezosa implementado
+ en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Sólo se ejecuta cuando se altera alguno de los parámetros de la máquina
+ de trading que interviene en el cálculo de la señal.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+resetSignal(algoTrader, src, event)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{src}
+\end_layout
+
+\end_inset
+
+ Fuente desde la que se produce el evento (parámetro obligatorio en aquellos
+ métodos que manejan eventos).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{event}
+\end_layout
+
+\end_inset
+
+ Evento que produce la ejecución del método (parámetro obligatorio en aquellos
+ métodos que manejan eventos).
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{signal2positions}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Transforma la señal de posición en un conjunto de intervalos.
+ Cada intervalo representa el instante inicial y el final en que la máquina
+ mantiene una posición en el mercado.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+[longPosition, shortPosition, noPosition, initIndex, endIndex] ...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ = signal2positions(algoTrader, setSelector, rangeInit, rangeEnd)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{setSelector}
+\end_layout
+
+\end_inset
+
+ Indica el intervalo de la serie de datos sobre el que se aplica el método:
+ con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{0}
+\end_layout
+
+\end_inset
+
+ para el de entrenamiento, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{1}
+\end_layout
+
+\end_inset
+
+ para el de test, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{2}
+\end_layout
+
+\end_inset
+
+ para la unión de ambos y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{3}
+\end_layout
+
+\end_inset
+
+ para todo el intervalo del cual se disponga de datos.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeInit}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos a partir de la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{rangeEnd}
+\end_layout
+
+\end_inset
+
+ Fecha en la serie de datos hasta la cual calcular la serie.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{longPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ larga en la máquina de trading.
+ La primera columna se refiere al índice de comienzo del intervalo y la
+ segunda columna al índice de final del intervalo.
+ La matriz tiene tantas filas como posiciones largas hayan sido tomadas
+ por la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{shortPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo de duración de una posición
+ corta en la máquina de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{noPosition}
+\end_layout
+
+\end_inset
+
+ Matriz de dos columnas para indicar el intervalo durante el que la máquina
+ permanece fuera del mercado.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{initIndex}
+\end_layout
+
+\end_inset
+
+ Índice a partir del cual efectuar los cálculos en el método.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{endIndex}
+\end_layout
+
+\end_inset
+
+ Índice hasta el cual efectuar los cálculos.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{updateSignal}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Método privado que maneja los eventos que inician el proceso de cálculo
+ de la señal de posición.
+ Este método es parte del mecanismo de actualización perezosa implementado
+ en la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+.
+ Se ejecuta cuando se requiere leer el valor de la señal de posición de
+ la máquina de trading.
+ Lo que hace este método es computar el valor de la propiedad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{Signal}
+\end_layout
+
+\end_inset
+
+ en caso de que alguno de los parámetros de los que depende haya alterado
+ su valor.
+\end_layout
+
+\begin_layout Subsubsection
+Sintaxis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-5mm}
+\backslash
+texttt{
+\backslash
+begin{tabbing}
+\end_layout
+
+\begin_layout Plain Layout
+
+updateSignal(algoTrader, src, event)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabbing}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Argumentos
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{algoTrader}
+\end_layout
+
+\end_inset
+
+ Instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ que implementa la estrategia de trading.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{src}
+\end_layout
+
+\end_inset
+
+ Fuente desde la que se produce el evento (parámetro obligatorio en aquellos
+ métodos que manejan eventos).
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{event}
+\end_layout
+
+\end_inset
+
+ Evento que produce la ejecución del método (parámetro obligatorio en aquellos
+ métodos que manejan eventos).
+\end_layout
+
+\begin_layout Section
+El sistema de dibujado
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AlgoTrader - El sistema de dibujado"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El sistema de dibujado está dividido en partes que colaboran en la construcción
+ de los gráficos: de esta manera se consigue un código fácil de mantener,
+ alterar y extender.
+ Este proceso está dividido en dos etapas: primero se crea y configura la
+ ventana contenedor y después se dibujan los gráficos que representan la
+ información.
+ La manera de acometer esta separación es utilizando el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+, que se encarga de la inicialización y toma como argumento un método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+, cuyo objetivo es dibujar el gráfico.
+ Para ocultar esta complejidad de cara al usuario se utilizan los métodos
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot*}
+\end_layout
+
+\end_inset
+
+, que generan el gráfico a través de una llamada a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ en combinación con un método de dibujado 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+.
+ Por ejemplo, la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AlgoTrader}
+\end_layout
+
+\end_inset
+
+ implementa el método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotProfitLoss}
+\end_layout
+
+\end_inset
+
+, que crea la ventana con la curva de beneficios y pérdidas de la máquina
+ de trading combinando los métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{drawProfitLoss}
+\end_layout
+
+\end_inset
+
+.
+ La ventaja de esta separación de roles en los métodos es que la implementación
+ del método 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plotWrapper}
+\end_layout
+
+\end_inset
+
+ es la más compleja (al lidiar con los aspectos específicos del entorno
+ MATLAB para configurar la ventana), mientras que la implementación de los
+ métodos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{plot*}
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{draw*}
+\end_layout
+
+\end_inset
+
+ es trivial.
+\end_layout
+
+\end_body
+\end_document
